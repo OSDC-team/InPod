@@ -105,8 +105,6 @@
     .lang-badge.EN { background:rgba(74,127,193,.14); color:#6090cc; border:1px solid rgba(74,127,193,.22); }
     .lang-badge.FR { background:rgba(180,60,60,.14); color:#c06060; border:1px solid rgba(180,60,60,.22); }
     .lang-badge.NL { background:rgba(40,160,90,.14); color:#50a870; border:1px solid rgba(40,160,90,.22); }
-    .lang-badge.ES { background:rgba(200,140,40,.14); color:#c89040; border:1px solid rgba(200,140,40,.22); }
-    .lang-badge.AR { background:rgba(140,80,180,.14); color:#9060c0; border:1px solid rgba(140,80,180,.22); }
     .platform-badge { font-family:var(--mono); font-size:.54rem; letter-spacing:.05em; text-transform:uppercase; padding:2px 6px; border-radius:3px; font-weight:500; }
     .platform-badge.spotify { background:rgba(29,185,84,.1); color:#1db954; border:1px solid rgba(29,185,84,.18); }
     .platform-badge.apple   { background:rgba(251,92,105,.1); color:#fb5c69; border:1px solid rgba(251,92,105,.18); }
@@ -213,8 +211,6 @@
       <button class="chip active" data-lang="">All</button>
       <button class="chip" data-lang="EN">🇬🇧 EN</button>
       <button class="chip" data-lang="FR">🇫🇷 FR</button>
-      <button class="chip" data-lang="ES">🇪🇸 ES</button>
-      <button class="chip" data-lang="AR">🇸🇦 AR</button>
       <button class="chip" data-lang="NL">🇳🇱 NL</button>
     </div>
   </div>
@@ -230,7 +226,7 @@
     </div>
   </div>
   <div class="filter-row">
-    <span class="filter-label">Region</span>
+    <span class="filter-label">Country</span>
     <div class="chips" id="chips-country"><button class="chip active" data-country="">All</button></div>
     <button class="filter-clear" id="clear-all-filters">Clear all</button>
   </div>
@@ -276,17 +272,19 @@
 </div>
 
 <script>
-let podcasts=[],pending=[],filterApp='all',filterLang='',filterFreq='',filterRegion='',activeTags=new Set(),query='',viewMode='card';
+let podcasts=[],pending=[],filterApp='all',filterLang='',filterFreq='',filterCountry='',activeTags=new Set(),query='',viewMode='card';
 
 const TAG_DOT={
-  // 7 topic tags — one colour each, clear and memorable
-  news:        '#c89828',  // amber
-  politics:    '#4a8ed0',  // blue
-  security:    '#c85060',  // red
-  humanitarian:'#38a858',  // green
-  tech:        '#9060c8',  // purple
-  law:         '#a0a038',  // olive
-  culture:     '#d07830',  // orange
+  conflict:'#c85060',security:'#c85060','war-reporting':'#c04858',military:'#c04858',extremism:'#b84858',defense:'#b84860',
+  geopolitics:'#d07830','foreign-policy':'#c87030','international-relations':'#c07030','risk-analysis':'#c87030','regional-analysis':'#c07830',
+  news:'#c89828','current-affairs':'#c09028','daily-briefing':'#b89028','press-review':'#b89030',journalism:'#c09030',media:'#b08828','internet-culture':'#a88028',explainer:'#b89030',
+  humanitarian:'#38a858',aid:'#30a850',development:'#30a848',peacebuilding:'#38a858',fieldwork:'#30a850','field-reporting':'#38a858',
+  africa:'#28a8a0',drc:'#28a8a0','global-affairs':'#30a8a0',
+  policy:'#4a8ed0',governance:'#4888c8',analysis:'#4888c8','international-law':'#4890c8',lawfare:'#5090d0',debate:'#4888c8','crisis-monitoring':'#4888c8',investigations:'#5090c8',
+  europe:'#4a7fc1','middle-east':'#6070c0',turkey:'#5878c0',russia:'#5878c0',
+  technology:'#9060c8',cybersecurity:'#9060c8',osint:'#8858c0',disinformation:'#8858c0',data:'#8060c0','critical-tech':'#9060c8',
+  french:'#b060b8',dutch:'#28a858',
+  politics:'#a0a038','us-politics':'#a0a038',society:'#989838',economics:'#a8a038',books:'#888838',
 };
 
 function appKey(r){const s=(r||'').toLowerCase();if(s.includes('spotify'))return'spotify';if(s.includes('apple'))return'apple';if(s.includes('deezer'))return'deezer';if(s==='web')return'web';return'other';}
@@ -304,7 +302,7 @@ function renderActivePills(){
   if(filterApp!=='all')add('Platform: '+filterApp,'app');
   if(filterLang)add('Language: '+filterLang,'lang');
   if(filterFreq)add('Frequency: '+filterFreq,'freq');
-  if(filterRegion)add('Region: '+filterRegion,'region');
+  if(filterCountry)add('Country: '+filterCountry,'country');
   activeTags.forEach(t=>add(t,'tag:'+t));
   el.innerHTML=pills.join('');
 }
@@ -315,9 +313,9 @@ function render(){
     const mApp=filterApp==='all'||appKey(p.app)===filterApp;
     const mLang=!filterLang||p.lang===filterLang;
     const mFreq=!filterFreq||p.freq===filterFreq;
-    const mCnt=!filterRegion||p.region===filterRegion;
+    const mCnt=!filterCountry||p.country===filterCountry;
     const mTags=activeTags.size===0||[...activeTags].every(t=>p.tags.includes(t));
-    const mQ=!q||p.title.toLowerCase().includes(q)||(p.producer||'').toLowerCase().includes(q)||p.tags.some(t=>t.includes(q))||(p.region||'').toLowerCase().includes(q)||(p.description||'').toLowerCase().includes(q);
+    const mQ=!q||p.title.toLowerCase().includes(q)||(p.producer||'').toLowerCase().includes(q)||p.tags.some(t=>t.includes(q))||(p.country||'').toLowerCase().includes(q)||(p.description||'').toLowerCase().includes(q);
     return mApp&&mLang&&mFreq&&mCnt&&mTags&&mQ;
   });
 
@@ -334,10 +332,10 @@ function render(){
     const listen=p.link?`<a class="btn-listen" href="${esc(p.link)}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Listen</a>`:'';
     const langB=p.lang?`<span class="lang-badge ${esc(p.lang)}">${esc(p.lang)}</span>`:'';
     const tagHtml=p.tags.length?`<div class="card-tags">${p.tags.map(t=>`<span class="tag${activeTags.has(t)?' active':''}" data-tag="${esc(t)}"><span class="tag-dot" style="background:${TAG_DOT[t]||'#606068'}"></span>${esc(t)}</span>`).join('')}</div>`:'';
-    const color=p.tags.reduce((c,t)=>TAG_DOT[t]||c,'#606068');
+    const color=p.tags.length?(TAG_DOT[p.tags[0]]||'#606068'):'#606068';
     const desc=p.description?`<div class="card-desc">${esc(p.description)}</div>`:'';
     const freq=p.freq?`<span class="card-freq">${esc(p.freq)}</span>`:'';
-    const loc=p.region&&p.region!=='Global'?` · <span style="color:var(--grey)">${esc(p.region)}</span>`:'';
+    const loc=p.country&&p.country!=='Global'?` · <span style="color:var(--grey)">${esc(p.country)}</span>`:'';
     return`<div class="card"><div class="card-icon" style="color:${color}">${esc(initialsFor(p.title))}</div><div class="card-body"><div class="card-top"><span class="card-title">${esc(p.title)}</span>${freq}</div><div class="card-producer">${esc(p.producer||'—')}${loc}</div>${desc}${tagHtml}</div><div class="card-right"><div class="card-meta">${langB}${badge}</div>${listen}</div></div>`;
   }).join('');
   list.classList.toggle('compact',viewMode==='compact');
@@ -355,12 +353,12 @@ function parseCSV(text){
     const c=sr(l);
     const rawT=iTg!==-1?(c[iTg]||'').trim():'';
     const tags=rawT?rawT.split(/[|,]/).map(t=>t.trim()).filter(Boolean):[];
-    return{title:(c[iT]||'').trim(),producer:(c[iP]||'').trim(),app:(c[iA]||'').trim(),link:(c[iL]||'').trim(),tags,lang:iLang!==-1?(c[iLang]||'').trim().toUpperCase():'',region:iCnt!==-1?(c[iCnt]||'').trim():'',freq:iFreq!==-1?(c[iFreq]||'').trim():'',description:iDesc!==-1?(c[iDesc]||'').trim():''};
+    return{title:(c[iT]||'').trim(),producer:(c[iP]||'').trim(),app:(c[iA]||'').trim(),link:(c[iL]||'').trim(),tags,lang:iLang!==-1?(c[iLang]||'').trim().toUpperCase():'',country:iCnt!==-1?(c[iCnt]||'').trim():'',freq:iFreq!==-1?(c[iFreq]||'').trim():'',description:iDesc!==-1?(c[iDesc]||'').trim():''};
   }).filter(r=>r.title&&r.title.toLowerCase()!=='podcast name');
 }
 
 function buildCountryChips(){
-  const countries=[...new Set(podcasts.map(p=>p.region).filter(c=>c&&c!=='Global'))].sort();
+  const countries=[...new Set(podcasts.map(p=>p.country).filter(c=>c&&c!=='Global'))].sort();
   const wrap=document.getElementById('chips-country');
   const all=wrap.querySelector('[data-country=""]');wrap.innerHTML='';wrap.appendChild(all);
   countries.forEach(c=>{const b=document.createElement('button');b.className='chip';b.dataset.country=c;b.textContent=c;wrap.appendChild(b);});
@@ -391,14 +389,14 @@ function setupChips(id,key){
     if(key==='app')filterApp=c.dataset.app;
     if(key==='lang')filterLang=c.dataset.lang;
     if(key==='freq')filterFreq=c.dataset.freq;
-    if(key==='region')filterRegion=c.dataset.country;
+    if(key==='country')filterCountry=c.dataset.country;
     render();
   });
 }
-setupChips('chips-app','app');setupChips('chips-lang','lang');setupChips('chips-freq','freq');setupChips('chips-country','region');
+setupChips('chips-app','app');setupChips('chips-lang','lang');setupChips('chips-freq','freq');setupChips('chips-country','country');
 
 document.getElementById('clear-all-filters').addEventListener('click',()=>{
-  filterApp='all';filterLang='';filterFreq='';filterRegion='';activeTags.clear();
+  filterApp='all';filterLang='';filterFreq='';filterCountry='';activeTags.clear();
   ['chips-app','chips-lang','chips-freq','chips-country'].forEach(id=>{
     document.querySelectorAll(`#${id} .chip`).forEach(c=>c.classList.remove('active'));
     document.querySelector(`#${id} .chip`)?.classList.add('active');
@@ -413,7 +411,7 @@ document.getElementById('active-filters').addEventListener('click',e=>{
   if(k==='app'){filterApp='all';reset('chips-app');}
   if(k==='lang'){filterLang='';reset('chips-lang');}
   if(k==='freq'){filterFreq='';reset('chips-freq');}
-  if(k==='country'){filterRegion='';reset('chips-country');}
+  if(k==='country'){filterCountry='';reset('chips-country');}
   if(k.startsWith('tag:'))activeTags.delete(k.slice(4));
   render();
 });
@@ -452,7 +450,7 @@ document.getElementById('confirm-add').addEventListener('click',()=>{
   const title=document.getElementById('add-title').value.trim();
   if(!title){document.getElementById('add-title').focus();return;}
   if(podcasts.some(p=>p.title.toLowerCase()===title.toLowerCase())){alert('Already exists.');return;}
-  podcasts.push({title,producer:document.getElementById('add-producer').value.trim(),app:document.getElementById('add-app').value,link:document.getElementById('add-link').value.trim(),tags:[],lang:'',region:'',freq:'',description:''});
+  podcasts.push({title,producer:document.getElementById('add-producer').value.trim(),app:document.getElementById('add-app').value,link:document.getElementById('add-link').value.trim(),tags:[],lang:'',country:'',freq:'',description:''});
   buildCountryChips();render();closeAdd();
 });
 
