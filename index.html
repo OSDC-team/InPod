@@ -25,9 +25,10 @@
     body { background: var(--bg); color: var(--white); font-family: var(--sans); font-weight: 300; min-height: 100vh; }
 
     /* HEADER */
-    header { position: sticky; top: 0; z-index: 50; background: var(--bg); border-bottom: 1px solid var(--border); padding: 0 48px; height: 68px; display: flex; align-items: center; gap: 20px; }
-    .logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
-    .logo img { width: 36px; height: 36px; object-fit: contain; filter: invert(1); }
+    header { position: sticky; top: 0; z-index: 50; background: var(--bg); border-bottom: 1px solid var(--border); height: 68px; }
+    .header-inner { max-width: 860px; margin: 0 auto; padding: 0 40px; height: 100%; display: flex; align-items: center; gap: 20px; }
+    .logo { display: flex; align-items: flex-start; gap: 14px; text-decoration: none; }
+    .logo img { width: 36px; height: 36px; object-fit: contain; filter: invert(1); margin-top: 2px; }
     .logo-label { font-family: var(--display); font-size: 1.6rem; letter-spacing: .15em; color: var(--white); line-height: 1; }
     .logo-sub   { font-family: var(--mono); font-size: .56rem; letter-spacing: .22em; text-transform: uppercase; color: var(--grey); margin-top: 2px; }
     .header-right { margin-left: auto; display: flex; gap: 10px; }
@@ -38,8 +39,11 @@
     .btn-primary { background: var(--white); color: var(--bg); border-color: var(--white); font-weight: 500; }
     .btn-primary:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
 
+    /* CENTERED LAYOUT */
+    .page-wrap { max-width: 860px; margin: 0 auto; padding: 0 40px; }
+
     /* TOOLBAR */
-    .toolbar { padding: 20px 48px 0; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .toolbar { padding: 20px 0 0; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
     .search-wrap { position: relative; flex: 1; min-width: 220px; max-width: 460px; }
     .search-wrap svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 14px; height: 14px; stroke: var(--grey); fill: none; pointer-events: none; }
     .search-wrap input { width: 100%; background: var(--card); border: 1px solid var(--border); color: var(--white); font-family: var(--sans); font-size: .85rem; font-weight: 300; padding: 10px 14px 10px 38px; border-radius: 24px; outline: none; transition: border-color .15s; }
@@ -51,7 +55,7 @@
     .chip.active { border-color: var(--accent); color: var(--bg); background: var(--accent); font-weight: 500; }
 
     /* MAIN + CARDS */
-    .main { padding: 6px 48px 0; }
+    .main { padding: 6px 0 0; }
     .count-bar { font-family: var(--mono); font-size: .62rem; color: var(--grey); padding: 14px 0 8px; }
     .card-list { display: flex; flex-direction: column; gap: 10px; }
 
@@ -117,7 +121,8 @@
     ::-webkit-scrollbar-thumb { background: #303030; border-radius: 2px; }
 
     @media (max-width: 640px) {
-      header, .toolbar, .main { padding-left: 16px; padding-right: 16px; }
+      .page-wrap { padding: 0 16px; }
+      .header-inner { padding: 0 16px; }
       .logo-sub { display: none; }
       .card-right { flex-direction: row; align-items: center; width: 100%; justify-content: space-between; }
       .add-strip { flex-direction: column; align-items: flex-start; }
@@ -128,19 +133,22 @@
 <body>
 
 <header>
-  <a class="logo" href="#">
-    <img src="static/logo-symbol-wb.png" alt="INSO" />
-    <div>
-      <div class="logo-label">INSO</div>
-      <div class="logo-sub">Podcast Index</div>
+  <div class="header-inner">
+    <a class="logo" href="#">
+      <img src="static/logo-symbol-wb.png" alt="INSO" />
+      <div>
+        <div class="logo-label">INSO</div>
+        <div class="logo-sub">Podcast Index</div>
+      </div>
+    </a>
+    <div class="header-right">
+      <button class="btn" id="open-import">Import CSV</button>
+      <button class="btn btn-primary" id="open-add">+ Add Podcast</button>
     </div>
-  </a>
-  <div class="header-right">
-    <button class="btn" id="open-import">Import CSV</button>
-    <button class="btn btn-primary" id="open-add">+ Add Podcast</button>
   </div>
 </header>
 
+<div class="page-wrap">
 <div class="toolbar">
   <div class="search-wrap">
     <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -172,12 +180,13 @@
     </div>
   </div>
 </div>
+</div><!-- end page-wrap -->
 
 <!-- IMPORT CSV modal -->
 <div class="overlay" id="overlay-import">
   <div class="modal">
     <h2>Import CSV</h2>
-    <p class="modal-sub">Drop a CSV with columns: <code>Title</code>, <code>Producer</code>, <code>App</code>, <code>Link</code>.<br/>Column order and casing are flexible. Duplicate titles are skipped.</p>
+    <p class="modal-sub">Drop a CSV with columns: <code>Title</code>, <code>Producer</code>, <code>App</code>, <code>Link</code>, <code>Tags</code>.<br/>Tags are pipe-separated e.g. <code>news|politics</code>. Column order and casing are flexible. Duplicate titles are skipped.</p>
     <div class="drop-zone" id="drop-zone">
       <div class="drop-icon">📂</div>
       <div class="drop-label">Drop a .csv file here, or click to browse</div>
@@ -290,7 +299,9 @@ function render() {
     const listenBtn = p.link
       ? `<a class="btn-listen" href="${esc(p.link)}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Listen</a>`
       : '';
-    const tagHtml = pl ? `<div class="card-tags"><span class="tag">${esc(pl.key==='apple'?'apple podcasts':pl.key)}</span></div>` : '';
+    const tagHtml = p.tags && p.tags.length
+      ? `<div class="card-tags">${p.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>`
+      : '';
 
     return `<div class="card">
       <div class="card-icon">${iconFor(p.producer, p.title)}</div>
@@ -321,10 +332,12 @@ function parseCSV(text) {
   }
   const headers = splitRow(lines[0]).map(h=>h.toLowerCase().trim());
   const col = k => headers.findIndex(h=>h.includes(k));
-  const iT=col('title'), iP=col('producer'), iA=col('app')!==-1?col('app'):col('application'), iL=col('link');
+  const iT=col('title'), iP=col('producer'), iA=col('app')!==-1?col('app'):col('application'), iL=col('link'), iTg=col('tag');
   return lines.slice(1).map(l=>{
     const c=splitRow(l);
-    return { title:(c[iT]||'').trim(), producer:(c[iP]||'').trim(), app:(c[iA]||'').trim(), link:(c[iL]||'').trim() };
+    const rawTags = iTg !== -1 ? (c[iTg]||'').trim() : '';
+    const tags = rawTags ? rawTags.split('|').map(t=>t.trim()).filter(Boolean) : [];
+    return { title:(c[iT]||'').trim(), producer:(c[iP]||'').trim(), app:(c[iA]||'').trim(), link:(c[iL]||'').trim(), tags };
   }).filter(r=>r.title && r.title.toLowerCase()!=='podcast name');
 }
 
@@ -385,7 +398,7 @@ document.getElementById('confirm-add').addEventListener('click',()=>{
   const title=document.getElementById('add-title').value.trim();
   if(!title){document.getElementById('add-title').focus();return;}
   if(podcasts.some(p=>p.title.toLowerCase()===title.toLowerCase())){alert('That title already exists.');return;}
-  podcasts.push({title,producer:document.getElementById('add-producer').value.trim(),app:document.getElementById('add-app').value,link:document.getElementById('add-link').value.trim()});
+  podcasts.push({title,producer:document.getElementById('add-producer').value.trim(),app:document.getElementById('add-app').value,link:document.getElementById('add-link').value.trim(),tags:[]});
   render();closeAdd();
 });
 
