@@ -1,44 +1,104 @@
-Title,Producer,App,Link,Tags,Language
-The Philip DeFranco Show,Philip deFranco,Spotify,https://open.spotify.com/show/6ESemquRbz6f8XLVywdZ2V,"news, current-affairs, internet-culture, us-politics",EN
-The World in Brief,The Economist,Spotify,https://open.spotify.com/show/5zDCsEAvMp61OZOt0CaPS8,"news, global-affairs, daily-briefing, geopolitics",EN
-"Today, Explained",Vox,Spotify,https://open.spotify.com/show/3pXx5SXzXwJxnf4A5pWN2A,"explainer, current-affairs, news, policy",EN
-The Daily,New York Times,Spotify,https://open.spotify.com/show/3IM0lmZxpFAY7CwMuv9H4g,"news, daily-briefing, us-politics, current-affairs",EN
-NRC Vandaag,NRC,Spotify,https://open.spotify.com/show/73vZPMVjxTqC02OYZdcCr7,"dutch, news, current-affairs, daily-briefing",NL
-War & Peace,International Crisis Group,Web,https://www.crisisgroup.org/pod/europe-central-asia/war-peace,"conflict, geopolitics, security, analysis",EN
-Hold your fire!,International Crisis Group,Web,https://www.crisisgroup.org/pod/global/hold-your-fire,"conflict, peacebuilding, humanitarian, geopolitics",EN
-The Horn,International Crisis Group,Web,https://www.crisisgroup.org/pod/africa/horn-africa/horn,"africa, conflict, geopolitics, regional-analysis",EN
-Le Collimateur,Alexandre Jubelin,Deezer,https://www.deezer.com/fr/show/568972,"defense, military, security, french",FR
-Turkey Book Talk,William Armstrong,Apple Podcasts,https://podcasts.apple.com/us/podcast/turkey-book-talk/id1035167283,"turkey, books, politics, middle-east",EN
-Recap Radio,Turkey Recap,Apple Podcasts,https://podcasts.apple.com/us/podcast/recap-radio/id1813696945,"turkey, news, politics, current-affairs",EN
-Popular Front,Jake Hanrahan,Apple Podcasts,https://podcasts.apple.com/us/podcast/popular-front/id1364539980,"conflict, journalism, field-reporting, extremism",EN
-In Moscow's Shadows,Mark Galeotti,Apple Podcasts,https://podcasts.apple.com/nl/podcast/in-moscows-shadows/id1510124746,"russia, geopolitics, security, analysis",EN
-Angry Planet,Matthew Gault and Jason Fields,Apple Podcasts,https://podcasts.apple.com/us/podcast/angry-planet/id1023774600,"security, technology, conflict, geopolitics",EN
-Zone critique,MSF,Deezer,https://www.deezer.com/de/show/1001243651,"humanitarian, conflict, fieldwork, french",FR
-Po Na Biso,Ebuteli/GEC,Apple Podcasts,https://podcasts.apple.com/us/podcast/po-na-biso/id1553475927,"drc, africa, politics, governance",FR
-ACAPS Audio Reports,ACAPS,Spotify,https://open.spotify.com/show/7IlMirNXkxFXTy6QPx9ju5,"humanitarian, risk-analysis, crisis-monitoring, global-affairs",EN
-Afrique 360,International Crisis Group,Web,https://www.crisisgroup.org/fr/pod/africa/afrique-360deg,"africa, geopolitics, conflict, french",FR
-Bulletproof Podcast,Voxpot (Czech),Web,https://bulletproof.voxpot.cz/,"osint, security, journalism, risk-analysis",EN
-Carnegie Connects,Carnegie Endowment,Web,https://carnegieendowment.org/podcasts/carnegie-connects,"geopolitics, policy, international-relations, analysis",EN
-Conflict of Interest,ACLED,Web,https://conflictsofinterest.buzzsprout.com/,"conflict, data, security, analysis",EN
-Digital Dilemmas,Lenk Studios,Spotify,https://open.spotify.com/show/5UpqCJIWqECv3qiPy2YMIg,"technology, disinformation, cybersecurity, policy",EN
-From Our Own Correspondent,BBC,Apple Podcasts,https://podcasts.apple.com/us/podcast/from-our-own-correspondent/id73331209,"journalism, global-affairs, field-reporting, news",EN
-Global News Podcast,BBC,Spotify,https://open.spotify.com/show/3wBfqov60qDZbEVjPHo0a8,"news, global-affairs, daily-briefing, current-affairs",EN
-Global Security Briefing,The Royal United Services Institute,Web,https://www.rusi.org/podcast-series/global-security-briefing-podcasts,"security, defense, geopolitics, analysis",EN
-Humanitarian Frontiers,Chris Hoffman,Spotify,https://open.spotify.com/show/2Aaj0HJ46inB8M3kKjpljs,"humanitarian, aid, fieldwork, global-affairs",EN
-Info ou Intox,France24,Apple Podcasts,https://podcasts.apple.com/us/podcast/info-ou-intox/id1528195894,"fact-checking, disinformation, media, french",FR
-Into Africa,CSIS,Web,https://www.csis.org/podcasts/africa,"africa, geopolitics, economics, policy",EN
-Le Journal de l'Afrique,France24,Apple Podcasts,https://podcasts.apple.com/us/podcast/journal-de-lafrique/id1055013662,"africa, news, french, current-affairs",FR
-Needle Stack,Authentic8,Web,https://www.authentic8.com/needlestack,"osint, cybersecurity, technology, investigations",EN
-Think Change,ODI,Web,https://odi.org/en/think-change-podcast/,"development, policy, humanitarian, global-affairs",EN
-On the Record,CFR,Web,https://www.cfr.org/podcasts/on-the-record,"international-relations, policy, geopolitics, analysis",EN
-Pod Save the World,Crooked Media,Web,https://crooked.com/podcast-series/pod-save-the-world/,"us-politics, foreign-policy, current-affairs, geopolitics",EN
-Journal Afrique,RFI,Apple Podcasts,https://podcasts.apple.com/us/podcast/journal-afrique/id1573763106,"africa, news, french, current-affairs",FR
-Revue de Presse Internationale,RFI,Apple Podcasts,https://podcasts.apple.com/fr/podcast/revue-de-presse-internationale/id1547648032,"press-review, news, french, global-affairs",FR
-Tech Won't Save Us,Paris Marx,Web,https://www.techwontsave.us/,"technology, politics, critical-tech, society",EN
-The Foreign Affairs Interview,Foreign Affairs Magazine,Apple Podcasts,https://podcasts.apple.com/us/podcast/the-foreign-affairs-interview/id1623855270,"international-relations, geopolitics, policy, analysis",EN
-The Global Story,BBC,Spotify,https://open.spotify.com/show/5mcWBCBMSCLddYdYOH9Er2,"news, global-affairs, explainer, current-affairs",EN
-The Inside Story Podcast,Al Jazeera,Web,https://www.aljazeera.com/audio/podcasts/the-inside-story-podcast/,"news, debate, global-affairs, analysis",EN
-The New Humanitarian,The New Humanitarian,Spotify,https://open.spotify.com/show/7xGIfcTWJUuBv5uWB3vy8S,"humanitarian, aid, conflict, global-affairs",EN
-The Take,Al Jazeera,Apple Podcasts,https://podcasts.apple.com/us/podcast/the-take/id1438817292,"news, middle-east, explainer, current-affairs",EN
-War Fronts,Cloud10,Apple Podcasts,https://podcasts.apple.com/us/podcast/warfronts/id1773188988,"conflict, military, geopolitics, war-reporting",EN
-The Crisis Room Team and The Lawfare Podcast,The Crisis Room Team and Lawfare,Spotify,https://open.spotify.com/show/7CrrgePZN4R3FoNZUNONQe,"lawfare, security, us-politics, international-law",EN
+Title,Producer,App,Link,Tags
+The Philip DeFranco Show,Philip deFranco,Spotify,https://open.spotify.com/show/6ESemquRbz6f8XLVywdZ2V,news|global|english
+The World in Brief,The Economist,Spotify,https://open.spotify.com/show/5zDCsEAvMp61OZOt0CaPS8,news|global|english
+"Today, Explained",Vox,Spotify,https://open.spotify.com/show/3pXx5SXzXwJxnf4A5pWN2A,news|global|english
+The Daily,New York Times,Spotify,https://open.spotify.com/show/3IM0lmZxpFAY7CwMuv9H4g,news|global|english
+NRC Vandaag,NRC,Spotify,https://open.spotify.com/show/73vZPMVjxTqC02OYZdcCr7,news|global|dutch
+War & Peace,International Crisis Group,Web,https://www.crisisgroup.org/pod/europe-central-asia/war-peace,security|politics|europe|english
+Hold your fire!,International Crisis Group,Web,https://www.crisisgroup.org/pod/global/hold-your-fire,politics|global|english
+The Horn,International Crisis Group,Web,https://www.crisisgroup.org/pod/africa/horn-africa/horn,politics|africa|english
+Le Collimateur,Alexandre Jubelin,Deezer,https://www.deezer.com/fr/show/568972,politics|europe|french
+Turkey Book Talk,William Armstrong,Apple Podcasts,https://podcasts.apple.com/us/podcast/turkey-book-talk/id1035167283,politics|europe|english
+Recap Radio,Turkey Recap,Apple Podcasts,https://podcasts.apple.com/us/podcast/recap-radio/id1813696945,politics|europe|english
+Popular Front,Jake Hanrahan,Apple Podcasts,https://podcasts.apple.com/us/podcast/popular-front/id1364539980,security|global|english
+In Moscow's Shadows,Mark Galeotti,Apple Podcasts,https://podcasts.apple.com/nl/podcast/in-moscows-shadows/id1510124746,politics|europe|english
+Angry Planet,Matthew Gault and Jason Fields,Apple Podcasts,https://podcasts.apple.com/us/podcast/angry-planet/id1023774600,security|global|english
+Zone critique,MSF,Deezer,https://www.deezer.com/de/show/1001243651,humanitarian|politics|global|french
+Po Na Biso,Ebuteli/GEC,Apple Podcasts,https://podcasts.apple.com/us/podcast/po-na-biso/id1553475927,politics|africa|english
+ACAPS Audio Reports,ACAPS,Spotify,https://open.spotify.com/show/7IlMirNXkxFXTy6QPx9ju5,humanitarian|politics|global|english
+Afrique 360,International Crisis Group,Web,https://www.crisisgroup.org/fr/pod/africa/afrique-360deg,politics|africa|french
+Bulletproof Podcast,Voxpot (Czech),Web,https://bulletproof.voxpot.cz/,security|news|global|english
+Carnegie Connects,Carnegie Endowment,Web,https://carnegieendowment.org/podcasts/carnegie-connects,politics|global|english
+Conflict of Interest,ACLED,Web,https://conflictsofinterest.buzzsprout.com/,security|global|english
+Digital Dilemmas,Lenk Studios,Spotify,https://open.spotify.com/show/5UpqCJIWqECv3qiPy2YMIg,tech|global|english
+From Our Own Correspondent,BBC,Apple Podcasts,https://podcasts.apple.com/us/podcast/from-our-own-correspondent/id73331209,news|global|english
+Global News Podcast,BBC,Spotify,https://open.spotify.com/show/3wBfqov60qDZbEVjPHo0a8,news|global|english
+Global Security Briefing,The Royal United Services Institute,Web,https://www.rusi.org/podcast-series/global-security-briefing-podcasts,security|news|global|english
+Humanitarian Frontiers,Chris Hoffman,Spotify,https://open.spotify.com/show/2Aaj0HJ46inB8M3kKjpljs,security|humanitarian|global|english
+Info ou Intox,France24,Apple Podcasts,https://podcasts.apple.com/us/podcast/info-ou-intox/id1528195894,news|global|french
+Into Africa,CSIS,Web,https://www.csis.org/podcasts/africa,politics|africa|english
+Le Journal de l'Afrique,France24,Apple Podcasts,https://podcasts.apple.com/us/podcast/journal-de-lafrique/id1055013662,news|africa|french
+Needle Stack,Authentic8,Web,https://www.authentic8.com/needlestack,tech|global|english
+Think Change,ODI,Web,https://odi.org/en/think-change-podcast/,humanitarian|law|global|english
+On the Record,CFR,Web,https://www.cfr.org/podcasts/on-the-record,politics|global|english
+Pod Save the World,Crooked Media,Web,https://crooked.com/podcast-series/pod-save-the-world/,politics|global|english
+Journal Afrique,RFI,Apple Podcasts,https://podcasts.apple.com/us/podcast/journal-afrique/id1573763106,news|africa|french
+Revue de Presse Internationale,RFI,Apple Podcasts,https://podcasts.apple.com/fr/podcast/revue-de-presse-internationale/id1547648032,news|global|french
+Tech Won't Save Us,Paris Marx,Web,https://www.techwontsave.us/,tech|global|english
+The Foreign Affairs Interview,Foreign Affairs Magazine,Apple Podcasts,https://podcasts.apple.com/us/podcast/the-foreign-affairs-interview/id1623855270,politics|global|english
+The Global Story,BBC,Spotify,https://open.spotify.com/show/5mcWBCBMSCLddYdYOH9Er2,news|global|english
+The Inside Story Podcast,Al Jazeera,Web,https://www.aljazeera.com/audio/podcasts/the-inside-story-podcast/,news|middle-east|english
+The New Humanitarian,The New Humanitarian,Spotify,https://open.spotify.com/show/7xGIfcTWJUuBv5uWB3vy8S,humanitarian|politics|global|english
+The Take,Al Jazeera,Apple Podcasts,https://podcasts.apple.com/us/podcast/the-take/id1438817292,news|middle-east|english
+War Fronts,Cloud10,Apple Podcasts,https://podcasts.apple.com/us/podcast/warfronts/id1773188988,security|global|english
+The Crisis Room Team and The Lawfare Podcast,The Crisis Room Team and Lawfare,Spotify,https://open.spotify.com/show/7CrrgePZN4R3FoNZUNONQe,law|global|english
+The Rest Is Politics: Leading,Goalhanger,Web,https://goalhanger.com/listen/the-rest-is-politics-leading,news|politics|global|english
+Battleground,Goalhanger,Web,https://goalhanger.com/listen/battleground,security|europe|english
+These Times,The Times / Tortoise,Web,https://www.thetimes.com/podcasts/these-times,news|politics|global|english
+Power Lines,Message Heard,Apple Podcasts,https://podcasts.apple.com/us/podcast/power-lines/id1613703848,security|politics|europe|english
+War on the Rocks,War on the Rocks,Web,https://warontherocks.com/category/podcasts/,security|politics|global|english
+The Russia Contingency,War on the Rocks / Michael Kofman,Web,https://warontherocks.com/category/podcasts/the-russia-contingency/,security|europe|english
+Modern War Institute Podcast,West Point Modern War Institute,Web,https://mwi.westpoint.edu/podcasts/,security|global|english
+Conflicted,Message Heard,Apple Podcasts,https://podcasts.apple.com/gb/podcast/conflicted/id1561675070,security|middle-east|english
+Risky Business,Patrick Gray,Web,https://risky.biz/,tech|security|global|english
+Click Here,Recorded Future News,Web,https://therecord.media/podcast,tech|security|global|english
+Darknet Diaries,Jack Rhysider,Web,https://darknetdiaries.com/,tech|security|global|english
+The Cyberlaw Podcast,Lawfare / Stewart Baker,Web,https://www.lawfaremedia.org/topics/series/cyberlaw-podcast,tech|security|global|english
+Rethinking Humanitarianism,The New Humanitarian,Web,https://www.thenewhumanitarian.org/podcasts/rethinking-humanitarianism,humanitarian|politics|global|english
+Trumanitarian,Lars Peter Nissen,Web,https://trumanitarian.org/,humanitarian|politics|global|english
+Displaced,Refugees International / IRC,Apple Podcasts,https://podcasts.apple.com/us/podcast/displaced/id1450824997,humanitarian|politics|global|english
+Babel: Translating the Middle East,CSIS,Web,https://www.csis.org/podcasts/babel-translating-middle-east,politics|middle-east|english
+Beyond the Headlines,The National (UAE),Web,https://www.thenationalnews.com/podcasts/beyond-the-headlines/,news|middle-east|english
+Asharq Podcasts,Asharq News (SRMG/Bloomberg),Web,https://www.asharq.com/podcasts/,news|middle-east|arabic
+BBC Arabic Podcasts,BBC Arabic,Web,https://www.bbc.com/arabic/podcasts,news|middle-east|arabic
+Al Jazeera Arabic Podcasts,Al Jazeera,Web,https://www.aljazeera.net/podcasts,news|middle-east|arabic
+Sowt Network,Sowt,Web,https://www.sowt.com/,politics|middle-east|arabic
+Thmanyah / Finjan,Thmanyah,Web,https://thmanyah.com/,politics|middle-east|arabic
+Hoy en EL PAÍS,El País,Spotify,https://open.spotify.com/show/4ASrcoseiEhqHsCmsbSjA9,news|global|spanish
+Hoy en La Vanguardia,La Vanguardia,Web,https://www.lavanguardia.com/podcast/hoy-en-la-vanguardia,news|global|spanish
+Carne Cruda,Javier Gallego,Web,https://www.carnecruda.es/,news|global|spanish
+El Hilo,Radio Ambulante Estudios + VICE,Web,https://elhilo.audio/,news|culture|americas|spanish
+Las Raras,Las Raras,Web,https://lasraras.cl/,culture|americas|spanish
+Radio Ambulante,NPR,Web,https://radioambulante.org/,culture|americas|spanish
+De Eso No Se Habla,Isabel Cadenas Cañón,Web,https://www.deesonosehabla.com/,culture|global|spanish
+InSight Crime Podcast,InSight Crime,Web,https://insightcrime.org/podcasts/,security|americas|spanish
+Affaires sensibles,France Inter,Web,https://www.radiofrance.fr/franceinter/podcasts/affaires-sensibles,politics|culture|global|french
+L'Heure du Monde,Le Monde,Web,https://www.lemonde.fr/podcasts/l-heure-du-monde/,news|global|french
+Code source,Le Parisien,Web,https://www.leparisien.fr/podcasts/code-source/,news|global|french
+Géopolitique,France Inter / Pierre Haski,Web,https://www.radiofrance.fr/franceinter/podcasts/geopolitique,politics|global|french
+Cultures Monde,France Culture,Web,https://www.radiofrance.fr/franceculture/podcasts/cultures-monde,news|politics|global|french
+Les Enjeux internationaux,France Culture,Web,https://www.radiofrance.fr/franceculture/podcasts/les-enjeux-internationaux,politics|culture|global|french
+Sismique,Julien Devaureix,Web,https://sismique.fr/,politics|global|french
+Thinkerview,Thinkerview,Web,https://thinkerview.com/,politics|global|french
+Le Nouvel Esprit Public,Philippe Meyer,Web,https://nouveauespritpublic.fr/,politics|global|french
+Asia Matters,Andrew Peaple / CSDS,Apple Podcasts,https://podcasts.apple.com/gb/podcast/asia-matters-podcast/id1487381702,news|politics|asia|english
+The Diplomat's Asia Geopolitics,The Diplomat,Web,https://thediplomat.com/podcasts/,security|politics|asia|english
+Indo-Pacific Insights,Lowy Institute,Web,https://www.lowyinstitute.org/podcasts,security|politics|asia|english
+Global Dispatches,Mark Leon Goldberg,Web,https://www.globaldispatches.org/,news|politics|global|english
+Sinica Podcast,Kaiser Kuo,Web,https://www.sinicapodcast.com/,politics|asia|english
+ChinaTalk,Jordan Schneider,Web,https://www.chinatalk.media/,tech|politics|asia|english
+The China-Global South Podcast,Eric Olander & Cobus van Staden,Web,https://www.chinaglobalsouth.com/podcasts/,politics|africa|english
+Pekingology,CSIS,Web,https://www.csis.org/podcasts/pekingology,politics|asia|english
+The Lazarus Heist,BBC,Apple Podcasts,https://podcasts.apple.com/us/podcast/the-lazarus-heist/id1612262549,tech|security|asia|english
+NK News Podcast,NK News,Web,https://www.nknews.org/category/north-korea-news-podcast/,security|news|asia|english
+New Mandala Podcast,ANU,Web,https://www.newmandala.org/category/podcasts/,politics|asia|english
+Insight Myanmar,Insight Myanmar,Web,https://insightmyanmar.org/,security|politics|asia|english
+Grand Tamasha,Carnegie Endowment / Hindustan Times,Web,https://carnegieendowment.org/podcasts/grand-tamasha,politics|asia|english
+The Pakistan Experience,Shehzad Ghias Shaikh,Web,https://www.youtube.com/@thepakistanexperience,politics|asia|english
+Pacific Waves,RNZ,Web,https://www.rnz.co.nz/national/programmes/pacificwaves,news|asia|english
+Majlis,RFE/RL / Bruce Pannier,Apple Podcasts,https://podcasts.apple.com/us/podcast/majlis/id1086142112,news|politics|asia|english
+Talking China In Eurasia,RFE/RL / Reid Standish,Web,https://www.rferl.org/talking-china-in-eurasia-podcast,news|politics|asia|english
+Voices on Central Asia,Central Asia Program (GWU),Web,https://voicesoncentralasia.org/podcast/,politics|asia|english
+Pakistonomy,Uzair Younus,Apple Podcasts,https://podcasts.apple.com/us/podcast/pakistonomy/id1531480503,politics|asia|english
+Dawn News Podcasts,Dawn,Web,https://www.dawn.com/podcasts,news|politics|asia|english
+Afghan Eye Podcast,Ahmad-Waleed Kakar,Web,https://www.afghaneye.org/podcast,security|politics|asia|english
