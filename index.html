@@ -7,7 +7,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
-    /* ─── Reset & Design Tokens ─────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --bg:#0c0c0e; --surface:#111113; --card:#161618; --card-h:#1a1a1c;
@@ -19,7 +18,6 @@
     }
     body { background:var(--bg); color:var(--white); font-family:var(--sans); font-weight:300; min-height:100vh; -webkit-font-smoothing:antialiased; }
 
-    /* ─── Header ─────────────────────────────────────────────────────── */
     header { position:sticky; top:0; z-index:100; background:rgba(12,12,14,.94); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); height:60px; }
     .header-inner { max-width:860px; margin:0 auto; padding:0 32px; height:100%; display:flex; align-items:center; gap:16px; }
     .logo { display:flex; align-items:center; gap:11px; text-decoration:none; }
@@ -29,16 +27,13 @@
     .header-right { margin-left:auto; display:flex; gap:8px; align-items:center; }
     .header-count { font-family:var(--mono); font-size:.58rem; color:var(--grey); letter-spacing:.04em; margin-right:2px; }
 
-    /* ─── Buttons ────────────────────────────────────────────────────── */
     .btn { font-family:var(--mono); font-size:.61rem; letter-spacing:.08em; text-transform:uppercase; padding:6px 14px; border:1px solid var(--muted); background:transparent; color:var(--grey); cursor:pointer; border-radius:var(--r-sm); transition:all .15s; white-space:nowrap; }
     .btn:hover { border-color:var(--accent); color:var(--accent); }
     .btn-primary { background:var(--accent); color:#fff; border-color:var(--accent); font-weight:500; }
     .btn-primary:hover { background:var(--accent-h); border-color:var(--accent-h); }
 
-    /* ─── Page Layout ────────────────────────────────────────────────── */
     .page-wrap { max-width:860px; margin:0 auto; padding:0 32px; }
 
-    /* ─── Toolbar (Search + Filter toggle + View toggle) ─────────────── */
     .toolbar { padding:20px 0 0; display:flex; gap:8px; align-items:center; }
     .search-wrap { position:relative; flex:1; }
     .search-wrap .s-ico { position:absolute; left:13px; top:50%; transform:translateY(-50%); width:14px; height:14px; stroke:var(--grey); fill:none; pointer-events:none; }
@@ -64,7 +59,6 @@
     .view-btn.active { background:var(--card); color:var(--white); }
     .view-btn:hover:not(.active) { color:var(--light); }
 
-    /* ─── Filter Panel ───────────────────────────────────────────────── */
     .filter-panel { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); padding:16px 18px; margin-top:8px; display:none; }
     .filter-panel.open { display:block; }
     .filter-row { display:flex; align-items:flex-start; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
@@ -77,18 +71,15 @@
     .filter-clear { font-family:var(--mono); font-size:.57rem; letter-spacing:.06em; background:none; border:none; color:var(--grey); cursor:pointer; padding:2px 4px; margin-left:auto; align-self:flex-start; transition:color .12s; }
     .filter-clear:hover { color:var(--light); }
 
-    /* ─── Active Filter Pills ────────────────────────────────────────── */
     .active-filters { display:flex; gap:5px; flex-wrap:wrap; margin-top:10px; }
     .active-filters:empty { display:none; }
     .af-pill { display:inline-flex; align-items:center; gap:4px; font-family:var(--mono); font-size:.58rem; letter-spacing:.04em; padding:3px 8px 3px 10px; background:rgba(74,127,193,.1); border:1px solid rgba(74,127,193,.25); color:var(--accent); border-radius:20px; cursor:pointer; transition:background .12s; }
     .af-pill:hover { background:rgba(74,127,193,.18); }
     .af-pill svg { width:9px; height:9px; stroke:currentColor; fill:none; }
 
-    /* ─── Result Count Bar ───────────────────────────────────────────── */
     .result-bar { display:flex; align-items:center; padding:12px 0 6px; }
     .result-count { font-family:var(--mono); font-size:.6rem; color:var(--grey); }
 
-    /* ─── Card List ──────────────────────────────────────────────────── */
     .card-list { display:flex; flex-direction:column; border:1px solid var(--border); border-radius:var(--r-lg); overflow:hidden; }
     .card { background:var(--card); padding:15px 16px; display:flex; align-items:flex-start; gap:14px; transition:background .1s; border-bottom:1px solid var(--border); }
     .card:last-child { border-bottom:none; }
@@ -110,8 +101,6 @@
 
     .card-right { display:flex; flex-direction:column; align-items:flex-end; gap:6px; flex-shrink:0; padding-top:1px; }
     .card-meta { display:flex; align-items:center; gap:4px; flex-wrap:wrap; justify-content:flex-end; }
-
-    /* ─── Language & Platform Badges ────────────────────────────────── */
     .lang-badge { font-family:var(--mono); font-size:.54rem; font-weight:600; letter-spacing:.06em; padding:2px 5px; border-radius:3px; }
     .lang-badge.EN { background:rgba(74,127,193,.14); color:#6090cc; border:1px solid rgba(74,127,193,.22); }
     .lang-badge.FR { background:rgba(180,60,60,.14); color:#c06060; border:1px solid rgba(180,60,60,.22); }
@@ -128,7 +117,6 @@
     .btn-listen:hover { border-color:var(--accent); color:var(--accent); background:rgba(74,127,193,.06); }
     .btn-listen svg { width:10px; height:10px; stroke:currentColor; fill:none; }
 
-    /* ─── Compact View Overrides ─────────────────────────────────────── */
     .card-list.compact .card { padding:9px 16px; align-items:center; }
     .card-list.compact .card-icon { width:28px; height:28px; font-size:.58rem; margin-top:0; }
     .card-list.compact .card-desc, .card-list.compact .card-tags, .card-list.compact .card-freq { display:none; }
@@ -136,12 +124,10 @@
     .card-list.compact .card-top { flex:1; min-width:0; margin-bottom:0; }
     .card-list.compact .card-producer { display:none; }
 
-    /* ─── Status / Loading / Empty States ───────────────────────────── */
     #status { display:none; text-align:center; padding:60px 20px; }
     #status .big { font-family:var(--display); font-size:2.4rem; letter-spacing:.1em; color:var(--muted); margin-bottom:8px; }
     #status p { font-family:var(--mono); font-size:.63rem; color:var(--grey); line-height:1.8; }
 
-    /* ─── Add Strip (bottom CTA) ─────────────────────────────────────── */
     .add-strip { margin:20px 0 60px; border:1px dashed var(--border); border-radius:var(--r-lg); padding:18px 22px; display:flex; align-items:center; gap:16px; background:var(--surface); transition:border-color .15s; }
     .add-strip:hover { border-color:var(--border-h); }
     .add-strip-text h3 { font-family:var(--display); font-size:.95rem; letter-spacing:.12em; margin-bottom:3px; }
@@ -149,7 +135,6 @@
     .add-strip-text p code { background:var(--card); padding:1px 5px; border-radius:3px; }
     .add-strip-actions { margin-left:auto; display:flex; gap:7px; flex-shrink:0; }
 
-    /* ─── Overlays & Modals ──────────────────────────────────────────── */
     .overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.8); z-index:200; align-items:center; justify-content:center; }
     .overlay.open { display:flex; }
     .modal { background:var(--surface); border:1px solid var(--border-h); width:500px; max-width:94vw; border-radius:var(--r-lg); padding:28px; }
@@ -170,12 +155,10 @@
     .form-row input::placeholder { color:var(--grey); }
     .form-row select option { background:var(--card); }
 
-    /* ─── Scrollbar ──────────────────────────────────────────────────── */
     ::-webkit-scrollbar { width:4px; height:4px; }
     ::-webkit-scrollbar-track { background:transparent; }
     ::-webkit-scrollbar-thumb { background:var(--muted); border-radius:2px; }
 
-    /* ─── Mobile ─────────────────────────────────────────────────────── */
     @media(max-width:640px){
       .page-wrap,.header-inner{padding-left:16px;padding-right:16px;}
       .logo-sub,.header-count{display:none;}
@@ -185,8 +168,6 @@
   </style>
 </head>
 <body>
-
-<!-- ─── Header ──────────────────────────────────────────────────────────── -->
 <header>
   <div class="header-inner">
     <a class="logo" href="#"><img src="static/logo-symbol-wb.png" alt="INSO" /><div><div class="logo-label">INSO</div><div class="logo-sub">Podcast Index</div></div></a>
@@ -199,89 +180,79 @@
 </header>
 
 <div class="page-wrap">
-
-  <!-- ─── Toolbar ──────────────────────────────────────────────────────── -->
-  <div class="toolbar">
-    <div class="search-wrap" id="search-wrap">
-      <svg class="s-ico" viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input id="search" type="text" placeholder="Search title, producer, tag, country…" autocomplete="off" />
-      <button class="search-clear" id="search-clear" aria-label="Clear">✕</button>
-    </div>
-    <button class="filter-btn" id="filter-toggle">
-      <svg viewBox="0 0 24 24" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
-      Filters <span class="filter-count" id="filter-count">0</span>
-    </button>
-    <div class="view-toggle">
-      <button class="view-btn active" id="view-card" title="Card view"><svg viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></button>
-      <button class="view-btn" id="view-compact" title="Compact view"><svg viewBox="0 0 24 24" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
-    </div>
+<div class="toolbar">
+  <div class="search-wrap" id="search-wrap">
+    <svg class="s-ico" viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input id="search" type="text" placeholder="Search title, producer, tag, country…" autocomplete="off" />
+    <button class="search-clear" id="search-clear" aria-label="Clear">✕</button>
   </div>
-
-  <!-- ─── Filter Panel ──────────────────────────────────────────────────── -->
-  <div class="filter-panel" id="filter-panel">
-    <div class="filter-row">
-      <span class="filter-label">Platform</span>
-      <div class="chips" id="chips-app">
-        <button class="chip active" data-app="all">All</button>
-        <button class="chip" data-app="spotify">Spotify</button>
-        <button class="chip" data-app="apple">Apple</button>
-        <button class="chip" data-app="deezer">Deezer</button>
-        <button class="chip" data-app="web">Web</button>
-      </div>
-    </div>
-    <div class="filter-row">
-      <span class="filter-label">Language</span>
-      <div class="chips" id="chips-lang">
-        <button class="chip active" data-lang="">All</button>
-        <button class="chip" data-lang="EN">🇬🇧 EN</button>
-        <button class="chip" data-lang="FR">🇫🇷 FR</button>
-        <button class="chip" data-lang="ES">🇪🇸 ES</button>
-        <button class="chip" data-lang="AR">🇸🇦 AR</button>
-        <button class="chip" data-lang="NL">🇳🇱 NL</button>
-      </div>
-    </div>
-    <div class="filter-row">
-      <span class="filter-label">Frequency</span>
-      <div class="chips" id="chips-freq">
-        <button class="chip active" data-freq="">All</button>
-        <button class="chip" data-freq="Daily">Daily</button>
-        <button class="chip" data-freq="Weekly">Weekly</button>
-        <button class="chip" data-freq="Biweekly">Biweekly</button>
-        <button class="chip" data-freq="Monthly">Monthly</button>
-        <button class="chip" data-freq="Irregular">Irregular</button>
-      </div>
-    </div>
-    <div class="filter-row">
-      <span class="filter-label">Region</span>
-      <!-- Country chips are built dynamically from CSV data in buildCountryChips() -->
-      <div class="chips" id="chips-country"><button class="chip active" data-country="">All</button></div>
-      <button class="filter-clear" id="clear-all-filters">Clear all</button>
-    </div>
-  </div>
-
-  <!-- Active filter pills appear here when filters are applied -->
-  <div class="active-filters" id="active-filters"></div>
-  <div class="result-bar"><span class="result-count" id="result-count"></span></div>
-
-  <!-- Status panel: shown during load, on error, or when no results match -->
-  <div id="status"><div class="big">LOADING</div><p>Fetching podcast data…</p></div>
-
-  <div class="card-list" id="card-list"></div>
-
-  <!-- ─── Bottom Add Strip ───────────────────────────────────────────── -->
-  <div class="add-strip">
-    <div class="add-strip-text">
-      <h3>Add a Podcast</h3>
-      <p>Add manually or bulk-import. Edit <code>data/podcasts.csv</code> to save permanently.</p>
-    </div>
-    <div class="add-strip-actions">
-      <button class="btn" id="open-import-2">Import CSV</button>
-      <button class="btn btn-primary" id="open-add-2">+ Add</button>
-    </div>
+  <button class="filter-btn" id="filter-toggle">
+    <svg viewBox="0 0 24 24" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg>
+    Filters <span class="filter-count" id="filter-count">0</span>
+  </button>
+  <div class="view-toggle">
+    <button class="view-btn active" id="view-card" title="Card view"><svg viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></button>
+    <button class="view-btn" id="view-compact" title="Compact view"><svg viewBox="0 0 24 24" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
   </div>
 </div>
 
-<!-- ─── Import CSV Modal ──────────────────────────────────────────────────── -->
+<div class="filter-panel" id="filter-panel">
+  <div class="filter-row">
+    <span class="filter-label">Platform</span>
+    <div class="chips" id="chips-app">
+      <button class="chip active" data-app="all">All</button>
+      <button class="chip" data-app="spotify">Spotify</button>
+      <button class="chip" data-app="apple">Apple</button>
+      <button class="chip" data-app="deezer">Deezer</button>
+      <button class="chip" data-app="web">Web</button>
+    </div>
+  </div>
+  <div class="filter-row">
+    <span class="filter-label">Language</span>
+    <div class="chips" id="chips-lang">
+      <button class="chip active" data-lang="">All</button>
+      <button class="chip" data-lang="EN">🇬🇧 EN</button>
+      <button class="chip" data-lang="FR">🇫🇷 FR</button>
+      <button class="chip" data-lang="ES">🇪🇸 ES</button>
+      <button class="chip" data-lang="AR">🇸🇦 AR</button>
+      <button class="chip" data-lang="NL">🇳🇱 NL</button>
+    </div>
+  </div>
+  <div class="filter-row">
+    <span class="filter-label">Frequency</span>
+    <div class="chips" id="chips-freq">
+      <button class="chip active" data-freq="">All</button>
+      <button class="chip" data-freq="Daily">Daily</button>
+      <button class="chip" data-freq="Weekly">Weekly</button>
+      <button class="chip" data-freq="Biweekly">Biweekly</button>
+      <button class="chip" data-freq="Monthly">Monthly</button>
+      <button class="chip" data-freq="Irregular">Irregular</button>
+    </div>
+  </div>
+  <div class="filter-row">
+    <span class="filter-label">Region</span>
+    <div class="chips" id="chips-country"><button class="chip active" data-country="">All</button></div>
+    <button class="filter-clear" id="clear-all-filters">Clear all</button>
+  </div>
+</div>
+
+<div class="active-filters" id="active-filters"></div>
+<div class="result-bar"><span class="result-count" id="result-count"></span></div>
+<div id="status"><div class="big">LOADING</div><p>Fetching podcast data…</p></div>
+<div class="card-list" id="card-list"></div>
+
+<div class="add-strip">
+  <div class="add-strip-text">
+    <h3>Add a Podcast</h3>
+    <p>Add manually or bulk-import. Edit <code>data/podcasts.csv</code> to save permanently.</p>
+  </div>
+  <div class="add-strip-actions">
+    <button class="btn" id="open-import-2">Import CSV</button>
+    <button class="btn btn-primary" id="open-add-2">+ Add</button>
+  </div>
+</div>
+</div>
+
 <div class="overlay" id="overlay-import">
   <div class="modal">
     <h2>Import CSV</h2>
@@ -292,600 +263,200 @@
   </div>
 </div>
 
-<!-- ─── Add Podcast Modal ─────────────────────────────────────────────────── -->
-<!-- NOTE: Add more fields here (lang, region, freq, tags, description) if needed. -->
-<!-- Currently only title, producer, app, and link are collected. -->
 <div class="overlay" id="overlay-add">
   <div class="modal">
     <h2>Add Podcast</h2>
     <p class="modal-sub">Only Title is required.</p>
     <div class="form-row"><label>Title *</label><input id="add-title" type="text" placeholder="e.g. War &amp; Peace" /></div>
     <div class="form-row"><label>Producer</label><input id="add-producer" type="text" placeholder="e.g. International Crisis Group" /></div>
-    <div class="form-row"><label>Language</label>
-      <select id="add-lang">
-        <option value="">— not specified —</option>
-        <option value="EN">English (EN)</option>
-        <option value="FR">French (FR)</option>
-        <option value="ES">Spanish (ES)</option>
-        <option value="AR">Arabic (AR)</option>
-        <option value="NL">Dutch (NL)</option>
-      </select>
-    </div>
-    <div class="form-row"><label>Platform</label>
-      <select id="add-app">
-        <option value="">— not specified —</option>
-        <option value="Spotify">Spotify</option>
-        <option value="Apple Podcasts">Apple Podcasts</option>
-        <option value="Deezer">Deezer</option>
-        <option value="Web">Web</option>
-      </select>
-    </div>
-    <div class="form-row"><label>Frequency</label>
-      <select id="add-freq">
-        <option value="">— not specified —</option>
-        <option value="Daily">Daily</option>
-        <option value="Weekly">Weekly</option>
-        <option value="Biweekly">Biweekly</option>
-        <option value="Monthly">Monthly</option>
-        <option value="Irregular">Irregular</option>
-      </select>
-    </div>
-    <div class="form-row"><label>Region</label><input id="add-region" type="text" placeholder="e.g. Global, Netherlands, Middle East" /></div>
-    <div class="form-row"><label>Tags</label><input id="add-tags" type="text" placeholder="e.g. news, politics, security (comma-separated)" /></div>
-    <div class="form-row"><label>Description</label><input id="add-description" type="text" placeholder="Short summary…" /></div>
+    <div class="form-row"><label>App</label><select id="add-app"><option value="">— not specified —</option><option value="Spotify">Spotify</option><option value="Apple Podcasts">Apple Podcasts</option><option value="Deezer">Deezer</option><option value="Web">Web</option></select></div>
     <div class="form-row"><label>Link</label><input id="add-link" type="url" placeholder="https://…" /></div>
     <div class="modal-actions"><button class="btn" id="cancel-add">Cancel</button><button class="btn btn-primary" id="confirm-add">Add to index</button></div>
   </div>
 </div>
 
 <script>
-// ─── State ────────────────────────────────────────────────────────────────
-// All mutable app state lives here. Modify these variables to change what
-// the UI displays; always call render() after making changes.
-let podcasts   = [];       // Full list loaded from CSV (or added manually)
-let pending    = [];       // Staged rows from CSV import, not yet committed
-let filterApp  = 'all';   // Platform filter — 'all' means no filter
-let filterLang = '';       // Language filter — empty string means no filter
-let filterFreq = '';       // Frequency filter — empty string means no filter
-let filterRegion = '';     // Region/country filter — empty string means no filter
-let activeTags = new Set(); // Tag filter — podcasts must match ALL active tags
-let query      = '';       // Current search query string
-let viewMode   = 'card';   // 'card' or 'compact'
+let podcasts=[],pending=[],filterApp='all',filterLang='',filterFreq='',filterRegion='',activeTags=new Set(),query='',viewMode='card';
 
-// ─── Tag Colours ─────────────────────────────────────────────────────────
-// Maps topic tag names to dot/accent colours used in the card UI.
-// Add new tags here to give them a colour; unknown tags fall back to #606068.
-const TAG_DOT = {
-  news:         '#c89828', // amber
-  politics:     '#4a8ed0', // blue
-  security:     '#c85060', // red
-  humanitarian: '#38a858', // green
-  tech:         '#9060c8', // purple
-  law:          '#a0a038', // olive
-  culture:      '#d07830', // orange
+const TAG_DOT={
+  // 7 topic tags — one colour each, clear and memorable
+  news:        '#c89828',  // amber
+  politics:    '#4a8ed0',  // blue
+  security:    '#c85060',  // red
+  humanitarian:'#38a858',  // green
+  tech:        '#9060c8',  // purple
+  law:         '#a0a038',  // olive
+  culture:     '#d07830',  // orange
 };
 
-// ─── Helpers ──────────────────────────────────────────────────────────────
+function appKey(r){const s=(r||'').toLowerCase();if(s.includes('spotify'))return'spotify';if(s.includes('apple'))return'apple';if(s.includes('deezer'))return'deezer';if(s==='web')return'web';return'other';}
+function platformInfo(r){const k=appKey(r);const l={spotify:'Spotify',apple:'Apple Podcasts',deezer:'Deezer',web:'Web',other:r||''};return{key:k,label:l[k]};}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function initialsFor(t){const w=t.replace(/[^a-zA-Z0-9 ]/g,'').trim().split(/\s+/);return w.length>=2?(w[0][0]+(w[1][0]||'')).toUpperCase():t.slice(0,2).toUpperCase();}
 
-// Normalises a platform/app string to a canonical CSS key used for badge styling.
-// Add new platform branches here as needed.
-function appKey(raw) {
-  const s = (raw || '').toLowerCase();
-  if (s.includes('spotify')) return 'spotify';
-  if (s.includes('apple'))   return 'apple';
-  if (s.includes('deezer'))  return 'deezer';
-  if (s === 'web')           return 'web';
-  return 'other';
+function activeFilterCount(){let n=0;if(filterApp!=='all')n++;if(filterLang)n++;if(filterFreq)n++;if(filterCountry)n++;n+=activeTags.size;return n;}
+
+function updateFilterBtn(){const n=activeFilterCount();const b=document.getElementById('filter-toggle');b.classList.toggle('has-filters',n>0);document.getElementById('filter-count').textContent=n;}
+
+function renderActivePills(){
+  const el=document.getElementById('active-filters');const pills=[];
+  const add=(lbl,k)=>pills.push(`<span class="af-pill" data-clear="${esc(k)}">${esc(lbl)}<svg viewBox="0 0 24 24" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>`);
+  if(filterApp!=='all')add('Platform: '+filterApp,'app');
+  if(filterLang)add('Language: '+filterLang,'lang');
+  if(filterFreq)add('Frequency: '+filterFreq,'freq');
+  if(filterRegion)add('Region: '+filterRegion,'region');
+  activeTags.forEach(t=>add(t,'tag:'+t));
+  el.innerHTML=pills.join('');
 }
 
-// Returns { key, label } for badge rendering given a raw platform string.
-function platformInfo(raw) {
-  const key = appKey(raw);
-  const labels = { spotify: 'Spotify', apple: 'Apple Podcasts', deezer: 'Deezer', web: 'Web', other: raw || '' };
-  return { key, label: labels[key] };
-}
-
-// Escapes HTML special characters to prevent XSS when inserting user data into innerHTML.
-function esc(s) {
-  return String(s)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
-}
-
-// Derives a 1–2 character abbreviation from a podcast title for the card icon.
-function initialsFor(title) {
-  const words = title.replace(/[^a-zA-Z0-9 ]/g, '').trim().split(/\s+/);
-  return words.length >= 2
-    ? (words[0][0] + (words[1][0] || '')).toUpperCase()
-    : title.slice(0, 2).toUpperCase();
-}
-
-// ─── Filter State Helpers ─────────────────────────────────────────────────
-
-// Returns the total number of active filters across all dimensions.
-// IMPORTANT: must stay in sync with the filter state variables above.
-// Bug fix: was using undefined `filterCountry` instead of `filterRegion`.
-function activeFilterCount() {
-  let n = 0;
-  if (filterApp !== 'all') n++;
-  if (filterLang)          n++;
-  if (filterFreq)          n++;
-  if (filterRegion)        n++;  // fixed: was `filterCountry` (undefined)
-  n += activeTags.size;
-  return n;
-}
-
-// Updates the Filters button appearance based on current filter count.
-function updateFilterBtn() {
-  const n = activeFilterCount();
-  const btn = document.getElementById('filter-toggle');
-  btn.classList.toggle('has-filters', n > 0);
-  document.getElementById('filter-count').textContent = n;
-}
-
-// Rebuilds the row of removable active-filter pills shown above the results.
-function renderActivePills() {
-  const el = document.getElementById('active-filters');
-  const pills = [];
-
-  // Helper to push a pill; data-clear value is used by the click handler to
-  // know which filter dimension to reset.
-  const addPill = (label, clearKey) =>
-    pills.push(`<span class="af-pill" data-clear="${esc(clearKey)}">${esc(label)}<svg viewBox="0 0 24 24" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>`);
-
-  if (filterApp !== 'all') addPill('Platform: ' + filterApp, 'app');
-  if (filterLang)          addPill('Language: ' + filterLang, 'lang');
-  if (filterFreq)          addPill('Frequency: ' + filterFreq, 'freq');
-  if (filterRegion)        addPill('Region: ' + filterRegion, 'region');
-  activeTags.forEach(t => addPill(t, 'tag:' + t));
-
-  el.innerHTML = pills.join('');
-}
-
-// ─── Card Rendering ───────────────────────────────────────────────────────
-
-// Builds the HTML string for a single podcast card.
-// Called by render() for every visible podcast.
-function buildCardHTML(p) {
-  const pl     = platformInfo(p.app);
-  const badge  = `<span class="platform-badge ${pl.key}">${esc(pl.label)}</span>`;
-  const listen = p.link
-    ? `<a class="btn-listen" href="${esc(p.link)}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Listen</a>`
-    : '';
-  const langB  = p.lang ? `<span class="lang-badge ${esc(p.lang)}">${esc(p.lang)}</span>` : '';
-  const tagHtml = p.tags.length
-    ? `<div class="card-tags">${p.tags.map(t =>
-        `<span class="tag${activeTags.has(t) ? ' active' : ''}" data-tag="${esc(t)}"><span class="tag-dot" style="background:${TAG_DOT[t] || '#606068'}"></span>${esc(t)}</span>`
-      ).join('')}</div>`
-    : '';
-
-  // Pick the first recognised tag colour for the initials icon; fall back to neutral.
-  const iconColor = p.tags.reduce((c, t) => TAG_DOT[t] || c, '#606068');
-  const desc  = p.description ? `<div class="card-desc">${esc(p.description)}</div>` : '';
-  const freq  = p.freq        ? `<span class="card-freq">${esc(p.freq)}</span>`       : '';
-  const loc   = p.region && p.region !== 'Global'
-    ? ` · <span style="color:var(--grey)">${esc(p.region)}</span>`
-    : '';
-
-  return `<div class="card">
-    <div class="card-icon" style="color:${iconColor}">${esc(initialsFor(p.title))}</div>
-    <div class="card-body">
-      <div class="card-top"><span class="card-title">${esc(p.title)}</span>${freq}</div>
-      <div class="card-producer">${esc(p.producer || '—')}${loc}</div>
-      ${desc}${tagHtml}
-    </div>
-    <div class="card-right">
-      <div class="card-meta">${langB}${badge}</div>
-      ${listen}
-    </div>
-  </div>`;
-}
-
-// ─── Main Render ──────────────────────────────────────────────────────────
-
-// Filters `podcasts` against all active filters + search query, then
-// re-renders the card list, counts, and filter UI.
-// Call this any time state changes (filters, search, viewMode, data).
-function render() {
-  const q = query.toLowerCase();
-
-  const filtered = podcasts.filter(p => {
-    const mApp    = filterApp === 'all' || appKey(p.app) === filterApp;
-    const mLang   = !filterLang   || p.lang   === filterLang;
-    const mFreq   = !filterFreq   || p.freq   === filterFreq;
-    const mRegion = !filterRegion || p.region === filterRegion;
-    // Tag filter: podcast must include ALL active tags (AND logic).
-    const mTags   = activeTags.size === 0 || [...activeTags].every(t => p.tags.includes(t));
-    // Search: matches title, producer, any tag, region, or description.
-    const mQ = !q
-      || p.title.toLowerCase().includes(q)
-      || (p.producer || '').toLowerCase().includes(q)
-      || p.tags.some(t => t.includes(q))
-      || (p.region || '').toLowerCase().includes(q)
-      || (p.description || '').toLowerCase().includes(q);
-
-    return mApp && mLang && mFreq && mRegion && mTags && mQ;
+function render(){
+  const q=query.toLowerCase();
+  const filtered=podcasts.filter(p=>{
+    const mApp=filterApp==='all'||appKey(p.app)===filterApp;
+    const mLang=!filterLang||p.lang===filterLang;
+    const mFreq=!filterFreq||p.freq===filterFreq;
+    const mCnt=!filterRegion||p.region===filterRegion;
+    const mTags=activeTags.size===0||[...activeTags].every(t=>p.tags.includes(t));
+    const mQ=!q||p.title.toLowerCase().includes(q)||(p.producer||'').toLowerCase().includes(q)||p.tags.some(t=>t.includes(q))||(p.region||'').toLowerCase().includes(q)||(p.description||'').toLowerCase().includes(q);
+    return mApp&&mLang&&mFreq&&mCnt&&mTags&&mQ;
   });
 
-  // Update counts in the header and result bar.
-  document.getElementById('header-count').textContent = podcasts.length + ' podcasts';
-  document.getElementById('result-count').textContent = filtered.length === podcasts.length
-    ? podcasts.length + ' podcasts'
-    : filtered.length + ' of ' + podcasts.length + ' podcasts';
+  document.getElementById('header-count').textContent=podcasts.length+' podcasts';
+  document.getElementById('result-count').textContent=filtered.length===podcasts.length?podcasts.length+' podcasts':filtered.length+' of '+podcasts.length+' podcasts';
 
-  const list   = document.getElementById('card-list');
-  const status = document.getElementById('status');
+  const list=document.getElementById('card-list'),status=document.getElementById('status');
+  if(filtered.length===0){list.innerHTML='';status.style.display='block';status.innerHTML='<div class="big">NO RESULTS</div><p>Try a different search or filter.</p>';updateFilterBtn();renderActivePills();return;}
+  status.style.display='none';
 
-  if (filtered.length === 0) {
-    list.innerHTML = '';
-    status.style.display = 'block';
-    status.innerHTML = '<div class="big">NO RESULTS</div><p>Try a different search or filter.</p>';
-  } else {
-    status.style.display = 'none';
-    list.innerHTML = filtered.map(buildCardHTML).join('');
-  }
-
-  list.classList.toggle('compact', viewMode === 'compact');
-  updateFilterBtn();
-  renderActivePills();
+  list.innerHTML=filtered.map(p=>{
+    const pl=platformInfo(p.app);
+    const badge=`<span class="platform-badge ${pl.key}">${esc(pl.label)}</span>`;
+    const listen=p.link?`<a class="btn-listen" href="${esc(p.link)}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Listen</a>`:'';
+    const langB=p.lang?`<span class="lang-badge ${esc(p.lang)}">${esc(p.lang)}</span>`:'';
+    const tagHtml=p.tags.length?`<div class="card-tags">${p.tags.map(t=>`<span class="tag${activeTags.has(t)?' active':''}" data-tag="${esc(t)}"><span class="tag-dot" style="background:${TAG_DOT[t]||'#606068'}"></span>${esc(t)}</span>`).join('')}</div>`:'';
+    const color=p.tags.reduce((c,t)=>TAG_DOT[t]||c,'#606068');
+    const desc=p.description?`<div class="card-desc">${esc(p.description)}</div>`:'';
+    const freq=p.freq?`<span class="card-freq">${esc(p.freq)}</span>`:'';
+    const loc=p.region&&p.region!=='Global'?` · <span style="color:var(--grey)">${esc(p.region)}</span>`:'';
+    return`<div class="card"><div class="card-icon" style="color:${color}">${esc(initialsFor(p.title))}</div><div class="card-body"><div class="card-top"><span class="card-title">${esc(p.title)}</span>${freq}</div><div class="card-producer">${esc(p.producer||'—')}${loc}</div>${desc}${tagHtml}</div><div class="card-right"><div class="card-meta">${langB}${badge}</div>${listen}</div></div>`;
+  }).join('');
+  list.classList.toggle('compact',viewMode==='compact');
+  updateFilterBtn();renderActivePills();
 }
 
-// ─── CSV Parsing ──────────────────────────────────────────────────────────
-
-// Parses a CSV string into an array of podcast objects.
-// Handles: BOM stripping, CRLF normalisation, quoted fields, escaped quotes.
-// Column detection is flexible — looks for substrings in the header row,
-// so columns don't need to be in a fixed order.
-function parseCSV(text) {
-  // Strip BOM and normalise line endings.
-  text = text.replace(/^\uFEFF/, '').replace(/\r\n/g, '\n').replace(/\r/g, '\n');
-  const lines = text.split('\n').filter(l => l.trim());
-  if (!lines.length) return [];
-
-  // Splits a single CSV line respecting quoted fields and escaped quotes ("").
-  function splitRow(line) {
-    const cols = [];
-    let cur = '', inQuote = false;
-    for (let i = 0; i < line.length; i++) {
-      const ch = line[i];
-      if (ch === '"') {
-        if (inQuote && line[i + 1] === '"') { cur += '"'; i++; } // escaped quote
-        else inQuote = !inQuote;
-      } else if (ch === ',' && !inQuote) {
-        cols.push(cur.trim()); cur = '';
-      } else {
-        cur += ch;
-      }
-    }
-    cols.push(cur.trim());
-    return cols;
-  }
-
-  const headers = splitRow(lines[0]).map(x => x.toLowerCase().trim());
-
-  // Returns column index for the first header containing `keyword`, or -1.
-  const col = keyword => headers.findIndex(x => x.includes(keyword));
-
-  // Map expected fields to column indices. Supports alternate header names.
-  const iTitle  = col('title');
-  const iProd   = col('producer');
-  const iApp    = col('app') !== -1 ? col('app') : col('application');
-  const iLink   = col('link');
-  const iTags   = col('tag');
-  const iLang   = col('lang');
-  const iRegion = col('region') !== -1 ? col('region') : col('countr'); // 'country' or 'countr'
-  const iFreq   = col('freq');
-  const iDesc   = col('desc');
-
-  return lines.slice(1).map(line => {
-    const c = splitRow(line);
-
-    // Tags may be pipe- or comma-separated within the cell.
-    const rawTags = iTags !== -1 ? (c[iTags] || '').trim() : '';
-    const tags = rawTags ? rawTags.split(/[|,]/).map(t => t.trim()).filter(Boolean) : [];
-
-    return {
-      title:       (c[iTitle]  || '').trim(),
-      producer:    (c[iProd]   || '').trim(),
-      app:         (c[iApp]    || '').trim(),
-      link:        (c[iLink]   || '').trim(),
-      tags,
-      lang:        iLang   !== -1 ? (c[iLang]   || '').trim().toUpperCase() : '',
-      region:      iRegion !== -1 ? (c[iRegion]  || '').trim()              : '',
-      freq:        iFreq   !== -1 ? (c[iFreq]    || '').trim()              : '',
-      description: iDesc   !== -1 ? (c[iDesc]    || '').trim()              : '',
-    };
-  // Filter out rows with no title, or rows that are literal header repeats.
-  }).filter(r => r.title && r.title.toLowerCase() !== 'podcast name');
+function parseCSV(text){
+  text=text.replace(/^\uFEFF/,'').replace(/\r\n/g,'\n').replace(/\r/g,'\n');
+  const lines=text.split('\n').filter(l=>l.trim());if(!lines.length)return[];
+  function sr(line){const c=[];let cur='',inQ=false;for(let i=0;i<line.length;i++){const ch=line[i];if(ch==='"'){if(inQ&&line[i+1]==='"'){cur+='"';i++;}else inQ=!inQ;}else if(ch===','&&!inQ){c.push(cur.trim());cur='';}else cur+=ch;}c.push(cur.trim());return c;}
+  const h=sr(lines[0]).map(x=>x.toLowerCase().trim());
+  const col=k=>h.findIndex(x=>x.includes(k));
+  const iT=col('title'),iP=col('producer'),iA=col('app')!==-1?col('app'):col('application'),iL=col('link'),iTg=col('tag'),iLang=col('lang'),iCnt=col('region')!==-1?col('region'):col('countr'),iFreq=col('freq'),iDesc=col('desc');
+  return lines.slice(1).map(l=>{
+    const c=sr(l);
+    const rawT=iTg!==-1?(c[iTg]||'').trim():'';
+    const tags=rawT?rawT.split(/[|,]/).map(t=>t.trim()).filter(Boolean):[];
+    return{title:(c[iT]||'').trim(),producer:(c[iP]||'').trim(),app:(c[iA]||'').trim(),link:(c[iL]||'').trim(),tags,lang:iLang!==-1?(c[iLang]||'').trim().toUpperCase():'',region:iCnt!==-1?(c[iCnt]||'').trim():'',freq:iFreq!==-1?(c[iFreq]||'').trim():'',description:iDesc!==-1?(c[iDesc]||'').trim():''};
+  }).filter(r=>r.title&&r.title.toLowerCase()!=='podcast name');
 }
 
-// ─── Country Chip Builder ─────────────────────────────────────────────────
-
-// Dynamically populates the Region chip group from the loaded podcast data.
-// Called after CSV load and after each import.
-function buildCountryChips() {
-  const countries = [...new Set(podcasts.map(p => p.region).filter(c => c && c !== 'Global'))].sort();
-  const wrap = document.getElementById('chips-country');
-  // Reset to just the "All" chip, then append one chip per country.
-  const allChip = wrap.querySelector('[data-country=""]');
-  wrap.innerHTML = '';
-  wrap.appendChild(allChip);
-  countries.forEach(c => {
-    const btn = document.createElement('button');
-    btn.className = 'chip';
-    btn.dataset.country = c;
-    btn.textContent = c;
-    wrap.appendChild(btn);
-  });
+function buildCountryChips(){
+  const countries=[...new Set(podcasts.map(p=>p.region).filter(c=>c&&c!=='Global'))].sort();
+  const wrap=document.getElementById('chips-country');
+  const all=wrap.querySelector('[data-country=""]');wrap.innerHTML='';wrap.appendChild(all);
+  countries.forEach(c=>{const b=document.createElement('button');b.className='chip';b.dataset.country=c;b.textContent=c;wrap.appendChild(b);});
 }
 
-// ─── CSV Load (from server) ───────────────────────────────────────────────
-
-// Fetches data/podcasts.csv relative to this page.
-// Requires a local HTTP server (e.g. `python3 -m http.server`);
-// opening the file directly via file:// will fail due to CORS restrictions.
-async function loadCSV() {
-  document.getElementById('status').style.display = 'block';
-  try {
-    const res = await fetch('data/podcasts.csv');
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    podcasts = parseCSV(await res.text());
-    document.getElementById('status').style.display = 'none';
-    buildCountryChips();
-    render();
-  } catch (err) {
-    // Show a helpful error rather than a blank screen.
-    document.getElementById('status').innerHTML =
-      '<div class="big">NO DATA</div>' +
-      '<p>Could not load <code style="background:var(--card);padding:2px 6px;border-radius:3px">data/podcasts.csv</code>' +
-      '<br/><br/>Run locally: <code style="background:var(--card);padding:2px 6px;border-radius:3px">python3 -m http.server</code></p>';
+async function loadCSV(){
+  document.getElementById('status').style.display='block';
+  try{
+    const res=await fetch('data/podcasts.csv');if(!res.ok)throw new Error('');
+    podcasts=parseCSV(await res.text());
+    document.getElementById('status').style.display='none';
+    buildCountryChips();render();
+  }catch{
+    document.getElementById('status').innerHTML='<div class="big">NO DATA</div><p>Could not load <code style="background:var(--card);padding:2px 6px;border-radius:3px">data/podcasts.csv</code><br/><br/>Run locally: <code style="background:var(--card);padding:2px 6px;border-radius:3px">python3 -m http.server</code></p>';
   }
 }
 
-// ─── Search ───────────────────────────────────────────────────────────────
-const searchInput = document.getElementById('search');
-const searchWrap  = document.getElementById('search-wrap');
-const searchClear = document.getElementById('search-clear');
+const sI=document.getElementById('search'),sW=document.getElementById('search-wrap'),sC=document.getElementById('search-clear');
+sI.addEventListener('input',e=>{query=e.target.value;sW.classList.toggle('has-value',query.length>0);render();});
+sC.addEventListener('click',()=>{sI.value='';query='';sW.classList.remove('has-value');sI.focus();render();});
 
-searchInput.addEventListener('input', e => {
-  query = e.target.value;
-  searchWrap.classList.toggle('has-value', query.length > 0);
-  render();
-});
+document.getElementById('filter-toggle').addEventListener('click',()=>document.getElementById('filter-panel').classList.toggle('open'));
 
-searchClear.addEventListener('click', () => {
-  searchInput.value = '';
-  query = '';
-  searchWrap.classList.remove('has-value');
-  searchInput.focus();
-  render();
-});
-
-// ─── Filter Panel Toggle ──────────────────────────────────────────────────
-document.getElementById('filter-toggle').addEventListener('click', () => {
-  document.getElementById('filter-panel').classList.toggle('open');
-});
-
-// ─── Chip Group Setup ─────────────────────────────────────────────────────
-
-// Generic handler for a chip group. Selects one chip at a time (radio-style),
-// then updates the corresponding filter variable and re-renders.
-// `id`  = element ID of the chip group container
-// `key` = which filter variable to update ('app' | 'lang' | 'freq' | 'region')
-function setupChips(id, key) {
-  document.getElementById(id).addEventListener('click', e => {
-    const chip = e.target.closest('.chip');
-    if (!chip) return;
-
-    // Deselect all chips in this group, select the clicked one.
-    document.querySelectorAll(`#${id} .chip`).forEach(x => x.classList.remove('active'));
-    chip.classList.add('active');
-
-    // Update the matching filter state variable.
-    if (key === 'app')    filterApp    = chip.dataset.app;
-    if (key === 'lang')   filterLang   = chip.dataset.lang;
-    if (key === 'freq')   filterFreq   = chip.dataset.freq;
-    if (key === 'region') filterRegion = chip.dataset.country;
-
+function setupChips(id,key){
+  document.getElementById(id).addEventListener('click',e=>{
+    const c=e.target.closest('.chip');if(!c)return;
+    document.querySelectorAll(`#${id} .chip`).forEach(x=>x.classList.remove('active'));c.classList.add('active');
+    if(key==='app')filterApp=c.dataset.app;
+    if(key==='lang')filterLang=c.dataset.lang;
+    if(key==='freq')filterFreq=c.dataset.freq;
+    if(key==='region')filterRegion=c.dataset.country;
     render();
   });
 }
+setupChips('chips-app','app');setupChips('chips-lang','lang');setupChips('chips-freq','freq');setupChips('chips-country','region');
 
-setupChips('chips-app',     'app');
-setupChips('chips-lang',    'lang');
-setupChips('chips-freq',    'freq');
-setupChips('chips-country', 'region');
-
-// ─── Clear All Filters ────────────────────────────────────────────────────
-document.getElementById('clear-all-filters').addEventListener('click', () => {
-  filterApp = 'all'; filterLang = ''; filterFreq = ''; filterRegion = '';
-  activeTags.clear();
-  // Reset all chip groups to their "All" chip.
-  ['chips-app', 'chips-lang', 'chips-freq', 'chips-country'].forEach(id => {
-    document.querySelectorAll(`#${id} .chip`).forEach(c => c.classList.remove('active'));
+document.getElementById('clear-all-filters').addEventListener('click',()=>{
+  filterApp='all';filterLang='';filterFreq='';filterRegion='';activeTags.clear();
+  ['chips-app','chips-lang','chips-freq','chips-country'].forEach(id=>{
+    document.querySelectorAll(`#${id} .chip`).forEach(c=>c.classList.remove('active'));
     document.querySelector(`#${id} .chip`)?.classList.add('active');
   });
   render();
 });
 
-// ─── Active Filter Pill Click (remove individual filter) ─────────────────
-document.getElementById('active-filters').addEventListener('click', e => {
-  const pill = e.target.closest('.af-pill');
-  if (!pill) return;
-
-  // `data-clear` tells us which filter to reset.
-  const clearKey = pill.dataset.clear;
-
-  // Helper to reset a chip group back to its first ("All") chip.
-  const resetChips = id => {
-    document.querySelectorAll(`#${id} .chip`).forEach(c => c.classList.remove('active'));
-    document.querySelector(`#${id} .chip`)?.classList.add('active');
-  };
-
-  if (clearKey === 'app')    { filterApp    = 'all'; resetChips('chips-app'); }
-  if (clearKey === 'lang')   { filterLang   = '';    resetChips('chips-lang'); }
-  if (clearKey === 'freq')   { filterFreq   = '';    resetChips('chips-freq'); }
-  if (clearKey === 'region') { filterRegion = '';    resetChips('chips-country'); }
-  if (clearKey.startsWith('tag:')) activeTags.delete(clearKey.slice(4));
-
+document.getElementById('active-filters').addEventListener('click',e=>{
+  const pill=e.target.closest('.af-pill');if(!pill)return;
+  const k=pill.dataset.clear;
+  const reset=id=>{document.querySelectorAll(`#${id} .chip`).forEach(c=>c.classList.remove('active'));document.querySelector(`#${id} .chip`)?.classList.add('active');};
+  if(k==='app'){filterApp='all';reset('chips-app');}
+  if(k==='lang'){filterLang='';reset('chips-lang');}
+  if(k==='freq'){filterFreq='';reset('chips-freq');}
+  if(k==='country'){filterRegion='';reset('chips-country');}
+  if(k.startsWith('tag:'))activeTags.delete(k.slice(4));
   render();
 });
 
-// ─── Tag Click (on cards) ─────────────────────────────────────────────────
-// Clicking a tag on a card toggles it in activeTags and opens the filter panel.
-document.getElementById('card-list').addEventListener('click', e => {
-  const tag = e.target.closest('.tag');
-  if (!tag) return;
-  const t = tag.dataset.tag;
-  if (activeTags.has(t)) activeTags.delete(t);
-  else activeTags.add(t);
-  render();
-  document.getElementById('filter-panel').classList.add('open');
+document.getElementById('card-list').addEventListener('click',e=>{
+  const tag=e.target.closest('.tag');if(!tag)return;
+  const t=tag.dataset.tag;
+  if(activeTags.has(t))activeTags.delete(t);else activeTags.add(t);
+  render();document.getElementById('filter-panel').classList.add('open');
 });
 
-// ─── View Toggle ─────────────────────────────────────────────────────────
-document.getElementById('view-card').addEventListener('click', () => {
-  viewMode = 'card';
-  document.getElementById('view-card').classList.add('active');
-  document.getElementById('view-compact').classList.remove('active');
-  render();
-});
-document.getElementById('view-compact').addEventListener('click', () => {
-  viewMode = 'compact';
-  document.getElementById('view-compact').classList.add('active');
-  document.getElementById('view-card').classList.remove('active');
-  render();
-});
+document.getElementById('view-card').addEventListener('click',()=>{viewMode='card';document.getElementById('view-card').classList.add('active');document.getElementById('view-compact').classList.remove('active');render();});
+document.getElementById('view-compact').addEventListener('click',()=>{viewMode='compact';document.getElementById('view-compact').classList.add('active');document.getElementById('view-card').classList.remove('active');render();});
 
-// ─── Import CSV Modal ─────────────────────────────────────────────────────
-const overlayImport = document.getElementById('overlay-import');
-const dropZone      = document.getElementById('drop-zone');
-const csvFileInput  = document.getElementById('csv-input');
-const previewBox    = document.getElementById('preview-box');
-const confirmImport = document.getElementById('confirm-import');
+const oImp=document.getElementById('overlay-import'),dz=document.getElementById('drop-zone'),ci=document.getElementById('csv-input'),pb=document.getElementById('preview-box'),cImp=document.getElementById('confirm-import');
+function openImport(){oImp.classList.add('open');}
+function closeImport(){oImp.classList.remove('open');pb.style.display='none';pb.textContent='';cImp.disabled=true;pending=[];ci.value='';dz.classList.remove('over');}
+['open-import','open-import-2'].forEach(id=>document.getElementById(id).addEventListener('click',openImport));
+document.getElementById('cancel-import').addEventListener('click',closeImport);
+oImp.addEventListener('click',e=>{if(e.target===oImp)closeImport();});
+dz.addEventListener('click',()=>ci.click());
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('over');});
+dz.addEventListener('dragleave',()=>dz.classList.remove('over'));
+dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('over');if(e.dataTransfer.files[0])loadFile(e.dataTransfer.files[0]);});
+ci.addEventListener('change',()=>{if(ci.files[0])loadFile(ci.files[0]);});
+function loadFile(file){const r=new FileReader();r.onload=e=>{const rows=parseCSV(e.target.result);const ex=new Set(podcasts.map(p=>p.title.toLowerCase()));pending=rows.filter(r=>!ex.has(r.title.toLowerCase()));pb.style.display='block';if(!pending.length){pb.textContent='✓ All rows already in index.';cImp.disabled=true;}else{pb.innerHTML=`<strong style="color:var(--accent)">${pending.length} new</strong> of ${rows.length}:\n\n`+pending.map(r=>`• ${r.title}${r.producer?' — '+r.producer:''}`).join('\n');cImp.disabled=false;}};r.readAsText(file);}
+cImp.addEventListener('click',()=>{podcasts.push(...pending);buildCountryChips();render();closeImport();});
 
-function openImport()  { overlayImport.classList.add('open'); }
-function closeImport() {
-  overlayImport.classList.remove('open');
-  previewBox.style.display = 'none';
-  previewBox.textContent = '';
-  confirmImport.disabled = true;
-  pending = [];
-  csvFileInput.value = '';
-  dropZone.classList.remove('over');
-}
-
-['open-import', 'open-import-2'].forEach(id =>
-  document.getElementById(id).addEventListener('click', openImport)
-);
-document.getElementById('cancel-import').addEventListener('click', closeImport);
-// Close modal when clicking the dark backdrop (not the modal itself).
-overlayImport.addEventListener('click', e => { if (e.target === overlayImport) closeImport(); });
-
-// Drop zone: click-to-browse and drag-and-drop support.
-dropZone.addEventListener('click',     ()  => csvFileInput.click());
-dropZone.addEventListener('dragover',  e   => { e.preventDefault(); dropZone.classList.add('over'); });
-dropZone.addEventListener('dragleave', ()  => dropZone.classList.remove('over'));
-dropZone.addEventListener('drop',      e   => {
-  e.preventDefault();
-  dropZone.classList.remove('over');
-  if (e.dataTransfer.files[0]) loadImportFile(e.dataTransfer.files[0]);
-});
-csvFileInput.addEventListener('change', () => {
-  if (csvFileInput.files[0]) loadImportFile(csvFileInput.files[0]);
+const oAdd=document.getElementById('overlay-add');
+function openAdd(){oAdd.classList.add('open');document.getElementById('add-title').focus();}
+function closeAdd(){oAdd.classList.remove('open');['add-title','add-producer','add-link'].forEach(id=>document.getElementById(id).value='');document.getElementById('add-app').value='';}
+['open-add','open-add-2'].forEach(id=>document.getElementById(id).addEventListener('click',openAdd));
+document.getElementById('cancel-add').addEventListener('click',closeAdd);
+oAdd.addEventListener('click',e=>{if(e.target===oAdd)closeAdd();});
+document.getElementById('confirm-add').addEventListener('click',()=>{
+  const title=document.getElementById('add-title').value.trim();
+  if(!title){document.getElementById('add-title').focus();return;}
+  if(podcasts.some(p=>p.title.toLowerCase()===title.toLowerCase())){alert('Already exists.');return;}
+  podcasts.push({title,producer:document.getElementById('add-producer').value.trim(),app:document.getElementById('add-app').value,link:document.getElementById('add-link').value.trim(),tags:[],lang:'',region:'',freq:'',description:''});
+  buildCountryChips();render();closeAdd();
 });
 
-// Reads the selected file, parses it, and shows a preview of new rows.
-function loadImportFile(file) {
-  const reader = new FileReader();
-  reader.onload = e => {
-    const rows = parseCSV(e.target.result);
-    // Only stage rows whose title isn't already in the index (case-insensitive).
-    const existingTitles = new Set(podcasts.map(p => p.title.toLowerCase()));
-    pending = rows.filter(r => !existingTitles.has(r.title.toLowerCase()));
-
-    previewBox.style.display = 'block';
-    if (!pending.length) {
-      previewBox.textContent = '✓ All rows already in index.';
-      confirmImport.disabled = true;
-    } else {
-      previewBox.innerHTML =
-        `<strong style="color:var(--accent)">${pending.length} new</strong> of ${rows.length}:\n\n` +
-        pending.map(r => `• ${r.title}${r.producer ? ' — ' + r.producer : ''}`).join('\n');
-      confirmImport.disabled = false;
-    }
-  };
-  reader.readAsText(file);
-}
-
-// Commits staged rows to the main list.
-confirmImport.addEventListener('click', () => {
-  podcasts.push(...pending);
-  buildCountryChips();
-  render();
-  closeImport();
-});
-
-// ─── Add Podcast Modal ────────────────────────────────────────────────────
-const overlayAdd = document.getElementById('overlay-add');
-
-// Field IDs for the add form — update this list if you add more fields to the modal HTML.
-const ADD_FIELDS = ['add-title', 'add-producer', 'add-lang', 'add-app', 'add-freq', 'add-region', 'add-tags', 'add-description', 'add-link'];
-
-function openAdd() {
-  overlayAdd.classList.add('open');
-  document.getElementById('add-title').focus();
-}
-function closeAdd() {
-  overlayAdd.classList.remove('open');
-  ADD_FIELDS.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.value = '';
-  });
-}
-
-['open-add', 'open-add-2'].forEach(id =>
-  document.getElementById(id).addEventListener('click', openAdd)
-);
-document.getElementById('cancel-add').addEventListener('click', closeAdd);
-overlayAdd.addEventListener('click', e => { if (e.target === overlayAdd) closeAdd(); });
-
-document.getElementById('confirm-add').addEventListener('click', () => {
-  const title = document.getElementById('add-title').value.trim();
-  if (!title) { document.getElementById('add-title').focus(); return; }
-
-  // Prevent duplicate titles (case-insensitive).
-  if (podcasts.some(p => p.title.toLowerCase() === title.toLowerCase())) {
-    alert('A podcast with this title already exists.');
-    return;
-  }
-
-  // Parse comma-separated tags from the tags input field.
-  const rawTags = document.getElementById('add-tags').value.trim();
-  const tags = rawTags ? rawTags.split(/[,|]/).map(t => t.trim()).filter(Boolean) : [];
-
-  podcasts.push({
-    title,
-    producer:    document.getElementById('add-producer').value.trim(),
-    lang:        document.getElementById('add-lang').value,
-    app:         document.getElementById('add-app').value,
-    freq:        document.getElementById('add-freq').value,
-    region:      document.getElementById('add-region').value.trim(),
-    tags,
-    description: document.getElementById('add-description').value.trim(),
-    link:        document.getElementById('add-link').value.trim(),
-  });
-
-  buildCountryChips();
-  render();
-  closeAdd();
-});
-
-// ─── Init ─────────────────────────────────────────────────────────────────
-// Kick off CSV load, then focus search for immediate typing.
-loadCSV().then(() => searchInput.focus());
+loadCSV().then(()=>sI.focus());
 </script>
 </body>
 </html>
