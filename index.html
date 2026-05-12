@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Podcast Playlist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f0f10;
+      --bg-surface: #1a1a1d;
+      --bg-elevated: #242428;
+      --text-primary: #f0eff4;
+      --text-secondary: #8e8d96;
+      --text-muted: #5c5b63;
+      --border: rgba(255,255,255,0.07);
+      --border-hover: rgba(255,255,255,0.14);
+      --accent: #e8ff6b;
+      --accent-dim: rgba(232,255,107,0.12);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --font: 'DM Sans', sans-serif;
+      --font-mono: 'DM Mono', monospace;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* Layout */
+    .page {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 1.25rem 4rem;
+    }
+
+    /* Header */
+    .site-header {
+      padding: 3rem 0 2.5rem;
+      border-bottom: 0.5px solid var(--border);
+      margin-bottom: 2rem;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 0.5rem;
+    }
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--accent);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .site-header h1 {
+      font-size: 1.5rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+    .site-header p {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-top: 0.25rem;
+    }
+    .count-badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: 20px;
+      background: var(--bg-elevated);
+      color: var(--text-secondary);
+      border: 0.5px solid var(--border);
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    /* Controls */
+    .controls {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .search-wrap {
+      position: relative;
+      flex: 1;
+      min-width: 200px;
+    }
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 15px;
+      pointer-events: none;
+    }
+    .search-input {
+      width: 100%;
+      background: var(--bg-surface);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 9px 12px 9px 36px;
+      color: var(--text-primary);
+      font-family: var(--font);
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .search-input::placeholder { color: var(--text-muted); }
+    .search-input:focus { border-color: var(--border-hover); }
+
+    .filter-btn {
+      font-size: 13px;
+      font-family: var(--font);
+      padding: 8px 14px;
+      border: 0.5px solid var(--border);
+      border-radius: 20px;
+      background: transparent;
+      cursor: pointer;
+      color: var(--text-secondary);
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .filter-btn:hover { background: var(--bg-surface); color: var(--text-primary); border-color: var(--border-hover); }
+    .filter-btn.active { background: var(--accent-dim); color: var(--accent); border-color: rgba(232,255,107,0.3); }
+
+    /* Podcast cards */
+    .podcast-list { display: flex; flex-direction: column; gap: 8px; }
+
+    .card {
+      display: flex;
+      gap: 14px;
+      padding: 16px;
+      border-radius: var(--radius-lg);
+      border: 0.5px solid var(--border);
+      background: var(--bg-surface);
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      text-decoration: none;
+      color: inherit;
+    }
+    .card:hover { border-color: var(--border-hover); background: var(--bg-elevated); }
+    .card.hidden { display: none; }
+
+    .artwork {
+      width: 68px;
+      height: 68px;
+      border-radius: var(--radius-md);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      background: var(--bg-elevated);
+      border: 0.5px solid var(--border);
+    }
+
+    .card-body { flex: 1; min-width: 0; }
+    .card-title { font-size: 15px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .card-host { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
+    .card-desc { font-size: 13px; color: var(--text-secondary); margin-top: 6px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .card-tags { display: flex; gap: 5px; margin-top: 9px; flex-wrap: wrap; }
+    .tag {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: var(--bg);
+      color: var(--text-muted);
+      border: 0.5px solid var(--border);
+    }
+
+    .card-side {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .source-badge {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .src-spotify  { background: rgba(29,185,84,0.15);  color: #1db954; border: 0.5px solid rgba(29,185,84,0.25); }
+    .src-apple    { background: rgba(252,60,255,0.12); color: #fc3cff; border: 0.5px solid rgba(252,60,255,0.2); }
+    .src-rss      { background: rgba(255,165,0,0.13);  color: #ffa500; border: 0.5px solid rgba(255,165,0,0.25); }
+    .src-youtube  { background: rgba(255,70,70,0.13);  color: #ff4646; border: 0.5px solid rgba(255,70,70,0.25); }
+    .src-web      { background: rgba(99,179,237,0.13); color: #63b3ed; border: 0.5px solid rgba(99,179,237,0.25); }
+
+    .listen-btn {
+      font-size: 12px;
+      font-family: var(--font);
+      padding: 6px 11px;
+      border: 0.5px solid var(--border-hover);
+      border-radius: var(--radius-sm);
+      background: transparent;
+      cursor: pointer;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.15s;
+      text-decoration: none;
+    }
+    .listen-btn:hover { background: var(--bg); color: var(--text-primary); border-color: var(--border-hover); }
+
+    /* Empty state */
+    .empty {
+      text-align: center;
+      padding: 4rem 1rem;
+      color: var(--text-muted);
+    }
+    .empty svg { display: block; margin: 0 auto 12px; opacity: 0.4; }
+
+    /* Add form */
+    .add-section {
+      margin-top: 2.5rem;
+      border: 0.5px dashed var(--border-hover);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+    }
+    .add-section h2 {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .form-grid input,
+    .form-grid select {
+      background: var(--bg);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 9px 12px;
+      color: var(--text-primary);
+      font-family: var(--font);
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.15s;
+      width: 100%;
+    }
+    .form-grid input::placeholder { color: var(--text-muted); }
+    .form-grid input:focus,
+    .form-grid select:focus { border-color: var(--border-hover); }
+    .form-grid select { cursor: pointer; }
+    .form-grid option { background: var(--bg-surface); }
+    .full { grid-column: 1 / -1; }
+    .submit-btn {
+      grid-column: 1 / -1;
+      padding: 10px;
+      border-radius: var(--radius-sm);
+      border: 0.5px solid rgba(232,255,107,0.3);
+      background: var(--accent-dim);
+      color: var(--accent);
+      font-family: var(--font);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .submit-btn:hover { background: rgba(232,255,107,0.2); }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: var(--bg-elevated);
+      border: 0.5px solid var(--border-hover);
+      color: var(--text-primary);
+      font-size: 13px;
+      padding: 9px 16px;
+      border-radius: 20px;
+      opacity: 0;
+      transition: opacity 0.2s, transform 0.2s;
+      pointer-events: none;
+      z-index: 99;
+      white-space: nowrap;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    @media (max-width: 520px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .full { grid-column: 1; }
+      .submit-btn { grid-column: 1; }
+      .card-side { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <header class="site-header">
+    <div class="logo">
+      <div class="logo-icon">🎧</div>
+      <h1>My Podcast Playlist <span class="count-badge" id="total-count">0</span></h1>
+    </div>
+    <p>Curated shows from across the web — add any source, any platform.</p>
+  </header>
+
+  <div class="controls">
+    <div class="search-wrap">
+      <span class="search-icon">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 6.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-.818 3.596a4.5 4.5 0 1 1 .707-.707l2.761 2.76-.707.708-2.761-2.761Z" fill="currentColor"/></svg>
+      </span>
+      <input class="search-input" type="search" id="search" placeholder="Search by title, host, or tag…" oninput="render()">
+    </div>
+    <button class="filter-btn active" data-filter="all" onclick="setFilter(this)">All</button>
+    <button class="filter-btn" data-filter="tech" onclick="setFilter(this)">Tech</button>
+    <button class="filter-btn" data-filter="science" onclick="setFilter(this)">Science</button>
+    <button class="filter-btn" data-filter="culture" onclick="setFilter(this)">Culture</button>
+    <button class="filter-btn" data-filter="news" onclick="setFilter(this)">News</button>
+  </div>
+
+  <div class="podcast-list" id="podcast-list"></div>
+
+  <div id="empty-state" class="empty" style="display:none;">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <p>No podcasts match your search.</p>
+  </div>
+
+  <section class="add-section">
+    <h2>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+      Add a podcast to your playlist
+    </h2>
+    <div class="form-grid">
+      <input type="text"  id="f-title"  placeholder="Podcast title *">
+      <input type="text"  id="f-host"   placeholder="Host name">
+      <input type="url"   id="f-url"    placeholder="URL — Spotify, Apple Podcasts, RSS feed… *" class="full">
+      <input type="text"  id="f-desc"   placeholder="Short description" class="full">
+      <select id="f-source">
+        <option value="web">Web / Other</option>
+        <option value="spotify">Spotify</option>
+        <option value="apple">Apple Podcasts</option>
+        <option value="youtube">YouTube</option>
+        <option value="rss">RSS Feed</option>
+      </select>
+      <input type="text" id="f-tags" placeholder="Tags: tech, news, design…">
+      <button class="submit-btn" onclick="addPodcast()">Add to playlist</button>
+    </div>
+  </section>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const SOURCE_LABELS = { spotify:'Spotify', apple:'Apple Podcasts', rss:'RSS', youtube:'YouTube', web:'Web' };
+
+  const DEFAULT_PODCASTS = [
+    { title:"Lex Fridman Podcast",   host:"Lex Fridman",      source:"youtube", url:"https://lexfridman.com/podcast/",            emoji:"🎙️", desc:"Long-form conversations with scientists, engineers, artists, and leaders about the nature of intelligence and humanity.", tags:["tech","science","culture"] },
+    { title:"Huberman Lab",          host:"Andrew Huberman",  source:"spotify", url:"https://hubermanlab.com/",                   emoji:"🧠", desc:"Neuroscience and practical tools for everyday life, from Stanford professor Andrew Huberman.", tags:["science","health"] },
+    { title:"Darknet Diaries",       host:"Jack Rhysider",    source:"rss",     url:"https://darknetdiaries.com/",                emoji:"🕵️", desc:"True stories from the dark side of the internet — hackers, breaches, and cyber crime.", tags:["tech","culture"] },
+    { title:"The Daily",             host:"Michael Barbaro",  source:"apple",   url:"https://www.nytimes.com/column/the-daily",   emoji:"📰", desc:"20 minutes on the stories shaping the day, from The New York Times.", tags:["news"] },
+    { title:"99% Invisible",         host:"Roman Mars",       source:"web",     url:"https://99percentinvisible.org/",            emoji:"🏛️", desc:"Stories about the unnoticed design and architecture that shapes our world.", tags:["culture","design"] },
+    { title:"Radiolab",              host:"Latif Nasser",     source:"web",     url:"https://radiolab.org/",                      emoji:"🔬", desc:"Investigating a strange world through science, philosophy, and human experience.", tags:["science","culture"] },
+  ];
+
+  let podcasts = load();
+  let activeFilter = 'all';
+
+  function load() {
+    try { const s = localStorage.getItem('podcasts'); return s ? JSON.parse(s) : DEFAULT_PODCASTS; }
+    catch { return DEFAULT_PODCASTS; }
+  }
+
+  function save() {
+    try { localStorage.setItem('podcasts', JSON.stringify(podcasts)); } catch {}
+  }
+
+  function render() {
+    const q = (document.getElementById('search').value || '').toLowerCase();
+    const list = document.getElementById('podcast-list');
+    let visible = 0;
+
+    list.innerHTML = podcasts.map((p, i) => {
+      const matchSearch = !q || [p.title, p.host, p.desc, ...(p.tags||[])].join(' ').toLowerCase().includes(q);
+      const matchFilter = activeFilter === 'all' || (p.tags||[]).includes(activeFilter);
+      if (!matchSearch || !matchFilter) return `<div class="card hidden"></div>`;
+      visible++;
+      const srcLabel = SOURCE_LABELS[p.source] || p.source;
+      const tags = (p.tags||[]).map(t => `<span class="tag">${t}</span>`).join('');
+      return `
+        <div class="card" onclick="openURL('${escAttr(p.url)}')">
+          <div class="artwork">${p.emoji || '🎧'}</div>
+          <div class="card-body">
+            <div class="card-title">${esc(p.title)}</div>
+            <div class="card-host">${esc(p.host)}</div>
+            <div class="card-desc">${esc(p.desc)}</div>
+            <div class="card-tags">${tags}</div>
+          </div>
+          <div class="card-side">
+            <span class="source-badge src-${p.source}">${srcLabel}</span>
+            <a class="listen-btn" href="${escAttr(p.url)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Listen
+            </a>
+          </div>
+        </div>`;
+    }).join('');
+
+    document.getElementById('empty-state').style.display = visible === 0 ? 'block' : 'none';
+    document.getElementById('total-count').textContent = podcasts.length;
+  }
+
+  function setFilter(btn) {
+    activeFilter = btn.dataset.filter;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    render();
+  }
+
+  function addPodcast() {
+    const title  = document.getElementById('f-title').value.trim();
+    const host   = document.getElementById('f-host').value.trim();
+    const url    = document.getElementById('f-url').value.trim();
+    const desc   = document.getElementById('f-desc').value.trim();
+    const source = document.getElementById('f-source').value;
+    const tags   = document.getElementById('f-tags').value.split(',').map(t => t.trim()).filter(Boolean);
+
+    if (!title) { toast('Please enter a podcast title.'); return; }
+    if (!url)   { toast('Please enter a URL.'); return; }
+
+    podcasts.unshift({ title, host: host || 'Unknown', source, url, emoji: '🎧', desc, tags });
+    save();
+    ['f-title','f-host','f-url','f-desc','f-tags'].forEach(id => document.getElementById(id).value = '');
+    render();
+    toast('✓ Added to your playlist');
+  }
+
+  function openURL(url) { window.open(url, '_blank', 'noopener'); }
+
+  function esc(s) {
+    return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+  function escAttr(s) {
+    return String(s||'').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
+  let toastTimer;
+  function toast(msg) {
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove('show'), 2500);
+  }
+
+  render();
+</script>
+</body>
+</html>
