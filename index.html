@@ -26,9 +26,9 @@
 
     /* HEADER */
     header { position: sticky; top: 0; z-index: 50; background: var(--bg); border-bottom: 1px solid var(--border); height: 68px; }
-    .header-inner { max-width: 860px; margin: 0 auto; padding: 0 40px; height: 100%; display: flex; align-items: center; gap: 20px; }
-    .logo { display: flex; align-items: flex-start; gap: 14px; text-decoration: none; }
-    .logo img { width: 36px; height: 36px; object-fit: contain; filter: invert(1); margin-top: 2px; }
+    .header-inner { max-width: 740px; margin: 0 auto; padding: 0 48px; height: 100%; display: flex; align-items: center; gap: 20px; }
+    .logo { display: flex; align-items: flex-start; gap: 14px; text-decoration: none; padding-top: 3px; }
+    .logo img { width: 32px; height: 32px; object-fit: contain; filter: invert(1); flex-shrink: 0; }
     .logo-label { font-family: var(--display); font-size: 1.6rem; letter-spacing: .15em; color: var(--white); line-height: 1; }
     .logo-sub   { font-family: var(--mono); font-size: .56rem; letter-spacing: .22em; text-transform: uppercase; color: var(--grey); margin-top: 2px; }
     .header-right { margin-left: auto; display: flex; gap: 10px; }
@@ -40,7 +40,7 @@
     .btn-primary:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
 
     /* CENTERED LAYOUT */
-    .page-wrap { max-width: 860px; margin: 0 auto; padding: 0 40px; }
+    .page-wrap { max-width: 740px; margin: 0 auto; padding: 0 48px; }
 
     /* TOOLBAR */
     .toolbar { padding: 20px 0 0; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
@@ -66,9 +66,9 @@
 
     .card-body { flex: 1; min-width: 0; }
     .card-title { font-size: 1rem; font-weight: 500; color: var(--white); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .card-producer { font-size: .8rem; color: var(--grey); margin-bottom: 8px; }
-    .card-tags { display: flex; gap: 6px; flex-wrap: wrap; }
-    .tag { font-family: var(--mono); font-size: .58rem; letter-spacing: .05em; padding: 3px 9px; border-radius: 4px; border: 1px solid var(--muted); color: var(--grey); }
+    .card-producer { font-size: .8rem; color: var(--grey); margin-bottom: 6px; }
+    .card-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 2px; }
+    .tag { font-family: var(--mono); font-size: .56rem; letter-spacing: .05em; padding: 2px 8px; border-radius: 4px; border: 1px solid var(--muted); color: #666; text-transform: lowercase; }
 
     .card-right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; flex-shrink: 0; }
 
@@ -122,8 +122,8 @@
     ::-webkit-scrollbar-thumb { background: #303030; border-radius: 2px; }
 
     @media (max-width: 640px) {
-      .page-wrap { padding: 0 16px; }
-      .header-inner { padding: 0 16px; }
+      .page-wrap { padding: 0 20px; }
+      .header-inner { padding: 0 20px; }
       .logo-sub { display: none; }
       .card-right { flex-direction: row; align-items: center; width: 100%; justify-content: space-between; }
       .add-strip { flex-direction: column; align-items: flex-start; }
@@ -277,7 +277,7 @@ function render() {
   const filtered = podcasts.filter(p => {
     const k = appKey(p.app);
     const mApp = filterApp==='all' ? true
-      : filterApp==='other' ? (k!=='spotify'&&k!=='apple'&&k!=='deezer'&&k!=='')
+      : filterApp==='other' ? (k!=='spotify'&&k!=='apple'&&k!=='deezer'&&k!=='web'&&k!=='')
       : k===filterApp;
     const mQ = !q || p.title.toLowerCase().includes(q) || (p.producer||'').toLowerCase().includes(q);
     return mApp && mQ;
