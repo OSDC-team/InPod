@@ -1,484 +1,624 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>INSO Pod Playlist</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>INSO — Podcast Index</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #0f0f10;
-      --bg-surface: #1a1a1d;
-      --bg-elevated: #242428;
-      --text-primary: #f0eff4;
-      --text-secondary: #8e8d96;
-      --text-muted: #5c5b63;
-      --border: rgba(255,255,255,0.07);
-      --border-hover: rgba(255,255,255,0.14);
-      --accent: #e8ff6b;
-      --accent-dim: rgba(232,255,107,0.12);
-      --radius-sm: 8px;
-      --radius-md: 12px;
-      --radius-lg: 16px;
-      --font: 'DM Sans', sans-serif;
-      --font-mono: 'DM Mono', monospace;
+      --bg:      #0c0c0c;
+      --surface: #141414;
+      --border:  #222;
+      --muted:   #3a3a3a;
+      --grey:    #888;
+      --light:   #ccc;
+      --white:   #f0efe9;
+      --accent:  #e8df1e;
+      --mono: 'IBM Plex Mono', monospace;
+      --sans: 'IBM Plex Sans', sans-serif;
+      --display: 'Bebas Neue', sans-serif;
     }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: var(--font);
       background: var(--bg);
-      color: var(--text-primary);
+      color: var(--white);
+      font-family: var(--sans);
+      font-weight: 300;
       min-height: 100vh;
-      line-height: 1.6;
     }
 
-    /* Layout */
-    .page {
-      max-width: 780px;
-      margin: 0 auto;
-      padding: 0 1.25rem 4rem;
+    /* ─── HEADER ─────────────────────────────── */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0 40px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
     }
 
-    /* Header */
-    .site-header {
-      padding: 3rem 0 2.5rem;
-      border-bottom: 0.5px solid var(--border);
-      margin-bottom: 2rem;
-    }
     .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 0.5rem;
+      display: flex; align-items: center; gap: 14px;
+      text-decoration: none;
     }
-    .logo-icon {
-      width: 36px;
-      height: 36px;
-      background: var(--accent);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      flex-shrink: 0;
+    .logo img {
+      width: 38px; height: 38px;
+      object-fit: contain;
+      /* invert so the black logo shows white on dark bg */
+      filter: invert(1);
     }
-    .site-header h1 {
-      font-size: 1.5rem;
-      font-weight: 500;
-      letter-spacing: -0.02em;
+    .logo-label {
+      font-family: var(--display);
+      font-size: 1.55rem;
+      letter-spacing: .15em;
+      color: var(--white);
+      line-height: 1;
     }
-    .site-header p {
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-      margin-top: 0.25rem;
-    }
-    .count-badge {
-      display: inline-block;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      padding: 2px 7px;
-      border-radius: 20px;
-      background: var(--bg-elevated);
-      color: var(--text-secondary);
-      border: 0.5px solid var(--border);
-      margin-left: 8px;
-      vertical-align: middle;
+    .logo-sub {
+      font-family: var(--mono);
+      font-size: .58rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-top: 1px;
     }
 
-    /* Controls */
-    .controls {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 1.25rem;
+    .header-right {
+      margin-left: auto;
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    /* ─── TOOLBAR ─────────────────────────────── */
+    .toolbar {
+      padding: 14px 40px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 12px;
       flex-wrap: wrap;
-      align-items: center;
     }
-    .search-wrap {
-      position: relative;
-      flex: 1;
-      min-width: 200px;
+
+    .search-box {
+      position: relative; flex: 1; min-width: 200px;
     }
-    .search-icon {
-      position: absolute;
-      left: 12px;
-      top: 50%;
+    .search-box svg {
+      position: absolute; left: 11px; top: 50%;
       transform: translateY(-50%);
-      color: var(--text-muted);
-      font-size: 15px;
+      width: 14px; height: 14px;
+      stroke: var(--grey); fill: none;
       pointer-events: none;
     }
-    .search-input {
+    .search-box input {
       width: 100%;
-      background: var(--bg-surface);
-      border: 0.5px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 9px 12px 9px 36px;
-      color: var(--text-primary);
-      font-family: var(--font);
-      font-size: 14px;
-      outline: none;
-      transition: border-color 0.15s;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--white);
+      font-family: var(--mono); font-size: .72rem;
+      padding: 7px 12px 7px 32px;
+      border-radius: 2px; outline: none;
+      transition: border-color .15s;
     }
-    .search-input::placeholder { color: var(--text-muted); }
-    .search-input:focus { border-color: var(--border-hover); }
+    .search-box input:focus { border-color: #444; }
+    .search-box input::placeholder { color: var(--muted); }
 
-    .filter-btn {
-      font-size: 13px;
-      font-family: var(--font);
-      padding: 8px 14px;
-      border: 0.5px solid var(--border);
-      border-radius: 20px;
-      background: transparent;
-      cursor: pointer;
-      color: var(--text-secondary);
-      transition: all 0.15s;
+    .filters { display: flex; gap: 6px; flex-wrap: wrap; }
+
+    .chip {
+      font-family: var(--mono); font-size: .6rem;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: 5px 11px;
+      border: 1px solid var(--border);
+      background: transparent; color: var(--muted);
+      cursor: pointer; border-radius: 2px;
+      transition: all .12s; white-space: nowrap;
+    }
+    .chip:hover  { border-color: #555; color: var(--light); }
+    .chip.active { border-color: var(--white); color: var(--white); background: #1e1e1e; }
+
+    .row-count {
+      margin-left: auto;
+      font-family: var(--mono); font-size: .62rem;
+      color: var(--grey); white-space: nowrap;
+    }
+
+    /* ─── BUTTONS ─────────────────────────────── */
+    .btn {
+      font-family: var(--mono); font-size: .65rem;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: 7px 15px;
+      border: 1px solid var(--border);
+      background: transparent; color: var(--grey);
+      cursor: pointer; border-radius: 2px;
+      transition: all .15s; white-space: nowrap;
+    }
+    .btn:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-primary {
+      background: var(--white); color: var(--bg);
+      border-color: var(--white); font-weight: 500;
+    }
+    .btn-primary:hover { background: var(--accent); border-color: var(--accent); }
+
+    /* ─── TABLE ──────────────────────────────── */
+    .table-wrap { padding: 0 40px 80px; overflow-x: auto; }
+
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+
+    thead th {
+      font-family: var(--mono); font-size: .58rem;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--muted); padding: 8px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer; user-select: none;
       white-space: nowrap;
     }
-    .filter-btn:hover { background: var(--bg-surface); color: var(--text-primary); border-color: var(--border-hover); }
-    .filter-btn.active { background: var(--accent-dim); color: var(--accent); border-color: rgba(232,255,107,0.3); }
-
-    /* Podcast cards */
-    .podcast-list { display: flex; flex-direction: column; gap: 8px; }
-
-    .card {
-      display: flex;
-      gap: 14px;
-      padding: 16px;
-      border-radius: var(--radius-lg);
-      border: 0.5px solid var(--border);
-      background: var(--bg-surface);
-      cursor: pointer;
-      transition: border-color 0.15s, background 0.15s;
-      text-decoration: none;
-      color: inherit;
+    thead th:hover { color: var(--grey); }
+    thead th[data-sort]::after {
+      content: ' ↕'; opacity: .3; font-size: .55rem;
     }
-    .card:hover { border-color: var(--border-hover); background: var(--bg-elevated); }
-    .card.hidden { display: none; }
+    thead th.asc::after  { content: ' ↑'; opacity: 1; }
+    thead th.desc::after { content: ' ↓'; opacity: 1; }
 
-    .artwork {
-      width: 68px;
-      height: 68px;
-      border-radius: var(--radius-md);
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 30px;
-      background: var(--bg-elevated);
-      border: 0.5px solid var(--border);
+    tbody tr {
+      border-bottom: 1px solid #191919;
+      transition: background .08s;
+    }
+    tbody tr:hover { background: #161616; }
+    tbody tr.hidden { display: none; }
+
+    td { padding: 12px 14px; font-size: .82rem; vertical-align: middle; }
+
+    .td-num {
+      font-family: var(--mono); font-size: .6rem;
+      color: var(--muted); width: 44px;
+    }
+    .td-title  { font-weight: 500; color: var(--white); }
+    .td-producer { color: var(--grey); }
+    .td-submitter {
+      font-family: var(--mono); font-size: .62rem;
+      color: var(--muted); letter-spacing: .03em;
     }
 
-    .card-body { flex: 1; min-width: 0; }
-    .card-title { font-size: 15px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .card-host { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
-    .card-desc { font-size: 13px; color: var(--text-secondary); margin-top: 6px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-    .card-tags { display: flex; gap: 5px; margin-top: 9px; flex-wrap: wrap; }
-    .tag {
-      font-size: 11px;
-      font-family: var(--font-mono);
-      padding: 2px 7px;
-      border-radius: 4px;
-      background: var(--bg);
-      color: var(--text-muted);
-      border: 0.5px solid var(--border);
+    .app-badge {
+      display: inline-block;
+      font-family: var(--mono); font-size: .58rem;
+      letter-spacing: .08em; text-transform: uppercase;
+      padding: 3px 8px; border-radius: 2px;
+      border: 1px solid var(--border);
+      background: var(--surface); color: var(--grey);
+    }
+    .app-badge.spotify { color: #1db954; border-color: #1a3a1a; background: #0c1a0c; }
+    .app-badge.apple   { color: #fb5c69; border-color: #3a1520; background: #1a0a10; }
+    .app-badge.deezer  { color: #a53ff5; border-color: #2a1540; background: #120a1e; }
+
+    /* ─── EMPTY STATE ─────────────────────────── */
+    #empty-state {
+      display: none; text-align: center;
+      padding: 80px 20px; color: var(--muted);
+    }
+    #empty-state .big {
+      font-family: var(--display);
+      font-size: 3.5rem; letter-spacing: .1em;
+      margin-bottom: 10px; color: #2a2a2a;
+    }
+    #empty-state p {
+      font-family: var(--mono); font-size: .68rem;
+      letter-spacing: .1em; color: var(--muted);
     }
 
-    .card-side {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 10px;
-      flex-shrink: 0;
+    /* ─── MODAL ──────────────────────────────── */
+    .overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,.82); z-index: 100;
+      align-items: center; justify-content: center;
+    }
+    .overlay.open { display: flex; }
+
+    .modal {
+      background: #111;
+      border: 1px solid #2c2c2c;
+      width: 500px; max-width: 94vw;
+      border-radius: 3px; padding: 32px;
+    }
+    .modal h2 {
+      font-family: var(--display);
+      font-size: 1.9rem; letter-spacing: .1em;
+      margin-bottom: 6px;
+    }
+    .modal-sub {
+      font-family: var(--mono); font-size: .65rem;
+      color: var(--grey); letter-spacing: .06em;
+      line-height: 1.65; margin-bottom: 22px;
+    }
+    .modal-sub code {
+      background: #1e1e1e; padding: 1px 5px;
+      border-radius: 2px; font-size: .63rem;
     }
 
-    .source-badge {
-      font-size: 11px;
-      font-family: var(--font-mono);
-      padding: 3px 8px;
-      border-radius: 6px;
-      font-weight: 500;
-      white-space: nowrap;
+    .drop-zone {
+      border: 1px dashed #2e2e2e; border-radius: 2px;
+      padding: 32px 20px; text-align: center;
+      cursor: pointer; transition: all .15s;
+      margin-bottom: 14px;
     }
-    .src-spotify  { background: rgba(29,185,84,0.15);  color: #1db954; border: 0.5px solid rgba(29,185,84,0.25); }
-    .src-apple    { background: rgba(252,60,255,0.12); color: #fc3cff; border: 0.5px solid rgba(252,60,255,0.2); }
-    .src-rss      { background: rgba(255,165,0,0.13);  color: #ffa500; border: 0.5px solid rgba(255,165,0,0.25); }
-    .src-youtube  { background: rgba(255,70,70,0.13);  color: #ff4646; border: 0.5px solid rgba(255,70,70,0.25); }
-    .src-web      { background: rgba(99,179,237,0.13); color: #63b3ed; border: 0.5px solid rgba(99,179,237,0.25); }
+    .drop-zone:hover, .drop-zone.over {
+      border-color: var(--accent);
+      background: rgba(232,223,30,.03);
+    }
+    .drop-icon { font-size: 1.6rem; opacity: .3; margin-bottom: 8px; }
+    .drop-label {
+      font-family: var(--mono); font-size: .65rem;
+      color: var(--muted); letter-spacing: .06em;
+    }
+    #csv-input { display: none; }
 
-    .listen-btn {
-      font-size: 12px;
-      font-family: var(--font);
-      padding: 6px 11px;
-      border: 0.5px solid var(--border-hover);
-      border-radius: var(--radius-sm);
-      background: transparent;
-      cursor: pointer;
-      color: var(--text-secondary);
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      transition: all 0.15s;
-      text-decoration: none;
+    .preview-box {
+      display: none;
+      background: #0d0d0d; border: 1px solid #222;
+      border-radius: 2px; padding: 10px 12px;
+      font-family: var(--mono); font-size: .63rem;
+      color: var(--light); line-height: 1.6;
+      max-height: 110px; overflow-y: auto;
+      margin-bottom: 14px;
     }
-    .listen-btn:hover { background: var(--bg); color: var(--text-primary); border-color: var(--border-hover); }
 
-    /* Empty state */
-    .empty {
-      text-align: center;
-      padding: 4rem 1rem;
-      color: var(--text-muted);
+    .modal-actions {
+      display: flex; gap: 8px; justify-content: flex-end;
+      margin-top: 4px;
     }
-    .empty svg { display: block; margin: 0 auto 12px; opacity: 0.4; }
 
-    /* Add form */
-    .add-section {
-      margin-top: 2.5rem;
-      border: 0.5px dashed var(--border-hover);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-    }
-    .add-section h2 {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--text-secondary);
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
-    .form-grid input,
-    .form-grid select {
-      background: var(--bg);
-      border: 0.5px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 9px 12px;
-      color: var(--text-primary);
-      font-family: var(--font);
-      font-size: 13px;
-      outline: none;
-      transition: border-color 0.15s;
-      width: 100%;
-    }
-    .form-grid input::placeholder { color: var(--text-muted); }
-    .form-grid input:focus,
-    .form-grid select:focus { border-color: var(--border-hover); }
-    .form-grid select { cursor: pointer; }
-    .form-grid option { background: var(--bg-surface); }
-    .full { grid-column: 1 / -1; }
-    .submit-btn {
-      grid-column: 1 / -1;
-      padding: 10px;
-      border-radius: var(--radius-sm);
-      border: 0.5px solid rgba(232,255,107,0.3);
-      background: var(--accent-dim);
-      color: var(--accent);
-      font-family: var(--font);
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background 0.15s;
-    }
-    .submit-btn:hover { background: rgba(232,255,107,0.2); }
+    /* ─── SCROLLBAR ──────────────────────────── */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: #2e2e2e; border-radius: 3px; }
 
-    /* Toast */
-    .toast {
-      position: fixed;
-      bottom: 1.5rem;
-      left: 50%;
-      transform: translateX(-50%) translateY(10px);
-      background: var(--bg-elevated);
-      border: 0.5px solid var(--border-hover);
-      color: var(--text-primary);
-      font-size: 13px;
-      padding: 9px 16px;
-      border-radius: 20px;
-      opacity: 0;
-      transition: opacity 0.2s, transform 0.2s;
-      pointer-events: none;
-      z-index: 99;
-      white-space: nowrap;
-    }
-    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-    @media (max-width: 520px) {
-      .form-grid { grid-template-columns: 1fr; }
-      .full { grid-column: 1; }
-      .submit-btn { grid-column: 1; }
-      .card-side { display: none; }
+    @media (max-width: 600px) {
+      header, .toolbar, .table-wrap { padding-left: 16px; padding-right: 16px; }
+      .logo-sub { display: none; }
     }
   </style>
 </head>
 <body>
 
-<div class="page">
-
-  <header class="site-header">
-    <div class="logo">
-      <div class="logo-icon">🎧</div>
-      <h1>My Podcast Playlist <span class="count-badge" id="total-count">0</span></h1>
+<!-- ─── HEADER ──────────────────────────────────────────────── -->
+<header>
+  <a class="logo" href="#">
+    <!-- logo-symbol-wb.png lives in static/ next to index.html -->
+    <img src="static/logo-symbol-wb.png" alt="INSO logo" />
+    <div>
+      <div class="logo-label">INSO</div>
+      <div class="logo-sub">Podcast Index</div>
     </div>
-    <p>Curated shows from across the web — add any source, any platform.</p>
-  </header>
-
-  <div class="controls">
-    <div class="search-wrap">
-      <span class="search-icon">
-        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 6.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-.818 3.596a4.5 4.5 0 1 1 .707-.707l2.761 2.76-.707.708-2.761-2.761Z" fill="currentColor"/></svg>
-      </span>
-      <input class="search-input" type="search" id="search" placeholder="Search by title, host, or tag…" oninput="render()">
-    </div>
-    <button class="filter-btn active" data-filter="all" onclick="setFilter(this)">All</button>
-    <button class="filter-btn" data-filter="tech" onclick="setFilter(this)">Tech</button>
-    <button class="filter-btn" data-filter="science" onclick="setFilter(this)">Science</button>
-    <button class="filter-btn" data-filter="culture" onclick="setFilter(this)">Culture</button>
-    <button class="filter-btn" data-filter="news" onclick="setFilter(this)">News</button>
+  </a>
+  <div class="header-right">
+    <button class="btn btn-primary" id="open-import">Import CSV</button>
   </div>
+</header>
 
-  <div class="podcast-list" id="podcast-list"></div>
-
-  <div id="empty-state" class="empty" style="display:none;">
-    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-    <p>No podcasts match your search.</p>
+<!-- ─── TOOLBAR ─────────────────────────────────────────────── -->
+<div class="toolbar">
+  <div class="search-box">
+    <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input id="search" type="text" placeholder="Search title, producer, submitter…" />
   </div>
-
-  <section class="add-section">
-    <h2>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-      Add a podcast to your playlist
-    </h2>
-    <div class="form-grid">
-      <input type="text"  id="f-title"  placeholder="Podcast title *">
-      <input type="text"  id="f-host"   placeholder="Host name">
-      <input type="url"   id="f-url"    placeholder="URL — Spotify, Apple Podcasts, RSS feed… *" class="full">
-      <input type="text"  id="f-desc"   placeholder="Short description" class="full">
-      <select id="f-source">
-        <option value="web">Web / Other</option>
-        <option value="spotify">Spotify</option>
-        <option value="apple">Apple Podcasts</option>
-        <option value="youtube">YouTube</option>
-        <option value="rss">RSS Feed</option>
-      </select>
-      <input type="text" id="f-tags" placeholder="Tags: tech, news, design…">
-      <button class="submit-btn" onclick="addPodcast()">Add to playlist</button>
-    </div>
-  </section>
-
+  <div class="filters" id="app-filters">
+    <button class="chip active" data-app="all">All</button>
+    <button class="chip" data-app="spotify">Spotify</button>
+    <button class="chip" data-app="apple">Apple</button>
+    <button class="chip" data-app="deezer">Deezer</button>
+    <button class="chip" data-app="other">Other</button>
+  </div>
+  <span class="row-count" id="row-count"></span>
 </div>
 
-<div class="toast" id="toast"></div>
+<!-- ─── TABLE ───────────────────────────────────────────────── -->
+<div class="table-wrap">
+  <table id="podcast-table">
+    <thead>
+      <tr>
+        <th class="td-num">#</th>
+        <th data-col="title">Title</th>
+        <th data-col="producer">Producer</th>
+        <th data-col="app">App</th>
+        <th data-col="submitter">Submitted by</th>
+      </tr>
+    </thead>
+    <tbody id="table-body"></tbody>
+  </table>
+  <div id="empty-state">
+    <div class="big">NO RESULTS</div>
+    <p>Try a different search or filter.</p>
+  </div>
+</div>
+
+<!-- ─── IMPORT MODAL ────────────────────────────────────────── -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <h2>Import CSV</h2>
+    <p class="modal-sub">
+      Drop any CSV with these columns (order doesn't matter):<br/>
+      <code>Created By</code>, <code>Title</code>, <code>Podcast producer</code>, <code>Podcast application</code><br/><br/>
+      Rows already in the table (matched by title) are skipped. New rows are appended.
+    </p>
+
+    <div class="drop-zone" id="drop-zone">
+      <div class="drop-icon">📂</div>
+      <div class="drop-label">Drop a .csv file here, or click to browse</div>
+      <input type="file" id="csv-input" accept=".csv,text/csv" />
+    </div>
+
+    <div class="preview-box" id="preview-box"></div>
+
+    <div class="modal-actions">
+      <button class="btn" id="cancel-import">Cancel</button>
+      <button class="btn btn-primary" id="confirm-import" disabled>Add to index</button>
+    </div>
+  </div>
+</div>
 
 <script>
-  const SOURCE_LABELS = { spotify:'Spotify', apple:'Apple Podcasts', rss:'RSS', youtube:'YouTube', web:'Web' };
+// ─── STATE ──────────────────────────────────────────────────────
+let podcasts = [];          // master list
+let pendingRows = [];       // parsed from current CSV file
+let sortCol   = 'title';
+let sortDir   = 'asc';
+let filterApp = 'all';
+let query     = '';
 
-  const DEFAULT_PODCASTS = [
-    { title:"Lex Fridman Podcast",   host:"Lex Fridman",      source:"youtube", url:"https://lexfridman.com/podcast/",            emoji:"🎙️", desc:"Long-form conversations with scientists, engineers, artists, and leaders about the nature of intelligence and humanity.", tags:["tech","science","culture"] },
-    { title:"Huberman Lab",          host:"Andrew Huberman",  source:"spotify", url:"https://hubermanlab.com/",                   emoji:"🧠", desc:"Neuroscience and practical tools for everyday life, from Stanford professor Andrew Huberman.", tags:["science","health"] },
-    { title:"Darknet Diaries",       host:"Jack Rhysider",    source:"rss",     url:"https://darknetdiaries.com/",                emoji:"🕵️", desc:"True stories from the dark side of the internet — hackers, breaches, and cyber crime.", tags:["tech","culture"] },
-    { title:"The Daily",             host:"Michael Barbaro",  source:"apple",   url:"https://www.nytimes.com/column/the-daily",   emoji:"📰", desc:"20 minutes on the stories shaping the day, from The New York Times.", tags:["news"] },
-    { title:"99% Invisible",         host:"Roman Mars",       source:"web",     url:"https://99percentinvisible.org/",            emoji:"🏛️", desc:"Stories about the unnoticed design and architecture that shapes our world.", tags:["culture","design"] },
-    { title:"Radiolab",              host:"Latif Nasser",     source:"web",     url:"https://radiolab.org/",                      emoji:"🔬", desc:"Investigating a strange world through science, philosophy, and human experience.", tags:["science","culture"] },
-  ];
+// ─── SEED DATA (from Podcasts.csv) ─────────────────────────────
+const seedData = [
+  { submitter:"INSO_HQ_OPS_OFFICER",  title:"The Philip DeFranco Show",          producer:"Philip deFranco",                        app:"Spotify" },
+  { submitter:"INSO_HQ_OPS_OFFICER",  title:"The World in Brief",                 producer:"The Economist",                          app:"Spotify" },
+  { submitter:"INSO_HQ_OPS_OFFICER",  title:"Today, Explained",                   producer:"Vox",                                    app:"Spotify" },
+  { submitter:"INSO_HQ_OPS_OFFICER",  title:"The Daily",                          producer:"New York Times",                         app:"Spotify" },
+  { submitter:"INSO_HQ_OPS_OFFICER",  title:"NRC Vandaag",                        producer:"NRC",                                    app:"Spotify" },
+  { submitter:"INSO_HQ_COMMS_OFFICER",title:"War & Peace",                        producer:"International Crisis Group",             app:"" },
+  { submitter:"INSO_HQ_COMMS_OFFICER",title:"Hold Your Fire!",                    producer:"International Crisis Group",             app:"" },
+  { submitter:"INSO_HQ_COMMS_OFFICER",title:"The Horn",                           producer:"International Crisis Group",             app:"" },
+  { submitter:"INSO_HQ_HR_SPECIALIST",title:"The Crisis Room Team and The Lawfare Podcast", producer:"The Crisis Room Team and Lawfare", app:"Spotify" },
+  { submitter:"INSO_HQ_RD_WA",        title:"Le Collimateur",                     producer:"Alexandre Jubelin",                      app:"Deezer" },
+  { submitter:"INSO_HQ_RD_MECA",      title:"Turkey Book Talk",                   producer:"William Armstrong",                      app:"Apple Podcasts" },
+  { submitter:"INSO_HQ_RD_MECA",      title:"Recap Radio",                        producer:"Turkey Recap",                           app:"Apple Podcasts" },
+  { submitter:"INSO_HQ_RD_MECA",      title:"Popular Front",                      producer:"Jake Hanrahan",                          app:"Apple Podcasts" },
+  { submitter:"INSO_HQ_RD_MECA",      title:"In Moscow's Shadows",                producer:"Mark Galeotti",                          app:"Apple Podcasts" },
+  { submitter:"INSO_HQ_RD_MECA",      title:"Angry Planet",                       producer:"Matthew Gault and Jason Fields",         app:"Apple Podcasts" },
+  { submitter:"INSO_HQ_RD_WA",        title:"Zone critique",                      producer:"MSF",                                    app:"Deezer" },
+  { submitter:"INSO_HQ_OSDC_HEAD",    title:"Po Na Biso",                         producer:"Ebuteli/GEC",                            app:"Apple Podcasts" },
+  { submitter:"INSO_HQ_OSDC_HEAD",    title:"ACAPS Audio Reports",                producer:"ACAPS",                                  app:"" },
+  { submitter:"INSO_HQ_OSDC_HEAD",    title:"Afrique 360",                        producer:"International Crisis Group",             app:"" },
+  { submitter:"INSO_HQ_OSDC_HEAD",    title:"Bulletproof Podcast",                producer:"Voxpot (Czech)",                         app:"" },
+  { submitter:"INSO_HQ_OSDC_HEAD",    title:"Carnegie Connects",                  producer:"Carnegie Endowment",                    app:"" },
+  { submitter:"INSO_HQ_OSDC_HEAD",    title:"Conflict of Interest",               producer:"ACLED",                                  app:"" },
+  { submitter:"INSO_HQ_OSDC_HEAD",    title:"Digital Dilemmas",                   producer:"Lenk Studios",                           app:"" },
+  { submitter:"INSO_HQ_OSDC_HEAD",    title:"From Our Own Correspondent",         producer:"BBC",                                    app:"" },
+  { submitter:"INSO_HQ_OSDC_HEAD",    title:"Global News Podcast",                producer:"BBC",                                    app:"" },
+  { submitter:"INSO_HQ_OSDC_HEAD",    title:"Global Security Briefing",           producer:"The Royal United Services Institute",    app:"" },
+  { submitter:"INSO_HQ_OSDC_HEAD",    title:"Humanitarian Frontiers",             producer:"Chris Hoffman",                          app:"" },
+  { submitter:"INSO_HQ_OSDC_HEAD",    title:"Info ou Intox",                      producer:"France24",                               app:"" },
+  { submitter:"INSO_HQ_OSDC_HEAD",    title:"Into Africa",                        producer:"CSIS",                                   app:"" },
+  { submitter:"INSO_HQ_OSDC_HEAD",    title:"Le Journal de l'Afrique",            producer:"France24",                               app:"" },
+  { submitter:"INSO_HQ_OSDC_HEAD",    title:"Needle Stack",                       producer:"Authentic8",                             app:"" },
+  { submitter:"INSO_HQ_OSDC_HEAD",    title:"Think Change",                       producer:"ODI",                                    app:"" },
+  { submitter:"INSO_HQ_OSDC_HEAD",    title:"On the Record",                      producer:"CFR",                                    app:"" },
+  { submitter:"INSO_HQ_OSDC_HEAD",    title:"Pod Save the World",                 producer:"Crooked Media",                          app:"" },
+  { submitter:"INSO_HQ_OSDC_HEAD",    title:"Journal Afrique",                    producer:"RFI",                                    app:"" },
+  { submitter:"INSO_HQ_OSDC_HEAD",    title:"Revue de Presse Internationale",     producer:"RFI",                                    app:"" },
+  { submitter:"INSO_HQ_OSDC_HEAD",    title:"Tech Won't Save Us",                 producer:"Paris Marx",                             app:"" },
+  { submitter:"INSO_HQ_OSDC_HEAD",    title:"The Foreign Affairs Interview",      producer:"Foreign Affairs Magazine",               app:"" },
+  { submitter:"INSO_HQ_OSDC_HEAD",    title:"The Global Story",                   producer:"BBC",                                    app:"" },
+  { submitter:"INSO_HQ_OSDC_HEAD",    title:"The Inside Story Podcast",           producer:"Al Jazeera",                             app:"" },
+  { submitter:"INSO_HQ_OSDC_HEAD",    title:"The New Humanitarian",               producer:"The New Humanitarian",                   app:"" },
+  { submitter:"INSO_HQ_OSDC_HEAD",    title:"The Take",                           producer:"Al Jazeera",                             app:"" },
+  { submitter:"INSO_HQ_OSDC_HEAD",    title:"War Fronts",                         producer:"Cloud10",                                app:"" },
+];
 
-  let podcasts = load();
-  let activeFilter = 'all';
+// ─── HELPERS ────────────────────────────────────────────────────
+function appKey(raw) {
+  const s = (raw || '').toLowerCase();
+  if (s.includes('spotify')) return 'spotify';
+  if (s.includes('apple'))   return 'apple';
+  if (s.includes('deezer'))  return 'deezer';
+  if (s)                     return 'other';
+  return '';
+}
 
-  function load() {
-    try { const s = localStorage.getItem('podcasts'); return s ? JSON.parse(s) : DEFAULT_PODCASTS; }
-    catch { return DEFAULT_PODCASTS; }
-  }
+function appBadge(raw) {
+  if (!raw) return '—';
+  const key = appKey(raw);
+  return `<span class="app-badge ${key}">${raw}</span>`;
+}
 
-  function save() {
-    try { localStorage.setItem('podcasts', JSON.stringify(podcasts)); } catch {}
-  }
+// ─── RENDER ─────────────────────────────────────────────────────
+function render() {
+  const tbody = document.getElementById('table-body');
+  const q = query.toLowerCase();
 
-  function render() {
-    const q = (document.getElementById('search').value || '').toLowerCase();
-    const list = document.getElementById('podcast-list');
-    let visible = 0;
+  // filter
+  const filtered = podcasts.filter(p => {
+    const matchApp = filterApp === 'all'
+      ? true
+      : filterApp === 'other'
+        ? appKey(p.app) === 'other' || (filterApp === 'other' && p.app && !['spotify','apple','deezer'].includes(appKey(p.app)))
+        : appKey(p.app) === filterApp;
+    const matchQ = !q ||
+      p.title.toLowerCase().includes(q) ||
+      (p.producer || '').toLowerCase().includes(q) ||
+      (p.submitter || '').toLowerCase().includes(q);
+    return matchApp && matchQ;
+  });
 
-    list.innerHTML = podcasts.map((p, i) => {
-      const matchSearch = !q || [p.title, p.host, p.desc, ...(p.tags||[])].join(' ').toLowerCase().includes(q);
-      const matchFilter = activeFilter === 'all' || (p.tags||[]).includes(activeFilter);
-      if (!matchSearch || !matchFilter) return `<div class="card hidden"></div>`;
-      visible++;
-      const srcLabel = SOURCE_LABELS[p.source] || p.source;
-      const tags = (p.tags||[]).map(t => `<span class="tag">${t}</span>`).join('');
-      return `
-        <div class="card" onclick="openURL('${escAttr(p.url)}')">
-          <div class="artwork">${p.emoji || '🎧'}</div>
-          <div class="card-body">
-            <div class="card-title">${esc(p.title)}</div>
-            <div class="card-host">${esc(p.host)}</div>
-            <div class="card-desc">${esc(p.desc)}</div>
-            <div class="card-tags">${tags}</div>
-          </div>
-          <div class="card-side">
-            <span class="source-badge src-${p.source}">${srcLabel}</span>
-            <a class="listen-btn" href="${escAttr(p.url)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-              Listen
-            </a>
-          </div>
-        </div>`;
-    }).join('');
+  // sort
+  filtered.sort((a, b) => {
+    const va = (a[sortCol] || '').toLowerCase();
+    const vb = (b[sortCol] || '').toLowerCase();
+    return sortDir === 'asc' ? va.localeCompare(vb) : vb.localeCompare(va);
+  });
 
-    document.getElementById('empty-state').style.display = visible === 0 ? 'block' : 'none';
-    document.getElementById('total-count').textContent = podcasts.length;
-  }
+  tbody.innerHTML = filtered.map((p, i) => `
+    <tr>
+      <td class="td-num">${String(i + 1).padStart(2, '0')}</td>
+      <td class="td-title">${esc(p.title)}</td>
+      <td class="td-producer">${esc(p.producer || '—')}</td>
+      <td>${appBadge(p.app)}</td>
+      <td class="td-submitter">${esc(p.submitter || '—')}</td>
+    </tr>`).join('');
 
-  function setFilter(btn) {
-    activeFilter = btn.dataset.filter;
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+  const count = document.getElementById('row-count');
+  count.textContent = `${filtered.length} / ${podcasts.length} podcasts`;
+
+  document.getElementById('empty-state').style.display =
+    filtered.length === 0 ? 'block' : 'none';
+
+  // update sort indicators
+  document.querySelectorAll('thead th[data-col]').forEach(th => {
+    th.classList.toggle('asc',  th.dataset.col === sortCol && sortDir === 'asc');
+    th.classList.toggle('desc', th.dataset.col === sortCol && sortDir === 'desc');
+  });
+}
+
+function esc(s) {
+  return String(s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ─── SORT ───────────────────────────────────────────────────────
+document.querySelectorAll('thead th[data-col]').forEach(th => {
+  th.addEventListener('click', () => {
+    if (sortCol === th.dataset.col) {
+      sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+    } else {
+      sortCol = th.dataset.col; sortDir = 'asc';
+    }
     render();
-  }
+  });
+});
 
-  function addPodcast() {
-    const title  = document.getElementById('f-title').value.trim();
-    const host   = document.getElementById('f-host').value.trim();
-    const url    = document.getElementById('f-url').value.trim();
-    const desc   = document.getElementById('f-desc').value.trim();
-    const source = document.getElementById('f-source').value;
-    const tags   = document.getElementById('f-tags').value.split(',').map(t => t.trim()).filter(Boolean);
+// ─── SEARCH ─────────────────────────────────────────────────────
+document.getElementById('search').addEventListener('input', e => {
+  query = e.target.value; render();
+});
 
-    if (!title) { toast('Please enter a podcast title.'); return; }
-    if (!url)   { toast('Please enter a URL.'); return; }
-
-    podcasts.unshift({ title, host: host || 'Unknown', source, url, emoji: '🎧', desc, tags });
-    save();
-    ['f-title','f-host','f-url','f-desc','f-tags'].forEach(id => document.getElementById(id).value = '');
-    render();
-    toast('✓ Added to your playlist');
-  }
-
-  function openURL(url) { window.open(url, '_blank', 'noopener'); }
-
-  function esc(s) {
-    return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  }
-  function escAttr(s) {
-    return String(s||'').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
-  }
-
-  let toastTimer;
-  function toast(msg) {
-    const el = document.getElementById('toast');
-    el.textContent = msg;
-    el.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => el.classList.remove('show'), 2500);
-  }
-
+// ─── APP FILTER ─────────────────────────────────────────────────
+document.getElementById('app-filters').addEventListener('click', e => {
+  const chip = e.target.closest('.chip');
+  if (!chip) return;
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  chip.classList.add('active');
+  filterApp = chip.dataset.app;
   render();
+});
+
+// ─── CSV PARSER (no external deps) ──────────────────────────────
+function parseCSV(text) {
+  // strip BOM
+  text = text.replace(/^\uFEFF/, '');
+  const lines = text.split(/\r?\n/).filter(l => l.trim());
+  if (!lines.length) return [];
+
+  function splitRow(line) {
+    const cells = []; let cur = ''; let inQ = false;
+    for (let i = 0; i < line.length; i++) {
+      const ch = line[i];
+      if (ch === '"') {
+        if (inQ && line[i+1] === '"') { cur += '"'; i++; }
+        else inQ = !inQ;
+      } else if (ch === ',' && !inQ) {
+        cells.push(cur.trim()); cur = '';
+      } else cur += ch;
+    }
+    cells.push(cur.trim()); return cells;
+  }
+
+  const headers = splitRow(lines[0]).map(h => h.toLowerCase());
+  const col = key => headers.findIndex(h => h.includes(key));
+
+  const iTitle    = col('title');
+  const iProducer = col('producer');
+  const iApp      = col('application');
+  const iSub      = col('created by');
+
+  return lines.slice(1).map(l => {
+    const cells = splitRow(l);
+    return {
+      title:     cells[iTitle]    || '',
+      producer:  cells[iProducer] || '',
+      app:       cells[iApp]      || '',
+      submitter: cells[iSub]      || '',
+    };
+  }).filter(r => r.title && r.title.toLowerCase() !== 'podcast name');
+}
+
+// ─── IMPORT MODAL ───────────────────────────────────────────────
+const overlay     = document.getElementById('overlay');
+const dropZone    = document.getElementById('drop-zone');
+const csvInput    = document.getElementById('csv-input');
+const previewBox  = document.getElementById('preview-box');
+const confirmBtn  = document.getElementById('confirm-import');
+
+document.getElementById('open-import').addEventListener('click', () => {
+  overlay.classList.add('open');
+});
+document.getElementById('cancel-import').addEventListener('click', closeModal);
+overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+
+function closeModal() {
+  overlay.classList.remove('open');
+  previewBox.style.display = 'none';
+  previewBox.textContent = '';
+  confirmBtn.disabled = true;
+  pendingRows = [];
+  csvInput.value = '';
+  dropZone.classList.remove('over');
+}
+
+dropZone.addEventListener('click', () => csvInput.click());
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('over'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('over'));
+dropZone.addEventListener('drop', e => {
+  e.preventDefault(); dropZone.classList.remove('over');
+  if (e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]);
+});
+csvInput.addEventListener('change', () => {
+  if (csvInput.files[0]) loadFile(csvInput.files[0]);
+});
+
+function loadFile(file) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    const rows = parseCSV(e.target.result);
+    const existingTitles = new Set(podcasts.map(p => p.title.toLowerCase()));
+    pendingRows = rows.filter(r => !existingTitles.has(r.title.toLowerCase()));
+
+    previewBox.style.display = 'block';
+    if (pendingRows.length === 0) {
+      previewBox.textContent = `✓ All ${rows.length} rows already exist — nothing new to add.`;
+      confirmBtn.disabled = true;
+    } else {
+      previewBox.innerHTML =
+        `<strong style="color:var(--accent)">${pendingRows.length} new</strong> of ${rows.length} parsed rows will be added:\n\n` +
+        pendingRows.map(r => `• ${r.title} — ${r.producer || 'n/a'}`).join('\n');
+      confirmBtn.disabled = false;
+    }
+  };
+  reader.readAsText(file);
+}
+
+confirmBtn.addEventListener('click', () => {
+  podcasts.push(...pendingRows);
+  render();
+  closeModal();
+});
+
+// ─── INIT ────────────────────────────────────────────────────────
+podcasts = [...seedData];
+render();
 </script>
 </body>
 </html>
