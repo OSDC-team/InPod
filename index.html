@@ -350,7 +350,7 @@ function parseCSV(text){
   function sr(line){const c=[];let cur='',inQ=false;for(let i=0;i<line.length;i++){const ch=line[i];if(ch==='"'){if(inQ&&line[i+1]==='"'){cur+='"';i++;}else inQ=!inQ;}else if(ch===','&&!inQ){c.push(cur.trim());cur='';}else cur+=ch;}c.push(cur.trim());return c;}
   const h=sr(lines[0]).map(x=>x.toLowerCase().trim());
   const col=k=>h.findIndex(x=>x.includes(k));
-  const iT=col('title'),iP=col('producer'),iA=col('app')!==-1?col('app'):col('application'),iL=col('link'),iTg=col('tag'),iLang=col('lang'),iCnt=col('countr'),iFreq=col('freq'),iDesc=col('desc');
+  const iT=col('title'),iP=col('producer'),iA=col('app')!==-1?col('app'):col('application'),iL=col('link'),iTg=col('tag'),iLang=col('lang'),iCnt=col('region')!==-1?col('region'):col('countr'),iFreq=col('freq'),iDesc=col('desc');
   return lines.slice(1).map(l=>{
     const c=sr(l);
     const rawT=iTg!==-1?(c[iTg]||'').trim():'';
