@@ -22,10 +22,11 @@
     /* ─── Header ─────────────────────────────────────────────────────── */
     header { position:sticky; top:0; z-index:100; background:rgba(12,12,14,.94); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); height:60px; }
     .header-inner { max-width:860px; margin:0 auto; padding:0 32px; height:100%; display:flex; align-items:center; gap:16px; }
-    .logo { display:flex; align-items:center; gap:11px; text-decoration:none; }
-    .logo img { width:32px; height:32px; object-fit:contain; filter:invert(1); flex-shrink:0; }
+    .logo { display:flex; align-items:center; gap:12px; text-decoration:none; }
+    .logo img { width:38px; height:38px; object-fit:contain; filter:invert(1); flex-shrink:0; }
+    .logo-text { display:flex; flex-direction:column; justify-content:center; gap:3px; }
     .logo-label { font-family:var(--display); font-size:1.6rem; letter-spacing:.15em; color:var(--white); line-height:1; }
-    .logo-sub { font-family:var(--mono); font-size:.52rem; letter-spacing:.2em; text-transform:uppercase; color:var(--grey); margin-top:2px; }
+    .logo-sub { font-family:var(--mono); font-size:.52rem; letter-spacing:.2em; text-transform:uppercase; color:var(--grey); line-height:1; }
     .header-right { margin-left:auto; display:flex; gap:8px; align-items:center; }
     .header-count { font-family:var(--mono); font-size:.58rem; color:var(--grey); letter-spacing:.04em; margin-right:2px; }
 
@@ -189,7 +190,7 @@
 <!-- ─── Header ──────────────────────────────────────────────────────────── -->
 <header>
   <div class="header-inner">
-    <a class="logo" href="#"><img src="static/logo-symbol-wb.png" alt="INSO" /><div><div class="logo-label">INSO</div><div class="logo-sub">Podcast Index</div></div></a>
+    <a class="logo" href="#"><img src="static/logo-symbol-wb.png" alt="INSO" /><div class="logo-text"><div class="logo-label">INSO</div><div class="logo-sub">Podcast Index</div></div></a>
     <span class="header-count" id="header-count"></span>
     <div class="header-right">
       <button class="btn" id="open-import">Import CSV</button>
