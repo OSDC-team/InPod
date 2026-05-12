@@ -360,7 +360,7 @@ function parseCSV(text) {
   return lines.slice(1).map(l=>{
     const c=splitRow(l);
     const rawTags = iTg !== -1 ? (c[iTg]||'').trim() : '';
-    const tags = rawTags ? rawTags.split('|').map(t=>t.trim()).filter(Boolean) : [];
+    const tags = rawTags ? rawTags.split(/[|,]/).map(t=>t.trim()).filter(Boolean) : [];
     return { title:(c[iT]||'').trim(), producer:(c[iP]||'').trim(), app:(c[iA]||'').trim(), link:(c[iL]||'').trim(), tags };
   }).filter(r=>r.title && r.title.toLowerCase()!=='podcast name');
 }
