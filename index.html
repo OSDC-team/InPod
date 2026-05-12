@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>INSO — Podcast Index</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:      #0c0c0e;
+      --card:    #161618;
+      --card-h:  #1c1c1e;
+      --border:  #242426;
+      --muted:   #3a3a3c;
+      --grey:    #787880;
+      --light:   #b0b0b8;
+      --white:   #ededf0;
+      --accent:  #4a7fc1;
+      --mono: 'IBM Plex Mono', monospace;
+      --sans: 'IBM Plex Sans', sans-serif;
+      --display: 'Bebas Neue', sans-serif;
+    }
+    body { background: var(--bg); color: var(--white); font-family: var(--sans); font-weight: 300; min-height: 100vh; }
+
+    /* HEADER */
+    header { position: sticky; top: 0; z-index: 50; background: var(--bg); border-bottom: 1px solid var(--border); height: 68px; }
+    .header-inner { max-width: 740px; margin: 0 auto; padding: 0 48px; height: 100%; display: flex; align-items: center; gap: 20px; }
+    .logo { display: flex; align-items: flex-start; gap: 14px; text-decoration: none; padding-top: 3px; }
+    .logo img { width: 32px; height: 32px; object-fit: contain; filter: invert(1); flex-shrink: 0; }
+    .logo-label { font-family: var(--display); font-size: 1.6rem; letter-spacing: .15em; color: var(--white); line-height: 1; }
+    .logo-sub   { font-family: var(--mono); font-size: .56rem; letter-spacing: .22em; text-transform: uppercase; color: var(--grey); margin-top: 2px; }
+    .header-right { margin-left: auto; display: flex; gap: 10px; }
+
+    /* BUTTONS */
+    .btn { font-family: var(--mono); font-size: .64rem; letter-spacing: .1em; text-transform: uppercase; padding: 7px 16px; border: 1px solid var(--muted); background: transparent; color: var(--grey); cursor: pointer; border-radius: 8px; transition: all .15s; white-space: nowrap; }
+    .btn:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-primary { background: var(--white); color: var(--bg); border-color: var(--white); font-weight: 500; }
+    .btn-primary:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+
+    /* CENTERED LAYOUT */
+    .page-wrap { max-width: 740px; margin: 0 auto; padding: 0 48px; }
+
+    /* TOOLBAR */
+    .toolbar { padding: 20px 0 0; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .search-wrap { position: relative; flex: 1; min-width: 220px; max-width: 460px; }
+    .search-wrap svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 14px; height: 14px; stroke: var(--grey); fill: none; pointer-events: none; }
+    .search-wrap input { width: 100%; background: var(--card); border: 1px solid var(--border); color: var(--white); font-family: var(--sans); font-size: .85rem; font-weight: 300; padding: 10px 14px 10px 38px; border-radius: 24px; outline: none; transition: border-color .15s; }
+    .search-wrap input:focus { border-color: #505055; }
+    .search-wrap input::placeholder { color: var(--grey); }
+    .search-clear { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--grey); font-size: 1rem; line-height: 1; padding: 2px; border-radius: 3px; display: none; transition: color .12s; }
+    .search-clear:hover { color: var(--light); }
+    .search-wrap.has-value .search-clear { display: flex; align-items: center; justify-content: center; }
+    .search-wrap.has-value input { padding-right: 32px; }
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+    .chip { font-family: var(--sans); font-size: .82rem; padding: 6px 18px; border: 1px solid var(--border); background: transparent; color: var(--grey); cursor: pointer; border-radius: 24px; transition: all .12s; white-space: nowrap; }
+    .chip:hover  { border-color: #555; color: var(--light); }
+    .chip.active { border-color: var(--accent); color: #fff; background: var(--accent); font-weight: 500; }
+
+    /* MAIN + CARDS */
+    .main { padding: 6px 0 0; }
+    .count-bar { font-family: var(--mono); font-size: .62rem; color: var(--grey); padding: 14px 0 8px; }
+    .card-list { display: flex; flex-direction: column; gap: 10px; }
+
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; display: flex; align-items: center; gap: 18px; transition: background .12s, border-color .12s; }
+    .card:hover { background: var(--card-h); border-color: #333338; }
+
+    .card-icon { width: 56px; height: 56px; flex-shrink: 0; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: var(--mono); font-weight: 700; font-size: .78rem; letter-spacing: .04em; border: 1px solid transparent; }
+
+    .card-body { flex: 1; min-width: 0; }
+    .card-title { font-size: 1rem; font-weight: 500; color: var(--white); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .card-producer { font-size: .8rem; color: var(--grey); margin-bottom: 6px; }
+    .card-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 2px; }
+    .tag { font-family: var(--mono); font-size: .56rem; letter-spacing: .05em; padding: 2px 8px; border-radius: 4px; border: 1px solid var(--tag-bd, #303035); color: var(--tag-fg, #606068); background: var(--tag-bg, transparent); text-transform: lowercase; cursor: pointer; transition: opacity .12s; }
+    .tag:hover { opacity: .7; }
+    .tag.active { outline: 1.5px solid var(--tag-fg, #606068); outline-offset: 1px; opacity: 1; }
+    .lang-badge { font-family: var(--mono); font-size: .58rem; font-weight: 600; letter-spacing: .08em; padding: 2px 7px; border-radius: 4px; white-space: nowrap; }
+    .lang-badge.EN { background: #0e1e38; color: #4a7fc1; border: 1px solid #1a3060; }
+    .lang-badge.FR { background: #1a0e10; color: #d05060; border: 1px solid #301820; }
+    .lang-badge.NL { background: #0e1a10; color: #40a858; border: 1px solid #163820; }
+
+    .card-right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; flex-shrink: 0; }
+
+    .platform-badge { font-family: var(--mono); font-size: .62rem; letter-spacing: .06em; text-transform: uppercase; padding: 4px 10px; border-radius: 6px; font-weight: 500; white-space: nowrap; }
+    .platform-badge.spotify { background: #1a3d1a; color: #1db954; border: 1px solid #1db95430; }
+    .platform-badge.apple   { background: #3d1520; color: #fb5c69; border: 1px solid #fb5c6930; }
+    .platform-badge.deezer  { background: #2a1040; color: #b060ff; border: 1px solid #b060ff30; }
+    .platform-badge.web     { background: #12263a; color: #4da6ff; border: 1px solid #4da6ff30; }
+    .platform-badge.other   { background: #222; color: var(--grey); border: 1px solid var(--muted); }
+
+    .btn-listen { font-family: var(--mono); font-size: .6rem; letter-spacing: .08em; text-transform: uppercase; padding: 6px 14px; border: 1px solid var(--muted); background: transparent; color: var(--light); border-radius: 6px; transition: all .15s; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+    .btn-listen:hover { border-color: var(--accent); color: var(--accent); background: rgba(74,127,193,.07); }
+    .btn-listen svg { width: 11px; height: 11px; stroke: currentColor; fill: none; flex-shrink: 0; }
+
+    /* STATUS / EMPTY */
+    #status { display: none; text-align: center; padding: 72px 20px; }
+    #status .big { font-family: var(--display); font-size: 3rem; letter-spacing: .1em; color: #282830; margin-bottom: 10px; }
+    #status p { font-family: var(--mono); font-size: .68rem; letter-spacing: .08em; color: var(--muted); line-height: 1.8; }
+
+    /* ADD STRIP */
+    .add-strip { margin: 32px 0 60px; border: 1px dashed var(--border); border-radius: 12px; padding: 22px 28px; display: flex; align-items: center; gap: 20px; background: #111113; transition: border-color .15s; }
+    .add-strip:hover { border-color: #383840; }
+    .add-strip-text h3 { font-family: var(--display); font-size: 1.05rem; letter-spacing: .12em; margin-bottom: 4px; }
+    .add-strip-text p  { font-family: var(--mono); font-size: .61rem; color: var(--grey); line-height: 1.7; }
+    .add-strip-text p code { background: #1e1e1e; padding: 1px 5px; border-radius: 3px; }
+    .add-strip-actions { margin-left: auto; display: flex; gap: 8px; flex-shrink: 0; }
+
+    /* MODALS */
+    .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.88); z-index: 100; align-items: center; justify-content: center; }
+    .overlay.open { display: flex; }
+    .modal { background: #131315; border: 1px solid #282828; width: 500px; max-width: 94vw; border-radius: 12px; padding: 32px; }
+    .modal h2 { font-family: var(--display); font-size: 1.9rem; letter-spacing: .1em; margin-bottom: 6px; }
+    .modal-sub { font-family: var(--mono); font-size: .64rem; color: var(--grey); line-height: 1.7; margin-bottom: 22px; }
+    .modal-sub code { background: #1e1e1e; padding: 1px 5px; border-radius: 3px; font-size: .61rem; }
+    .drop-zone { border: 1px dashed #2e2e2e; border-radius: 8px; padding: 32px 20px; text-align: center; cursor: pointer; transition: all .15s; margin-bottom: 14px; }
+    .drop-zone:hover, .drop-zone.over { border-color: var(--accent); background: rgba(74,127,193,.06); }
+    .drop-icon { font-size: 1.5rem; opacity: .3; margin-bottom: 8px; }
+    .drop-label { font-family: var(--mono); font-size: .64rem; color: var(--muted); }
+    #csv-input { display: none; }
+    .preview-box { display: none; background: #0a0a0c; border: 1px solid #242426; border-radius: 6px; padding: 10px 12px; font-family: var(--mono); font-size: .63rem; color: var(--light); line-height: 1.65; max-height: 110px; overflow-y: auto; margin-bottom: 14px; white-space: pre-wrap; }
+    .modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
+    .form-row { margin-bottom: 14px; }
+    .form-row label { display: block; font-family: var(--mono); font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; color: var(--grey); margin-bottom: 5px; }
+    .form-row input, .form-row select { width: 100%; background: #131315; border: 1px solid #282828; color: var(--white); font-family: var(--sans); font-size: .85rem; padding: 9px 12px; border-radius: 8px; outline: none; transition: border-color .15s; }
+    .form-row input:focus, .form-row select:focus { border-color: #4a7fc1; }
+    .form-row input::placeholder { color: var(--muted); }
+    .form-row select option { background: #131315; }
+
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: #303035; border-radius: 2px; }
+
+    @media (max-width: 640px) {
+      .page-wrap { padding: 0 20px; }
+      .header-inner { padding: 0 20px; }
+      .logo-sub { display: none; }
+      .card-right { flex-direction: row; align-items: center; width: 100%; justify-content: space-between; }
+      .add-strip { flex-direction: column; align-items: flex-start; }
+      .add-strip-actions { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="logo" href="#">
+      <img src="static/logo-symbol-wb.png" alt="INSO" />
+      <div>
+        <div class="logo-label">INSO</div>
+        <div class="logo-sub">Podcast Index &mdash; <span id="total-count"></span></div>
+      </div>
+    </a>
+    <div class="header-right">
+      <button class="btn" id="open-import">Import CSV</button>
+      <button class="btn btn-primary" id="open-add">+ Add Podcast</button>
+    </div>
+  </div>
+</header>
+
+<div class="page-wrap">
+<div class="toolbar">
+  <div class="search-wrap">
+    <svg viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input id="search" type="text" placeholder="Search by title or producer…" autocomplete="off" />
+    <button class="search-clear" id="search-clear" aria-label="Clear search">&#x2715;</button>
+  </div>
+  <div class="filters" id="app-filters">
+    <button class="chip active" data-app="all">All</button>
+    <button class="chip" data-app="spotify">Spotify</button>
+    <button class="chip" data-app="apple">Apple</button>
+    <button class="chip" data-app="deezer">Deezer</button>
+    <button class="chip" data-app="web">Web</button>
+    <button class="chip" data-app="other">Other</button>
+  </div>
+</div>
+<div class="toolbar" style="padding-top:8px;padding-bottom:16px">
+  <span style="font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--grey);white-space:nowrap">Language</span>
+  <div class="filters" id="lang-filters">
+    <button class="chip active" data-lang="">All</button>
+    <button class="chip" data-lang="EN">🇬🇧 EN</button>
+    <button class="chip" data-lang="FR">🇫🇷 FR</button>
+    <button class="chip" data-lang="NL">🇳🇱 NL</button>
+  </div>
+</div>
+
+<div class="main">
+  <div class="count-bar" id="count-bar"></div>
+  <div id="status"><div class="big">LOADING</div><p>Fetching podcast data…</p></div>
+  <div class="card-list" id="card-list"></div>
+
+  <div class="add-strip">
+    <div class="add-strip-text">
+      <h3>Add a Podcast</h3>
+      <p>Add a single entry manually, or bulk-upload via CSV.<br/>
+         To save permanently, edit <code>data/podcasts.csv</code> in the repo.</p>
+    </div>
+    <div class="add-strip-actions">
+      <button class="btn" id="open-import-2">Import CSV</button>
+      <button class="btn btn-primary" id="open-add-2">+ Add Podcast</button>
+    </div>
+  </div>
+</div>
+</div><!-- end page-wrap -->
+
+<!-- IMPORT CSV modal -->
+<div class="overlay" id="overlay-import">
+  <div class="modal">
+    <h2>Import CSV</h2>
+    <p class="modal-sub">Drop a CSV with columns: <code>Title</code>, <code>Producer</code>, <code>App</code>, <code>Link</code>, <code>Tags</code>.<br/>Tags are pipe-separated e.g. <code>news|politics</code>. Column order and casing are flexible. Duplicate titles are skipped.</p>
+    <div class="drop-zone" id="drop-zone">
+      <div class="drop-icon">📂</div>
+      <div class="drop-label">Drop a .csv file here, or click to browse</div>
+      <input type="file" id="csv-input" accept=".csv,text/csv" />
+    </div>
+    <div class="preview-box" id="preview-box"></div>
+    <div class="modal-actions">
+      <button class="btn" id="cancel-import">Cancel</button>
+      <button class="btn btn-primary" id="confirm-import" disabled>Add to index</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD SINGLE modal -->
+<div class="overlay" id="overlay-add">
+  <div class="modal">
+    <h2>Add Podcast</h2>
+    <p class="modal-sub">Only Title is required. To save permanently, also add the row to <code>data/podcasts.csv</code>.</p>
+    <div class="form-row"><label>Title *</label><input id="add-title" type="text" placeholder="e.g. War &amp; Peace" /></div>
+    <div class="form-row"><label>Producer</label><input id="add-producer" type="text" placeholder="e.g. International Crisis Group" /></div>
+    <div class="form-row">
+      <label>App</label>
+      <select id="add-app">
+        <option value="">— not specified —</option>
+        <option value="Spotify">Spotify</option>
+        <option value="Apple Podcasts">Apple Podcasts</option>
+        <option value="Deezer">Deezer</option>
+        <option value="Web">Web</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+    <div class="form-row"><label>Link (optional)</label><input id="add-link" type="url" placeholder="https://…" /></div>
+    <div class="modal-actions">
+      <button class="btn" id="cancel-add">Cancel</button>
+      <button class="btn btn-primary" id="confirm-add">Add to index</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let podcasts = [], pending = [], filterApp = 'all', filterTag = '', filterLang = '', query = '';
+
+// Tag → colour palette (bg, text, border)
+const TAG_COLOURS = {
+  // red: conflict / security
+  'conflict':                { bg:'#1e0c0e', fg:'#e05060', bd:'#321820' },
+  'security':                { bg:'#1e0c0e', fg:'#e05060', bd:'#321820' },
+  'war-reporting':           { bg:'#1c0c10', fg:'#d04858', bd:'#2e1620' },
+  'military':                { bg:'#1a0c10', fg:'#c84858', bd:'#2c1620' },
+  'extremism':               { bg:'#1c0c0e', fg:'#d04858', bd:'#2e1618' },
+  'defense':                 { bg:'#1a0c12', fg:'#c05068', bd:'#2a1820' },
+  // orange: geopolitics / IR
+  'geopolitics':             { bg:'#1e1408', fg:'#e08030', bd:'#322010' },
+  'foreign-policy':          { bg:'#1c1408', fg:'#d07830', bd:'#302010' },
+  'international-relations': { bg:'#1a1208', fg:'#c87030', bd:'#2e1e10' },
+  'risk-analysis':           { bg:'#1c1208', fg:'#d07030', bd:'#301e10' },
+  'regional-analysis':       { bg:'#1a1408', fg:'#c87832', bd:'#2e2010' },
+  // amber: news / media
+  'news':                    { bg:'#1c1808', fg:'#d0a030', bd:'#302808' },
+  'current-affairs':         { bg:'#1a1808', fg:'#c89828', bd:'#2e2808' },
+  'daily-briefing':          { bg:'#181608', fg:'#c09028', bd:'#2c2608' },
+  'press-review':            { bg:'#181608', fg:'#b89030', bd:'#2c2608' },
+  'journalism':              { bg:'#1a1808', fg:'#c89830', bd:'#2e2808' },
+  'media':                   { bg:'#181608', fg:'#b88828', bd:'#2a2408' },
+  'internet-culture':        { bg:'#181608', fg:'#a88028', bd:'#282408' },
+  'explainer':               { bg:'#1a1808', fg:'#c09030', bd:'#2e2808' },
+  // green: humanitarian / aid
+  'humanitarian':            { bg:'#0c1a10', fg:'#38c058', bd:'#143020' },
+  'aid':                     { bg:'#0c1810', fg:'#30b850', bd:'#142e20' },
+  'development':             { bg:'#0c1810', fg:'#30b048', bd:'#142e20' },
+  'peacebuilding':           { bg:'#0c1c10', fg:'#38c058', bd:'#143020' },
+  'fieldwork':               { bg:'#0c1810', fg:'#30b050', bd:'#143020' },
+  'field-reporting':         { bg:'#0c1a10', fg:'#38b858', bd:'#143020' },
+  // teal: africa / global
+  'africa':                  { bg:'#0a1818', fg:'#28b0a8', bd:'#123030' },
+  'drc':                     { bg:'#0a1818', fg:'#28b0a8', bd:'#123030' },
+  'global-affairs':          { bg:'#0c1a1a', fg:'#30b0a8', bd:'#143232' },
+  // blue: policy / governance
+  'policy':                  { bg:'#0c1828', fg:'#4a98e0', bd:'#183050' },
+  'governance':              { bg:'#0e1828', fg:'#4890d8', bd:'#183050' },
+  'analysis':                { bg:'#0e1a28', fg:'#4890d0', bd:'#183048' },
+  'international-law':       { bg:'#0c1828', fg:'#4898d8', bd:'#183050' },
+  'lawfare':                 { bg:'#0e1828', fg:'#5098e0', bd:'#183050' },
+  'debate':                  { bg:'#0c1a28', fg:'#4890d0', bd:'#183048' },
+  'crisis-monitoring':       { bg:'#0e1828', fg:'#4890d0', bd:'#183050' },
+  'investigations':          { bg:'#0e1a28', fg:'#5098d8', bd:'#183048' },
+  // indigo: europe / regional politics
+  'europe':                  { bg:'#0d1b3e', fg:'#4a7fc1', bd:'#1a3060' },
+  'middle-east':             { bg:'#101830', fg:'#6070c8', bd:'#182050' },
+  'turkey':                  { bg:'#121830', fg:'#5878c8', bd:'#182050' },
+  'russia':                  { bg:'#121830', fg:'#5878c8', bd:'#182050' },
+  // purple: tech / data
+  'technology':              { bg:'#160e28', fg:'#9868d8', bd:'#241840' },
+  'cybersecurity':           { bg:'#160e28', fg:'#9868d8', bd:'#241840' },
+  'osint':                   { bg:'#160e28', fg:'#9060d0', bd:'#221840' },
+  'disinformation':          { bg:'#160e28', fg:'#9060d0', bd:'#221840' },
+  'data':                    { bg:'#140e28', fg:'#8868d0', bd:'#201838' },
+  'critical-tech':           { bg:'#160e28', fg:'#9868d8', bd:'#241840' },
+  // pink/violet: language
+  'french':                  { bg:'#1a0e20', fg:'#c868d0', bd:'#2c1838' },
+  'dutch':                   { bg:'#0a1a12', fg:'#28b870', bd:'#103028' },
+  // olive: politics / society
+  'politics':                { bg:'#181810', fg:'#a8a840', bd:'#282818' },
+  'us-politics':             { bg:'#181810', fg:'#a8a840', bd:'#282818' },
+  'society':                 { bg:'#161614', fg:'#989838', bd:'#262618' },
+  'economics':               { bg:'#181810', fg:'#b0b040', bd:'#282818' },
+  'books':                   { bg:'#161614', fg:'#909038', bd:'#242418' },
+};
+const DEFAULT_COLOURS = { bg:'#161618', fg:'#606068', bd:'#282830' };
+
+function initialsFor(title) {
+  const words = title.replace(/[^a-zA-Z0-9 ]/g,'').trim().split(/\s+/);
+  if (words.length >= 2) return (words[0][0] + words[1][0]).toUpperCase();
+  return title.slice(0,2).toUpperCase();
+}
+
+function iconFor(producer, title, tags) {
+  // Pick colour from first recognised tag
+  const palette = (tags && tags.length)
+    ? (TAG_COLOURS[tags[0]] || DEFAULT_COLOURS)
+    : DEFAULT_COLOURS;
+  const initials = initialsFor(title);
+  return `<span style="background:${palette.bg};color:${palette.fg};border-color:${palette.bd};width:100%;height:100%;border-radius:inherit;display:flex;align-items:center;justify-content:center;">${initials}</span>`;
+}
+
+function appKey(r) {
+  const s = (r || '').toLowerCase();
+  if (s.includes('spotify')) return 'spotify';
+  if (s.includes('apple'))   return 'apple';
+  if (s.includes('deezer'))  return 'deezer';
+  if (s === 'web')           return 'web';
+  if (s)                     return 'other';
+  return '';
+}
+
+function platformInfo(raw) {
+  const k = appKey(raw);
+  if (!k) return null;
+  const labels = { spotify:'Spotify', apple:'Apple Podcasts', deezer:'Deezer', web:'Web', other: raw };
+  return { key: k, label: labels[k] };
+}
+
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+function render() {
+  const q = query.toLowerCase();
+  const filtered = podcasts.filter(p => {
+    const k = appKey(p.app);
+    const mApp = filterApp==='all' ? true
+      : filterApp==='other' ? (k!=='spotify'&&k!=='apple'&&k!=='deezer'&&k!=='web'&&k!=='')
+      : k===filterApp;
+    const mTag = !filterTag || (p.tags && p.tags.includes(filterTag));
+    const mLang = !filterLang || p.lang === filterLang;
+    const mQ = !q || p.title.toLowerCase().includes(q) || (p.producer||'').toLowerCase().includes(q);
+    return mApp && mTag && mLang && mQ;
+  });
+
+  const total = document.getElementById('total-count');
+  if (total) total.textContent = podcasts.length + ' podcasts';
+  const tagSuffix = filterTag ? ` · ${filterTag}` : '';
+  document.getElementById('count-bar').textContent =
+    `${filtered.length} podcast${filtered.length!==1?'s':''}${filtered.length!==podcasts.length?' of '+podcasts.length:''}${tagSuffix}`;
+
+  const list   = document.getElementById('card-list');
+  const status = document.getElementById('status');
+
+  if (filtered.length === 0) {
+    list.innerHTML = '';
+    status.style.display = 'block';
+    status.innerHTML = '<div class="big">NO RESULTS</div><p>Try a different search or filter.</p>';
+    return;
+  }
+  status.style.display = 'none';
+
+  list.innerHTML = filtered.map(p => {
+    const pl = platformInfo(p.app);
+    const badge = pl ? `<span class="platform-badge ${pl.key}">${esc(pl.label)}</span>` : '';
+    const listenBtn = p.link
+      ? `<a class="btn-listen" href="${esc(p.link)}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Listen</a>`
+      : '';
+    const tagHtml = p.tags && p.tags.length
+      ? `<div class="card-tags">${p.tags.map(t=>{const c=TAG_COLOURS[t]||DEFAULT_COLOURS;return`<span class="tag" data-tag="${esc(t)}" title="Filter by ${esc(t)}" style="--tag-bg:${c.bg};--tag-fg:${c.fg};--tag-bd:${c.bd};background:${c.bg};color:${c.fg};border-color:${c.bd}">${esc(t)}</span>`;}).join('')}</div>`
+      : '';
+
+    return `<div class="card">
+      <div class="card-icon">${iconFor(p.producer, p.title, p.tags)}</div>
+      <div class="card-body">
+        <div class="card-title">${esc(p.title)}</div>
+        <div class="card-producer">${esc(p.producer||'—')}</div>
+        ${tagHtml}
+      </div>
+      <div class="card-right">${p.lang?`<span class="lang-badge ${esc(p.lang)}">${esc(p.lang)}</span>`:''} ${badge}${listenBtn}</div>
+    </div>`;
+  }).join('');
+}
+
+// ── CSV PARSER ────────────────────────────────────────────
+function parseCSV(text) {
+  text = text.replace(/^\uFEFF/,'');
+  const lines = text.split(/\r?\n/).filter(l=>l.trim());
+  if (!lines.length) return [];
+  function splitRow(line) {
+    const cells=[]; let cur='', inQ=false;
+    for (let i=0;i<line.length;i++) {
+      const ch=line[i];
+      if (ch==='"') { if(inQ&&line[i+1]==='"'){cur+='"';i++;}else inQ=!inQ; }
+      else if (ch===','&&!inQ) { cells.push(cur.trim()); cur=''; }
+      else cur+=ch;
+    }
+    cells.push(cur.trim()); return cells;
+  }
+  const headers = splitRow(lines[0]).map(h=>h.toLowerCase().trim());
+  const col = k => headers.findIndex(h=>h.includes(k));
+  const iT=col('title'), iP=col('producer'), iA=col('app')!==-1?col('app'):col('application'), iL=col('link'), iTg=col('tag'), iLang=col('lang');
+  return lines.slice(1).map(l=>{
+    const c=splitRow(l);
+    const rawTags = iTg !== -1 ? (c[iTg]||'').trim() : '';
+    const tags = rawTags ? rawTags.split(/[|,]/).map(t=>t.trim()).filter(Boolean) : [];
+    const lang = iLang !== -1 ? (c[iLang]||'').trim().toUpperCase() : '';
+    return { title:(c[iT]||'').trim(), producer:(c[iP]||'').trim(), app:(c[iA]||'').trim(), link:(c[iL]||'').trim(), tags, lang };
+  }).filter(r=>r.title && r.title.toLowerCase()!=='podcast name');
+}
+
+// ── LOAD data/podcasts.csv ────────────────────────────────
+async function loadCSV() {
+  const status = document.getElementById('status');
+  status.style.display = 'block';
+  try {
+    const res = await fetch('data/podcasts.csv');
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    podcasts = parseCSV(await res.text());
+    status.style.display = 'none';
+    render();
+  } catch {
+    status.innerHTML = `
+      <div class="big">NO DATA</div>
+      <p>Could not load <code style="font-size:.68rem;background:#1e1e1e;padding:2px 7px;border-radius:3px">data/podcasts.csv</code>.<br/><br/>
+      If opening locally, serve with a simple HTTP server:<br/>
+      <code style="font-size:.65rem;background:#1e1e1e;padding:3px 8px;border-radius:3px;display:inline-block;margin-top:6px">python3 -m http.server</code><br/><br/>
+      On GitHub Pages this works automatically.</p>`;
+  }
+}
+
+// ── SEARCH + FILTER ───────────────────────────────────────
+const searchInput = document.getElementById('search');
+const searchWrap  = searchInput.closest('.search-wrap');
+const searchClear = document.getElementById('search-clear');
+
+searchInput.addEventListener('input', e => {
+  query = e.target.value;
+  searchWrap.classList.toggle('has-value', query.length > 0);
+  render();
+});
+
+searchClear.addEventListener('click', () => {
+  searchInput.value = '';
+  query = '';
+  searchWrap.classList.remove('has-value');
+  searchInput.focus();
+  render();
+});
+document.getElementById('app-filters').addEventListener('click', e => {
+  const c=e.target.closest('.chip'); if(!c) return;
+  document.querySelectorAll('#app-filters .chip').forEach(x=>x.classList.remove('active'));
+  c.classList.add('active'); filterApp=c.dataset.app; render();
+});
+
+document.getElementById('lang-filters').addEventListener('click', e => {
+  const c=e.target.closest('.chip'); if(!c) return;
+  document.querySelectorAll('#lang-filters .chip').forEach(x=>x.classList.remove('active'));
+  c.classList.add('active'); filterLang=c.dataset.lang; render();
+});
+
+document.getElementById('card-list').addEventListener('click', e => {
+  const tag = e.target.closest('.tag');
+  if (!tag) return;
+  const clicked = tag.dataset.tag;
+  filterTag = filterTag === clicked ? '' : clicked;
+  render();
+  // Update active state on all matching tag pills
+  document.querySelectorAll('.tag').forEach(t => {
+    t.classList.toggle('active', t.dataset.tag === filterTag && filterTag !== '');
+  });
+});
+
+// ── IMPORT MODAL ──────────────────────────────────────────
+const oImp=document.getElementById('overlay-import'), dz=document.getElementById('drop-zone'),
+      ci=document.getElementById('csv-input'), pb=document.getElementById('preview-box'),
+      cImp=document.getElementById('confirm-import');
+
+function openImport()  { oImp.classList.add('open'); }
+function closeImport() { oImp.classList.remove('open'); pb.style.display='none'; pb.textContent=''; cImp.disabled=true; pending=[]; ci.value=''; dz.classList.remove('over'); }
+['open-import','open-import-2'].forEach(id=>document.getElementById(id).addEventListener('click',openImport));
+document.getElementById('cancel-import').addEventListener('click',closeImport);
+oImp.addEventListener('click',e=>{if(e.target===oImp)closeImport();});
+dz.addEventListener('click',()=>ci.click());
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('over');});
+dz.addEventListener('dragleave',()=>dz.classList.remove('over'));
+dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('over');if(e.dataTransfer.files[0])loadFile(e.dataTransfer.files[0]);});
+ci.addEventListener('change',()=>{if(ci.files[0])loadFile(ci.files[0]);});
+function loadFile(file){const r=new FileReader();r.onload=e=>{const rows=parseCSV(e.target.result);const ex=new Set(podcasts.map(p=>p.title.toLowerCase()));pending=rows.filter(r=>!ex.has(r.title.toLowerCase()));pb.style.display='block';if(!pending.length){pb.textContent=`✓ All ${rows.length} rows already in the index.`;cImp.disabled=true;}else{pb.innerHTML=`<strong style="color:var(--accent)">${pending.length} new</strong> of ${rows.length} rows:\n\n`+pending.map(r=>`• ${r.title}${r.producer?' — '+r.producer:''}`).join('\n');cImp.disabled=false;}};r.readAsText(file);}
+cImp.addEventListener('click',()=>{podcasts.push(...pending);render();closeImport();});
+
+// ── ADD SINGLE MODAL ──────────────────────────────────────
+const oAdd=document.getElementById('overlay-add');
+function openAdd(){oAdd.classList.add('open');document.getElementById('add-title').focus();}
+function closeAdd(){oAdd.classList.remove('open');['add-title','add-producer','add-link'].forEach(id=>document.getElementById(id).value='');document.getElementById('add-app').value='';}
+['open-add','open-add-2'].forEach(id=>document.getElementById(id).addEventListener('click',openAdd));
+document.getElementById('cancel-add').addEventListener('click',closeAdd);
+oAdd.addEventListener('click',e=>{if(e.target===oAdd)closeAdd();});
+document.getElementById('confirm-add').addEventListener('click',()=>{
+  const title=document.getElementById('add-title').value.trim();
+  if(!title){document.getElementById('add-title').focus();return;}
+  if(podcasts.some(p=>p.title.toLowerCase()===title.toLowerCase())){alert('That title already exists.');return;}
+  podcasts.push({title,producer:document.getElementById('add-producer').value.trim(),app:document.getElementById('add-app').value,link:document.getElementById('add-link').value.trim(),tags:[],lang:''});
+  render();closeAdd();
+});
+
+loadCSV().then(() => {
+  document.getElementById('search').focus();
+});
+</script>
+</body>
+</html>
