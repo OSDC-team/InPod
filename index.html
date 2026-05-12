@@ -76,6 +76,7 @@
     .platform-badge.spotify { background: #1a3d1a; color: #1db954; border: 1px solid #1db95430; }
     .platform-badge.apple   { background: #3d1520; color: #fb5c69; border: 1px solid #fb5c6930; }
     .platform-badge.deezer  { background: #2a1040; color: #b060ff; border: 1px solid #b060ff30; }
+    .platform-badge.web     { background: #12263a; color: #4da6ff; border: 1px solid #4da6ff30; }
     .platform-badge.other   { background: #222; color: var(--grey); border: 1px solid var(--muted); }
 
     .btn-listen { font-family: var(--mono); font-size: .6rem; letter-spacing: .08em; text-transform: uppercase; padding: 6px 14px; border: 1px solid var(--muted); background: transparent; color: var(--light); border-radius: 6px; transition: all .15s; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
@@ -159,6 +160,7 @@
     <button class="chip" data-app="spotify">Spotify</button>
     <button class="chip" data-app="apple">Apple</button>
     <button class="chip" data-app="deezer">Deezer</button>
+    <button class="chip" data-app="web">Web</button>
     <button class="chip" data-app="other">Other</button>
   </div>
 </div>
@@ -214,6 +216,7 @@
         <option value="Spotify">Spotify</option>
         <option value="Apple Podcasts">Apple Podcasts</option>
         <option value="Deezer">Deezer</option>
+        <option value="Web">Web</option>
         <option value="Other">Other</option>
       </select>
     </div>
@@ -255,6 +258,7 @@ function appKey(r) {
   if (s.includes('spotify')) return 'spotify';
   if (s.includes('apple'))   return 'apple';
   if (s.includes('deezer'))  return 'deezer';
+  if (s === 'web')           return 'web';
   if (s)                     return 'other';
   return '';
 }
@@ -262,7 +266,7 @@ function appKey(r) {
 function platformInfo(raw) {
   const k = appKey(raw);
   if (!k) return null;
-  const labels = { spotify:'Spotify', apple:'Apple Podcasts', deezer:'Deezer', other: raw };
+  const labels = { spotify:'Spotify', apple:'Apple Podcasts', deezer:'Deezer', web:'Web', other: raw };
   return { key: k, label: labels[k] };
 }
 
