@@ -33,7 +33,7 @@
     /* Tagline — mono, muted */
     .logo-sub { font-family:var(--mono); font-size:.52rem; letter-spacing:.12em; color:rgba(91,142,212,0.75); line-height:1; }
     .header-right { margin-left:auto; display:flex; gap:8px; align-items:center; }
-    .header-count { font-family:var(--mono); font-size:.58rem; color:rgba(255,255,255,0.35); letter-spacing:.04em; margin-right:2px; }
+    .header-count { font-family:var(--mono); font-size:.58rem; letter-spacing:.06em; color:#28b4a0; background:rgba(40,180,160,.10); border:1px solid rgba(40,180,160,.25); padding:4px 11px; border-radius:20px; white-space:nowrap; }
 
     /* ─── Buttons ────────────────────────────────────────────────────── */
     .btn { font-family:var(--mono); font-size:.61rem; letter-spacing:.08em; text-transform:uppercase; padding:6px 14px; border:1px solid var(--muted); background:transparent; color:var(--grey); cursor:pointer; border-radius:var(--r-sm); transition:all .15s; white-space:nowrap; }
@@ -93,9 +93,8 @@
     /* ─── Result Count Bar ───────────────────────────────────────────── */
     .result-bar { display:flex; align-items:center; padding:12px 0 6px; }
     .result-count { font-family:var(--mono); font-size:.6rem; color:var(--grey); }
-
-    .sort-select { margin-left:auto; font-family:var(--mono); font-size:.58rem; letter-spacing:.05em; background:transparent; border:none; color:var(--grey); cursor:pointer; outline:none; appearance:none; padding-right:14px; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2370707a'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 0 center; }
-    .sort-select:hover { color:var(--light); }
+    .sort-select { margin-left:auto; font-family:var(--mono); font-size:.58rem; letter-spacing:.06em; color:#28b4a0; background:rgba(40,180,160,.10); border:1px solid rgba(40,180,160,.25); padding:4px 11px 4px 11px; border-radius:20px; cursor:pointer; outline:none; appearance:none; padding-right:26px; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5'%3E%3Cpath d='M0 0l4 5 4-5z' fill='%2328b4a0'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 10px center; transition:background .12s,border-color .12s; }
+    .sort-select:hover { background-color:rgba(40,180,160,.16); border-color:rgba(40,180,160,.45); }
     .sort-select option { background:var(--card); color:var(--white); }
 
     /* ─── Card List ──────────────────────────────────────────────────── */
@@ -200,8 +199,8 @@
 <header>
   <div class="header-inner">
     <a class="logo" href="#"><img src="static/logo.png" alt="INSO" /><div class="logo-divider"></div><div class="logo-text"><div class="logo-label">Podcast Index</div><div class="logo-sub">Analysis &amp; Advice for Humanitarians</div></div></a>
-    <span class="header-count" id="header-count"></span>
     <div class="header-right">
+      <span class="header-count" id="header-count"></span>
       <button class="btn" id="open-import">Import CSV</button>
       <button class="btn btn-primary" id="open-add">+ Add</button>
     </div>
