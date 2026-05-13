@@ -94,6 +94,10 @@
     .result-bar { display:flex; align-items:center; padding:12px 0 6px; }
     .result-count { font-family:var(--mono); font-size:.6rem; color:var(--grey); }
 
+    .sort-select { margin-left:auto; font-family:var(--mono); font-size:.58rem; letter-spacing:.05em; background:transparent; border:none; color:var(--grey); cursor:pointer; outline:none; appearance:none; padding-right:14px; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2370707a'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 0 center; }
+    .sort-select:hover { color:var(--light); }
+    .sort-select option { background:var(--card); color:var(--white); }
+
     /* ─── Card List ──────────────────────────────────────────────────── */
     .card-list { display:flex; flex-direction:column; border:1px solid var(--border); border-radius:var(--r-lg); overflow:hidden; }
     .card { background:var(--card); padding:15px 16px; display:flex; align-items:flex-start; gap:14px; transition:background .1s; border-bottom:1px solid var(--border); }
@@ -287,7 +291,14 @@
 
   <!-- Active filter pills appear here when filters are applied -->
   <div class="active-filters" id="active-filters"></div>
-  <div class="result-bar"><span class="result-count" id="result-count"></span></div>
+  <div class="result-bar">
+    <span class="result-count" id="result-count"></span>
+    <select id="sort-select" class="sort-select" title="Sort order">
+      <option value="default">Default</option>
+      <option value="az">A → Z</option>
+      <option value="freq">Frequency</option>
+    </select>
+  </div>
 
   <!-- Status panel: shown during load, on error, or when no results match -->
   <div id="status"><div class="big">LOADING</div><p>Fetching podcast data…</p></div>
@@ -382,13 +393,14 @@ let filterPrimary = '';    // Primary topic category filter — empty string mea
 let activeTags = new Set(); // Tag filter — podcasts must match ALL active tags
 let query      = '';       // Current search query string
 let viewMode   = 'card';   // 'card' or 'compact'
+let sortMode   = 'default'; // 'default' | 'az' | 'freq'
 
 // ─── Tag Taxonomy ─────────────────────────────────────────────────────────
 // Two-level tag structure: primary categories → subtags.
 // TAG_DOT maps every tag (primary and sub) to a dot colour for card UI.
 // Unknown tags fall back to #606068.
 const TAG_TAXONOMY = {
-  'Conflict & Security':        ['security', 'military', 'organised crime', 'cyber', 'intelligence'],
+  'Conflict & Security':        ['security', 'military', 'organised crime', 'cyber'],
   'Politics & Policy':          ['politics', 'foreign policy', 'governance', 'law'],
   'Humanitarian Affairs & Aid': ['humanitarian', 'development', 'human rights'],
   'Critical & Emerging Issues': ['news', 'tech', 'disinformation', 'culture', 'environment'],
@@ -406,7 +418,6 @@ const TAG_DOT = {
   military:          '#b03050',
   'organised crime': '#d06070',
   cyber:             '#e07080',
-  intelligence:      '#d04080',
   // Politics & Policy — blues
   politics:          '#4a8ed0',
   'foreign policy':  '#3a7ec0',
@@ -577,6 +588,14 @@ function render() {
 
     return mApp && mLang && mFreq && mRegion && mTags && mPrimary && mQ;
   });
+
+  // Sort filtered results according to current sortMode.
+  const FREQ_ORDER = { 'Daily':1, 'Weekly':2, 'Biweekly':3, 'Monthly':4, 'Irregular':5, '':6 };
+  if (sortMode === 'az') {
+    filtered.sort((a, b) => a.title.localeCompare(b.title));
+  } else if (sortMode === 'freq') {
+    filtered.sort((a, b) => (FREQ_ORDER[a.freq] || 6) - (FREQ_ORDER[b.freq] || 6));
+  }
 
   // Update counts in the header and result bar.
   document.getElementById('header-count').textContent = podcasts.length + ' podcasts';
@@ -1025,6 +1044,12 @@ document.getElementById('confirm-add').addEventListener('click', () => {
   buildCountryChips();
   render();
   closeAdd();
+});
+
+// ─── Sort ─────────────────────────────────────────────────────────────────
+document.getElementById('sort-select').addEventListener('change', e => {
+  sortMode = e.target.value;
+  render();
 });
 
 // ─── Init ─────────────────────────────────────────────────────────────────
