@@ -244,6 +244,10 @@
         <button class="chip" data-lang="ES">🇪🇸 ES</button>
         <button class="chip" data-lang="AR">🇸🇦 AR</button>
         <button class="chip" data-lang="NL">🇳🇱 NL</button>
+        <button class="chip" data-lang="CZ">🇨🇿 CZ</button>
+        <button class="chip" data-lang="DE">🇩🇪 DE</button>
+        <button class="chip" data-lang="PT">🇵🇹 PT</button>
+        <button class="chip" data-lang="RU">🇷🇺 RU</button>
       </div>
     </div>
     <div class="filter-row">
@@ -256,6 +260,22 @@
         <button class="chip" data-freq="Monthly">Monthly</button>
         <button class="chip" data-freq="Irregular">Irregular</button>
       </div>
+    </div>
+    <div class="filter-row">
+      <span class="filter-label">Topic</span>
+      <!-- Primary category chips — clicking one reveals its subtags below -->
+      <div class="chips" id="chips-primary">
+        <button class="chip active" data-primary="">All</button>
+        <button class="chip" data-primary="Conflict &amp; Security">Conflict &amp; Security</button>
+        <button class="chip" data-primary="Politics &amp; Policy">Politics &amp; Policy</button>
+        <button class="chip" data-primary="Humanitarian Affairs &amp; Aid">Humanitarian Affairs &amp; Aid</button>
+        <button class="chip" data-primary="Critical &amp; Emerging Issues">Critical &amp; Emerging Issues</button>
+      </div>
+    </div>
+    <!-- Subtag row — hidden until a primary category is selected -->
+    <div class="filter-row filter-subtag-row" id="filter-subtag-row" style="display:none">
+      <span class="filter-label">Subtopic</span>
+      <div class="chips" id="chips-subtag"></div>
     </div>
     <div class="filter-row">
       <span class="filter-label">Region</span>
@@ -315,6 +335,10 @@
         <option value="ES">Spanish (ES)</option>
         <option value="AR">Arabic (AR)</option>
         <option value="NL">Dutch (NL)</option>
+        <option value="CZ">Czech (CZ)</option>
+        <option value="DE">German (DE)</option>
+        <option value="PT">Portuguese (PT)</option>
+        <option value="RU">Russian (RU)</option>
       </select>
     </div>
     <div class="form-row"><label>Platform</label>
@@ -354,21 +378,49 @@ let filterApp  = 'all';   // Platform filter — 'all' means no filter
 let filterLang = '';       // Language filter — empty string means no filter
 let filterFreq = '';       // Frequency filter — empty string means no filter
 let filterRegion = '';     // Region/country filter — empty string means no filter
+let filterPrimary = '';    // Primary topic category filter — empty string means no filter
 let activeTags = new Set(); // Tag filter — podcasts must match ALL active tags
 let query      = '';       // Current search query string
 let viewMode   = 'card';   // 'card' or 'compact'
 
-// ─── Tag Colours ─────────────────────────────────────────────────────────
-// Maps topic tag names to dot/accent colours used in the card UI.
-// Add new tags here to give them a colour; unknown tags fall back to #606068.
+// ─── Tag Taxonomy ─────────────────────────────────────────────────────────
+// Two-level tag structure: primary categories → subtags.
+// TAG_DOT maps every tag (primary and sub) to a dot colour for card UI.
+// Unknown tags fall back to #606068.
+const TAG_TAXONOMY = {
+  'Conflict & Security':        ['security', 'military', 'organised crime', 'cyber'],
+  'Politics & Policy':          ['politics', 'foreign policy', 'governance', 'law'],
+  'Humanitarian Affairs & Aid': ['humanitarian', 'development', 'human rights'],
+  'Critical & Emerging Issues': ['news', 'tech', 'disinformation', 'culture', 'environment'],
+};
+
+// Reverse lookup: subtag → primary category
+const TAG_PARENT = {};
+Object.entries(TAG_TAXONOMY).forEach(([primary, subs]) =>
+  subs.forEach(s => { TAG_PARENT[s] = primary; })
+);
+
 const TAG_DOT = {
-  news:         '#c89828', // amber
-  politics:     '#4a8ed0', // blue
-  security:     '#c85060', // red
-  humanitarian: '#38a858', // green
-  tech:         '#9060c8', // purple
-  law:          '#a0a038', // olive
-  culture:      '#d07830', // orange
+  // Conflict & Security — reds/rose
+  security:          '#c85060',
+  military:          '#b03050',
+  'organised crime': '#d06070',
+  cyber:             '#e07080',
+  // Politics & Policy — blues
+  politics:          '#4a8ed0',
+  'foreign policy':  '#3a7ec0',
+  governance:        '#5a9ee0',
+  law:               '#a0a038',
+  // Humanitarian Affairs & Aid — greens
+  humanitarian:      '#38a858',
+  development:       '#28b860',
+  'human rights':    '#48c868',
+  // Critical & Emerging Issues — ambers/purples/oranges
+  news:              '#c89828',
+  tech:              '#9060c8',
+  disinformation:    '#b87030',
+  culture:           '#d07830',
+  environment:       '#508840',
 };
 
 // ─── Helpers ──────────────────────────────────────────────────────────────
@@ -418,7 +470,8 @@ function activeFilterCount() {
   if (filterApp !== 'all') n++;
   if (filterLang)          n++;
   if (filterFreq)          n++;
-  if (filterRegion)        n++;  // fixed: was `filterCountry` (undefined)
+  if (filterRegion)        n++;
+  if (filterPrimary)       n++;
   n += activeTags.size;
   return n;
 }
@@ -445,6 +498,7 @@ function renderActivePills() {
   if (filterLang)          addPill('Language: ' + filterLang, 'lang');
   if (filterFreq)          addPill('Frequency: ' + filterFreq, 'freq');
   if (filterRegion)        addPill('Region: ' + filterRegion, 'region');
+  if (filterPrimary)       addPill('Topic: ' + filterPrimary, 'primary');
   activeTags.forEach(t => addPill(t, 'tag:' + t));
 
   el.innerHTML = pills.join('');
@@ -506,6 +560,12 @@ function render() {
     const mRegion = !filterRegion || effectiveRegion === filterRegion;
     // Tag filter: podcast must include ALL active tags (AND logic).
     const mTags   = activeTags.size === 0 || [...activeTags].every(t => p.tags.includes(t));
+    // Primary category filter: if a primary is selected but no subtags are active,
+    // match any podcast that has at least one tag belonging to that primary category.
+    const categoryTags = filterPrimary ? (TAG_TAXONOMY[filterPrimary] || []) : [];
+    const mPrimary = !filterPrimary || activeTags.size > 0
+      ? true
+      : p.tags.some(t => categoryTags.includes(t));
     // Search: matches title, producer, any tag, region, or description.
     const mQ = !q
       || p.title.toLowerCase().includes(q)
@@ -514,7 +574,7 @@ function render() {
       || (p.region || '').toLowerCase().includes(q)
       || (p.description || '').toLowerCase().includes(q);
 
-    return mApp && mLang && mFreq && mRegion && mTags && mQ;
+    return mApp && mLang && mFreq && mRegion && mTags && mPrimary && mQ;
   });
 
   // Update counts in the header and result bar.
@@ -716,15 +776,73 @@ setupChips('chips-lang',    'lang');
 setupChips('chips-freq',    'freq');
 setupChips('chips-country', 'region');
 
+// ─── Two-Level Tag Filter ─────────────────────────────────────────────────
+
+// Builds the subtag chip row for the given primary category.
+function buildSubtagChips(primary) {
+  const row  = document.getElementById('filter-subtag-row');
+  const wrap = document.getElementById('chips-subtag');
+  const subs = TAG_TAXONOMY[primary] || [];
+
+  if (!primary || !subs.length) {
+    row.style.display = 'none';
+    wrap.innerHTML = '';
+    return;
+  }
+
+  row.style.display = '';
+  wrap.innerHTML = subs.map(s =>
+    `<button class="chip${activeTags.has(s) ? ' active' : ''}" data-subtag="${s}">
+      <span class="tag-dot" style="background:${TAG_DOT[s] || '#606068'};width:6px;height:6px;border-radius:50%;display:inline-block;margin-right:4px"></span>${s}
+    </button>`
+  ).join('');
+}
+
+// Primary category chips — selecting one filters to that category's subtags,
+// and clears any active subtag filters that don't belong to it.
+document.getElementById('chips-primary').addEventListener('click', e => {
+  const chip = e.target.closest('.chip');
+  if (!chip) return;
+
+  document.querySelectorAll('#chips-primary .chip').forEach(x => x.classList.remove('active'));
+  chip.classList.add('active');
+
+  filterPrimary = chip.dataset.primary || '';
+
+  // Clear subtag filters that don't belong to the newly selected primary.
+  if (filterPrimary) {
+    const allowed = new Set(TAG_TAXONOMY[filterPrimary] || []);
+    [...activeTags].forEach(t => { if (!allowed.has(t)) activeTags.delete(t); });
+  } else {
+    activeTags.clear();
+  }
+
+  buildSubtagChips(filterPrimary);
+  render();
+});
+
+// Subtag chips — toggle individual subtags within the selected category.
+document.getElementById('chips-subtag').addEventListener('click', e => {
+  const chip = e.target.closest('.chip');
+  if (!chip) return;
+  const t = chip.dataset.subtag;
+  if (activeTags.has(t)) activeTags.delete(t);
+  else activeTags.add(t);
+  chip.classList.toggle('active', activeTags.has(t));
+  render();
+});
+
 // ─── Clear All Filters ────────────────────────────────────────────────────
 document.getElementById('clear-all-filters').addEventListener('click', () => {
   filterApp = 'all'; filterLang = ''; filterFreq = ''; filterRegion = '';
+  filterPrimary = '';
   activeTags.clear();
   // Reset all chip groups to their "All" chip.
-  ['chips-app', 'chips-lang', 'chips-freq', 'chips-country'].forEach(id => {
+  ['chips-app', 'chips-lang', 'chips-freq', 'chips-country', 'chips-primary'].forEach(id => {
     document.querySelectorAll(`#${id} .chip`).forEach(c => c.classList.remove('active'));
     document.querySelector(`#${id} .chip`)?.classList.add('active');
   });
+  buildSubtagChips('');
   render();
 });
 
@@ -742,11 +860,18 @@ document.getElementById('active-filters').addEventListener('click', e => {
     document.querySelector(`#${id} .chip`)?.classList.add('active');
   };
 
-  if (clearKey === 'app')    { filterApp    = 'all'; resetChips('chips-app'); }
-  if (clearKey === 'lang')   { filterLang   = '';    resetChips('chips-lang'); }
-  if (clearKey === 'freq')   { filterFreq   = '';    resetChips('chips-freq'); }
-  if (clearKey === 'region') { filterRegion = '';    resetChips('chips-country'); }
-  if (clearKey.startsWith('tag:')) activeTags.delete(clearKey.slice(4));
+  if (clearKey === 'app')     { filterApp    = 'all'; resetChips('chips-app'); }
+  if (clearKey === 'lang')    { filterLang   = '';    resetChips('chips-lang'); }
+  if (clearKey === 'freq')    { filterFreq   = '';    resetChips('chips-freq'); }
+  if (clearKey === 'region')  { filterRegion = '';    resetChips('chips-country'); }
+  if (clearKey === 'primary') { filterPrimary = '';   resetChips('chips-primary'); activeTags.clear(); buildSubtagChips(''); }
+  if (clearKey.startsWith('tag:')) {
+    activeTags.delete(clearKey.slice(4));
+    // Sync subtag chip visual state
+    document.querySelectorAll('#chips-subtag .chip').forEach(c => {
+      c.classList.toggle('active', activeTags.has(c.dataset.subtag));
+    });
+  }
 
   render();
 });
