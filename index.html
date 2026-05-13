@@ -10,8 +10,8 @@
     /* ─── Reset & Design Tokens ─────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg:#0c0c0e; --surface:#111113; --card:#161618; --card-h:#1a1a1c;
-      --border:#222224; --border-h:#2e2e32; --muted:#38383c;
+      --bg:#1c1c22; --surface:#242430; --card:#2c2c38; --card-h:#323240;
+      --border:#363644; --border-h:#444454; --muted:#52526a;
       --grey:#70707a; --light:#a0a0aa; --white:#ededf0;
       --accent:#4a7fc1; --accent-h:#5a8fd4;
       --mono:'IBM Plex Mono',monospace; --sans:'IBM Plex Sans',sans-serif; --display:'Bebas Neue',sans-serif;
@@ -20,7 +20,7 @@
     body { background:var(--bg); color:var(--white); font-family:var(--sans); font-weight:300; min-height:100vh; -webkit-font-smoothing:antialiased; }
 
     /* ─── Header ─────────────────────────────────────────────────────── */
-    header { position:sticky; top:0; z-index:100; background:#f9f9f9; border-bottom:2px solid #02020a; height:80px; }
+    header { position:sticky; top:0; z-index:100; background:#f9f9f9; border-bottom:2px solid #2e2e38; height:80px; }
     .header-inner { max-width:860px; margin:0 auto; padding:0 32px; height:100%; display:flex; align-items:center; gap:16px; }
     .logo { display:flex; align-items:center; gap:16px; text-decoration:none; }
     /* Logo image — sourced from static/logo.png */
@@ -195,7 +195,7 @@
 <!-- ─── Header ──────────────────────────────────────────────────────────── -->
 <header>
   <div class="header-inner">
-    <a class="logo" href="#"><img src="static/logo.png" alt="INSO" /><div class="logo-divider"></div><div class="logo-text"><div class="logo-label">Podcast Index</div><div class="logo-sub">Up-to-Date Analysis &amp; Advice for Practitioners</div></div></a>
+    <a class="logo" href="#"><img src="static/logo.png" alt="INSO" /><div class="logo-divider"></div><div class="logo-text"><div class="logo-label">Podcast Index</div><div class="logo-sub">Analysis &amp; Advice for Humanitarians</div></div></a>
     <span class="header-count" id="header-count"></span>
     <div class="header-right">
       <button class="btn" id="open-import">Import CSV</button>
