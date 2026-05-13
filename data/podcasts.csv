@@ -1,104 +1,107 @@
 Title,Producer,App,Link,Tags,Language,Region,Frequency,Description
-The Philip DeFranco Show,Philip deFranco,Spotify,https://open.spotify.com/show/6ESemquRbz6f8XLVywdZ2V,news,EN,Global,Daily,Fast-paced daily news commentary on global events and internet culture.
-The World in Brief,The Economist,Spotify,https://open.spotify.com/show/5zDCsEAvMp61OZOt0CaPS8,news,EN,Global,Daily,"Three-times-daily briefing on global politics, business, and finance."
+The Philip DeFranco Show,Philip deFranco,Spotify,https://open.spotify.com/show/6ESemquRbz6f8XLVywdZ2V,news|disinformation,EN,Global,Daily,Fast-paced daily news commentary on global events and internet culture.
+The World in Brief,The Economist,Spotify,https://open.spotify.com/show/5zDCsEAvMp61OZOt0CaPS8,news|foreign policy,EN,Global,Daily,"Three-times-daily briefing on global politics, business, and finance."
 "Today, Explained",Vox,Spotify,https://open.spotify.com/show/3pXx5SXzXwJxnf4A5pWN2A,news,EN,Global,Daily,Vox's daily explainer on the most important story of the day.
 The Daily,New York Times,Spotify,https://open.spotify.com/show/3IM0lmZxpFAY7CwMuv9H4g,news,EN,Global,Daily,The New York Times' flagship daily news podcast.
 NRC Vandaag,NRC,Spotify,https://open.spotify.com/show/73vZPMVjxTqC02OYZdcCr7,news,NL,Global,Daily,Dutch daily news podcast from NRC covering national and international affairs.
-War & Peace,International Crisis Group,Web,https://www.crisisgroup.org/pod/europe-central-asia/war-peace,security|politics,EN,Europe,Monthly,"Crisis Group analysts examine European conflict, Russia, and diplomacy."
-Hold your fire!,International Crisis Group,Web,https://www.crisisgroup.org/pod/global/hold-your-fire,politics,EN,Global,Weekly,Crisis Group's global podcast diving into conflicts with field experts.
-The Horn,International Crisis Group,Web,https://www.crisisgroup.org/pod/africa/horn-africa/horn,politics,EN,Africa,Monthly,In-depth analysis of politics and conflict in the Horn of Africa.
-Le Collimateur,Alexandre Jubelin,Deezer,https://www.deezer.com/fr/show/568972,politics,FR,Europe,Weekly,French military strategy and defence analysis from Alexandre Jubelin.
-Turkey Book Talk,William Armstrong,Apple Podcasts,https://podcasts.apple.com/us/podcast/turkey-book-talk/id1035167283,politics,EN,Europe,Biweekly,Interviews with journalists and academics on Turkey and its region.
-Recap Radio,Turkey Recap,Apple Podcasts,https://podcasts.apple.com/us/podcast/recap-radio/id1813696945,politics,EN,Europe,Weekly,Weekly digest of Turkish news and political developments.
-Popular Front,Jake Hanrahan,Apple Podcasts,https://podcasts.apple.com/us/podcast/popular-front/id1364539980,security,EN,Global,Weekly,Independent conflict journalism covering under-reported wars worldwide.
-In Moscow's Shadows,Mark Galeotti,Apple Podcasts,https://podcasts.apple.com/nl/podcast/in-moscows-shadows/id1510124746,politics,EN,Europe,Weekly,"Mark Galeotti on Russian politics, security, and organised crime."
-Angry Planet,Matthew Gault and Jason Fields,Apple Podcasts,https://podcasts.apple.com/us/podcast/angry-planet/id1023774600,security,EN,Global,Weekly,"Weekly conversations about conflict, war, and global security."
-Zone critique,MSF,Deezer,https://www.deezer.com/de/show/1001243651,humanitarian|politics,FR,Global,Monthly,MSF's French-language podcast on humanitarian crises from the field.
-Po Na Biso,Ebuteli/GEC,Apple Podcasts,https://podcasts.apple.com/us/podcast/po-na-biso/id1553475927,politics,EN,Africa,Monthly,Ebuteli/GEC podcast on DRC politics and governance in French.
-ACAPS Audio Reports,ACAPS,Spotify,https://open.spotify.com/show/7IlMirNXkxFXTy6QPx9ju5,humanitarian|politics,EN,Global,Monthly,Humanitarian needs assessments and crisis analysis from ACAPS.
-Afrique 360,International Crisis Group,Web,https://www.crisisgroup.org/fr/pod/africa/afrique-360deg,politics,FR,Africa,Monthly,Crisis Group's French-language podcast covering African politics and conflict.
-Bulletproof Podcast,Voxpot (Czech),Web,https://bulletproof.voxpot.cz/,security|news,EN,Global,Weekly,Czech investigative journalism on conflicts and corruption.
-Carnegie Connects,Carnegie Endowment,Web,https://carnegieendowment.org/podcasts/carnegie-connects,politics,EN,Global,Weekly,Carnegie Endowment experts on global security and foreign policy.
-Conflict of Interest,ACLED,Web,https://conflictsofinterest.buzzsprout.com/,security,EN,Global,Monthly,ACLED data-driven analysis of political violence and conflict trends.
-Digital Dilemmas,Lenk Studios,Spotify,https://open.spotify.com/show/5UpqCJIWqECv3qiPy2YMIg,tech,EN,Global,Irregular,"Technology, surveillance, and their implications for humanitarians."
-From Our Own Correspondent,BBC,Apple Podcasts,https://podcasts.apple.com/us/podcast/from-our-own-correspondent/id73331209,news,EN,Global,Weekly,BBC correspondents share personal despatches from the field.
+War & Peace,International Crisis Group,Web,https://www.crisisgroup.org/pod/europe-central-asia/war-peace,security|politics|foreign policy,EN,Europe,Monthly,"Crisis Group analysts examine European conflict, Russia, and diplomacy."
+Hold your fire!,International Crisis Group,Web,https://www.crisisgroup.org/pod/global/hold-your-fire,politics|security|foreign policy,EN,Global,Weekly,Crisis Group's global podcast diving into conflicts with field experts.
+The Horn,International Crisis Group,Web,https://www.crisisgroup.org/pod/africa/horn-africa/horn,politics|security|governance,EN,Africa,Monthly,In-depth analysis of politics and conflict in the Horn of Africa.
+Le Collimateur,Alexandre Jubelin,Deezer,https://www.deezer.com/fr/show/568972,politics|military|foreign policy,FR,Europe,Weekly,French military strategy and defence analysis from Alexandre Jubelin.
+Turkey Book Talk,William Armstrong,Apple Podcasts,https://podcasts.apple.com/us/podcast/turkey-book-talk/id1035167283,politics|foreign policy,EN,Europe,Biweekly,Interviews with journalists and academics on Turkey and its region.
+Recap Radio,Turkey Recap,Apple Podcasts,https://podcasts.apple.com/us/podcast/recap-radio/id1813696945,politics|news,EN,Europe,Weekly,Weekly digest of Turkish news and political developments.
+Popular Front,Jake Hanrahan,Apple Podcasts,https://podcasts.apple.com/us/podcast/popular-front/id1364539980,security|military,EN,Global,Weekly,Independent conflict journalism covering under-reported wars worldwide.
+In Moscow's Shadows,Mark Galeotti,Apple Podcasts,https://podcasts.apple.com/nl/podcast/in-moscows-shadows/id1510124746,politics|security|organised crime,EN,Europe,Weekly,"Mark Galeotti on Russian politics, security, and organised crime."
+Angry Planet,Matthew Gault and Jason Fields,Apple Podcasts,https://podcasts.apple.com/us/podcast/angry-planet/id1023774600,security|military,EN,Global,Weekly,"Weekly conversations about conflict, war, and global security."
+Zone critique,MSF,Deezer,https://www.deezer.com/de/show/1001243651,humanitarian|human rights,FR,Global,Monthly,MSF's French-language podcast on humanitarian crises from the field.
+Po Na Biso,Ebuteli/GEC,Apple Podcasts,https://podcasts.apple.com/us/podcast/po-na-biso/id1553475927,politics|governance,EN,Africa,Monthly,Ebuteli/GEC podcast on DRC politics and governance in French.
+ACAPS Audio Reports,ACAPS,Spotify,https://open.spotify.com/show/7IlMirNXkxFXTy6QPx9ju5,humanitarian|development,EN,Global,Monthly,Humanitarian needs assessments and crisis analysis from ACAPS.
+Afrique 360,International Crisis Group,Web,https://www.crisisgroup.org/fr/pod/africa/afrique-360deg,politics|security|governance,FR,Africa,Monthly,Crisis Group's French-language podcast covering African politics and conflict.
+Bulletproof Podcast,Voxpot (Czech),Web,https://bulletproof.voxpot.cz/,security|organised crime|disinformation,EN,Global,Weekly,Czech investigative journalism on conflicts and corruption.
+Carnegie Connects,Carnegie Endowment,Web,https://carnegieendowment.org/podcasts/carnegie-connects,politics|foreign policy,EN,Global,Weekly,Carnegie Endowment experts on global security and foreign policy.
+Conflict of Interest,ACLED,Web,https://conflictsofinterest.buzzsprout.com/,security|politics,EN,Global,Monthly,ACLED data-driven analysis of political violence and conflict trends.
+Digital Dilemmas,Lenk Studios,Spotify,https://open.spotify.com/show/5UpqCJIWqECv3qiPy2YMIg,tech|cyber,EN,Global,Irregular,"Technology, surveillance, and their implications for humanitarians."
+From Our Own Correspondent,BBC,Apple Podcasts,https://podcasts.apple.com/us/podcast/from-our-own-correspondent/id73331209,news|humanitarian,EN,Global,Weekly,BBC correspondents share personal despatches from the field.
 Global News Podcast,BBC,Spotify,https://open.spotify.com/show/3wBfqov60qDZbEVjPHo0a8,news,EN,Global,Daily,BBC's twice-daily roundup of world news.
-Global Security Briefing,The Royal United Services Institute,Web,https://www.rusi.org/podcast-series/global-security-briefing-podcasts,security|news,EN,Global,Weekly,"RUSI experts on defence, security threats, and strategic affairs."
-Humanitarian Frontiers,Chris Hoffman,Spotify,https://open.spotify.com/show/2Aaj0HJ46inB8M3kKjpljs,security|humanitarian,EN,Global,Irregular,Frontline perspectives on humanitarian action and crisis response.
-Info ou Intox,France24,Apple Podcasts,https://podcasts.apple.com/us/podcast/info-ou-intox/id1528195894,news,FR,Global,Weekly,France24's fact-checking podcast debunking misinformation.
-Into Africa,CSIS,Web,https://www.csis.org/podcasts/africa,politics,EN,Africa,Monthly,"CSIS analysts on security, governance, and development across Africa."
+Global Security Briefing,The Royal United Services Institute,Web,https://www.rusi.org/podcast-series/global-security-briefing-podcasts,security|military|foreign policy,EN,Global,Weekly,"RUSI experts on defence, security threats, and strategic affairs."
+Humanitarian Frontiers,Chris Hoffman,Spotify,https://open.spotify.com/show/2Aaj0HJ46inB8M3kKjpljs,security|humanitarian|human rights,EN,Global,Irregular,Frontline perspectives on humanitarian action and crisis response.
+Info ou Intox,France24,Apple Podcasts,https://podcasts.apple.com/us/podcast/info-ou-intox/id1528195894,news|disinformation,FR,Global,Weekly,France24's fact-checking podcast debunking misinformation.
+Into Africa,CSIS,Web,https://www.csis.org/podcasts/africa,politics|governance|development,EN,Africa,Monthly,"CSIS analysts on security, governance, and development across Africa."
 Le Journal de l'Afrique,France24,Apple Podcasts,https://podcasts.apple.com/us/podcast/journal-de-lafrique/id1055013662,news,FR,Africa,Daily,France24's daily French-language African news programme.
-Needle Stack,Authentic8,Web,https://www.authentic8.com/needlestack,tech,EN,Global,Weekly,OSINT techniques and open-source intelligence for investigators.
-Think Change,ODI,Web,https://odi.org/en/think-change-podcast/,humanitarian|law,EN,Global,Monthly,"ODI researchers on development, policy, and humanitarian action."
-On the Record,CFR,Web,https://www.cfr.org/podcasts/on-the-record,politics,EN,Global,Weekly,CFR experts on foreign policy and global affairs.
-Pod Save the World,Crooked Media,Web,https://crooked.com/podcast-series/pod-save-the-world/,politics,EN,Global,Weekly,Former Obama advisors Ben Rhodes and Tommy Vietor on global politics.
+Needle Stack,Authentic8,Web,https://www.authentic8.com/needlestack,tech|cyber,EN,Global,Weekly,OSINT techniques and open-source intelligence for investigators.
+Think Change,ODI,Web,https://odi.org/en/think-change-podcast/,humanitarian|development|law,EN,Global,Monthly,"ODI researchers on development, policy, and humanitarian action."
+On the Record,CFR,Web,https://www.cfr.org/podcasts/on-the-record,politics|foreign policy,EN,Global,Weekly,CFR experts on foreign policy and global affairs.
+Pod Save the World,Crooked Media,Web,https://crooked.com/podcast-series/pod-save-the-world/,politics|foreign policy,EN,Global,Weekly,Former Obama advisors Ben Rhodes and Tommy Vietor on global politics.
 Journal Afrique,RFI,Apple Podcasts,https://podcasts.apple.com/us/podcast/journal-afrique/id1573763106,news,FR,Africa,Daily,RFI's daily French-language digest of African news.
 Revue de Presse Internationale,RFI,Apple Podcasts,https://podcasts.apple.com/fr/podcast/revue-de-presse-internationale/id1547648032,news,FR,Global,Daily,RFI's daily review of the international press in French.
-Tech Won't Save Us,Paris Marx,Web,https://www.techwontsave.us/,tech,EN,Global,Weekly,Critical examination of the tech industry and its political dimensions.
-The Foreign Affairs Interview,Foreign Affairs Magazine,Apple Podcasts,https://podcasts.apple.com/us/podcast/the-foreign-affairs-interview/id1623855270,politics,EN,Global,Weekly,Foreign Affairs editor in conversation with leading thinkers.
+Tech Won't Save Us,Paris Marx,Web,https://www.techwontsave.us/,tech|politics,EN,Global,Weekly,Critical examination of the tech industry and its political dimensions.
+The Foreign Affairs Interview,Foreign Affairs Magazine,Apple Podcasts,https://podcasts.apple.com/us/podcast/the-foreign-affairs-interview/id1623855270,politics|foreign policy,EN,Global,Weekly,Foreign Affairs editor in conversation with leading thinkers.
 The Global Story,BBC,Spotify,https://open.spotify.com/show/5mcWBCBMSCLddYdYOH9Er2,news,EN,Global,Daily,BBC's daily deep-dive into one global story.
-The Inside Story Podcast,Al Jazeera,Web,https://www.aljazeera.com/audio/podcasts/the-inside-story-podcast/,news,EN,Middle East,Daily,Al Jazeera's analysis of the major issues driving the news.
-The New Humanitarian,The New Humanitarian,Spotify,https://open.spotify.com/show/7xGIfcTWJUuBv5uWB3vy8S,humanitarian|politics,EN,Global,Monthly,Independent journalism on humanitarian crises and the aid system.
-The Take,Al Jazeera,Apple Podcasts,https://podcasts.apple.com/us/podcast/the-take/id1438817292,news,EN,Middle East,Daily,Al Jazeera's daily international news podcast.
-War Fronts,Cloud10,Apple Podcasts,https://podcasts.apple.com/us/podcast/warfronts/id1773188988,security,EN,Global,Monthly,Narrative reporting on wars and the people caught in them.
-The Crisis Room Team and The Lawfare Podcast,The Crisis Room Team and Lawfare,Spotify,https://open.spotify.com/show/7CrrgePZN4R3FoNZUNONQe,law,EN,Global,Weekly,"Analysis at the intersection of law, national security, and policy."
+The Inside Story Podcast,Al Jazeera,Web,https://www.aljazeera.com/audio/podcasts/the-inside-story-podcast/,news|politics,EN,Middle East,Daily,Al Jazeera's analysis of the major issues driving the news.
+The New Humanitarian,The New Humanitarian,Spotify,https://open.spotify.com/show/7xGIfcTWJUuBv5uWB3vy8S,humanitarian|human rights|politics,EN,Global,Monthly,Independent journalism on humanitarian crises and the aid system.
+The Take,Al Jazeera,Apple Podcasts,https://podcasts.apple.com/us/podcast/the-take/id1438817292,news|politics,EN,Middle East,Daily,Al Jazeera's daily international news podcast.
+War Fronts,Cloud10,Apple Podcasts,https://podcasts.apple.com/us/podcast/warfronts/id1773188988,security|military|humanitarian,EN,Global,Monthly,Narrative reporting on wars and the people caught in them.
+The Crisis Room Team and The Lawfare Podcast,The Crisis Room Team and Lawfare,Spotify,https://open.spotify.com/show/7CrrgePZN4R3FoNZUNONQe,law|security|politics,EN,Global,Weekly,"Analysis at the intersection of law, national security, and policy."
 The Rest Is Politics: Leading,Goalhanger,Web,https://goalhanger.com/listen/the-rest-is-politics-leading,news|politics,EN,Global,Weekly,UK-focused political analysis and global affairs commentary.
-Battleground,Goalhanger,Web,https://goalhanger.com/listen/battleground,security,EN,Europe,Weekly,"Analysis of European security, defence, and geopolitical conflict."
+Battleground,Goalhanger,Web,https://goalhanger.com/listen/battleground,security|military|foreign policy,EN,Europe,Weekly,"Analysis of European security, defence, and geopolitical conflict."
 These Times,The Times / Tortoise,Web,https://www.thetimes.com/podcasts/these-times,news|politics,EN,Global,Weekly,Sharp commentary on global politics and current affairs.
-Power Lines,Message Heard,Apple Podcasts,https://podcasts.apple.com/us/podcast/power-lines/id1613703848,security|politics,EN,Europe,Weekly,"European energy security, foreign policy, and geopolitics."
-War on the Rocks,War on the Rocks,Web,https://warontherocks.com/category/podcasts/,security|politics,EN,Global,Weekly,"National security, defence policy, and military affairs analysis."
-The Russia Contingency,War on the Rocks / Michael Kofman,Web,https://warontherocks.com/category/podcasts/the-russia-contingency/,security,EN,Europe,Weekly,"Russia's military strategy, operations, and European security."
-Modern War Institute Podcast,West Point Modern War Institute,Web,https://mwi.westpoint.edu/podcasts/,security,EN,Global,Weekly,West Point experts on modern warfare and military strategy.
-Conflicted,Message Heard,Apple Podcasts,https://podcasts.apple.com/gb/podcast/conflicted/id1561675070,security,EN,Middle East,Weekly,In-depth conversations on the Middle East's most complex conflicts.
-Risky Business,Patrick Gray,Web,https://risky.biz/,tech|security,EN,Global,Weekly,Information security news and interviews with industry experts.
-Click Here,Recorded Future News,Web,https://therecord.media/podcast,tech|security,EN,Global,Weekly,Cybersecurity investigations and the human stories behind hacks.
-Darknet Diaries,Jack Rhysider,Web,https://darknetdiaries.com/,tech|security,EN,Global,Monthly,True crime stories from the dark side of the internet.
-The Cyberlaw Podcast,Lawfare / Stewart Baker,Web,https://www.lawfaremedia.org/topics/series/cyberlaw-podcast,tech|security,EN,Global,Weekly,"Law, technology, and national security from the Lawfare Institute."
-Rethinking Humanitarianism,The New Humanitarian,Web,https://www.thenewhumanitarian.org/podcasts/rethinking-humanitarianism,humanitarian|politics,EN,Global,Monthly,Fresh perspectives on the future of the humanitarian system.
-Trumanitarian,Lars Peter Nissen,Web,https://trumanitarian.org/,humanitarian|politics,EN,Global,Irregular,Practitioner reflections on reform and accountability in aid.
-Displaced,Refugees International / IRC,Apple Podcasts,https://podcasts.apple.com/us/podcast/displaced/id1450824997,humanitarian|politics,EN,Global,Monthly,"Stories of displacement, migration, and the people behind the numbers."
-Babel: Translating the Middle East,CSIS,Web,https://www.csis.org/podcasts/babel-translating-middle-east,politics,EN,Middle East,Monthly,CSIS experts unpacking Middle East politics and policy.
-Beyond the Headlines,The National (UAE),Web,https://www.thenationalnews.com/podcasts/beyond-the-headlines/,news,EN,Middle East,Weekly,Context and analysis behind major stories in the Arab world.
+Power Lines,Message Heard,Apple Podcasts,https://podcasts.apple.com/us/podcast/power-lines/id1613703848,security|politics|foreign policy,EN,Europe,Weekly,"European energy security, foreign policy, and geopolitics."
+War on the Rocks,War on the Rocks,Web,https://warontherocks.com/category/podcasts/,security|military|politics,EN,Global,Weekly,"National security, defence policy, and military affairs analysis."
+The Russia Contingency,War on the Rocks / Michael Kofman,Web,https://warontherocks.com/category/podcasts/the-russia-contingency/,security|military,EN,Europe,Weekly,"Russia's military strategy, operations, and European security."
+Modern War Institute Podcast,West Point Modern War Institute,Web,https://mwi.westpoint.edu/podcasts/,security|military,EN,Global,Weekly,West Point experts on modern warfare and military strategy.
+Conflicted,Message Heard,Apple Podcasts,https://podcasts.apple.com/gb/podcast/conflicted/id1561675070,security|politics,EN,Middle East,Weekly,In-depth conversations on the Middle East's most complex conflicts.
+Risky Business,Patrick Gray,Web,https://risky.biz/,tech|cyber,EN,Global,Weekly,Information security news and interviews with industry experts.
+Click Here,Recorded Future News,Web,https://therecord.media/podcast,tech|cyber|disinformation,EN,Global,Weekly,Cybersecurity investigations and the human stories behind hacks.
+Darknet Diaries,Jack Rhysider,Web,https://darknetdiaries.com/,tech|cyber|organised crime,EN,Global,Monthly,True crime stories from the dark side of the internet.
+The Cyberlaw Podcast,Lawfare / Stewart Baker,Web,https://www.lawfaremedia.org/topics/series/cyberlaw-podcast,tech|cyber|law,EN,Global,Weekly,"Law, technology, and national security from the Lawfare Institute."
+Rethinking Humanitarianism,The New Humanitarian,Web,https://www.thenewhumanitarian.org/podcasts/rethinking-humanitarianism,humanitarian|development|human rights,EN,Global,Monthly,Fresh perspectives on the future of the humanitarian system.
+Trumanitarian,Lars Peter Nissen,Web,https://trumanitarian.org/,humanitarian|development|governance,EN,Global,Irregular,Practitioner reflections on reform and accountability in aid.
+Displaced,Refugees International / IRC,Apple Podcasts,https://podcasts.apple.com/us/podcast/displaced/id1450824997,humanitarian|human rights|development,EN,Global,Monthly,"Stories of displacement, migration, and the people behind the numbers."
+Babel: Translating the Middle East,CSIS,Web,https://www.csis.org/podcasts/babel-translating-middle-east,politics|foreign policy,EN,Middle East,Monthly,CSIS experts unpacking Middle East politics and policy.
+Beyond the Headlines,The National (UAE),Web,https://www.thenationalnews.com/podcasts/beyond-the-headlines/,news|politics,EN,Middle East,Weekly,Context and analysis behind major stories in the Arab world.
 Asharq Podcasts,Asharq News (SRMG/Bloomberg),Web,https://www.asharq.com/podcasts/,news,AR,Middle East,Daily,Arabic-language news and analysis from Asharq Bloomberg.
 BBC Arabic Podcasts,BBC Arabic,Web,https://www.bbc.com/arabic/podcasts,news,AR,Middle East,Daily,"BBC Arabic news, analysis, and feature programming."
-Al Jazeera Arabic Podcasts,Al Jazeera,Web,https://www.aljazeera.net/podcasts,news,AR,Middle East,Daily,Al Jazeera's flagship Arabic current affairs programmes.
-Sowt Network,Sowt,Web,https://www.sowt.com/,politics,AR,Middle East,Weekly,"Independent Arabic-language podcasts on society, culture, and politics."
-Thmanyah / Finjan,Thmanyah,Web,https://thmanyah.com/,politics,AR,Middle East,Weekly,Saudi Arabia's leading Arabic podcast network covering culture and ideas.
+Al Jazeera Arabic Podcasts,Al Jazeera,Web,https://www.aljazeera.net/podcasts,news|politics,AR,Middle East,Daily,Al Jazeera's flagship Arabic current affairs programmes.
+Sowt Network,Sowt,Web,https://www.sowt.com/,politics|culture,AR,Middle East,Weekly,"Independent Arabic-language podcasts on society, culture, and politics."
+Thmanyah / Finjan,Thmanyah,Web,https://thmanyah.com/,politics|culture,AR,Middle East,Weekly,Saudi Arabia's leading Arabic podcast network covering culture and ideas.
 Hoy en EL PAÍS,El País,Spotify,https://open.spotify.com/show/4ASrcoseiEhqHsCmsbSjA9,news,ES,Global,Daily,Daily Spanish-language news briefing from El País.
 Hoy en La Vanguardia,La Vanguardia,Web,https://www.lavanguardia.com/podcast/hoy-en-la-vanguardia,news,ES,Global,Daily,Daily Spanish news briefing from La Vanguardia.
-Carne Cruda,Javier Gallego,Web,https://www.carnecruda.es/,news,ES,Global,Weekly,Independent Spanish radio journalism and political commentary.
+Carne Cruda,Javier Gallego,Web,https://www.carnecruda.es/,news|politics,ES,Global,Weekly,Independent Spanish radio journalism and political commentary.
 El Hilo,Radio Ambulante Estudios + VICE,Web,https://elhilo.audio/,news|culture,ES,Americas,Weekly,Long-form Spanish-language journalism on Latin America's biggest stories.
-Las Raras,Las Raras,Web,https://lasraras.cl/,culture,ES,Americas,Monthly,Stories of people living on the margins in Latin America.
+Las Raras,Las Raras,Web,https://lasraras.cl/,culture|human rights,ES,Americas,Monthly,Stories of people living on the margins in Latin America.
 Radio Ambulante,NPR,Web,https://radioambulante.org/,culture,ES,Americas,Weekly,Latin American narrative journalism in Spanish.
 De Eso No Se Habla,Isabel Cadenas Cañón,Web,https://www.deesonosehabla.com/,culture,ES,Global,Weekly,Spanish-language conversations on taboo social and cultural topics.
-InSight Crime Podcast,InSight Crime,Web,https://insightcrime.org/podcasts/,security,ES,Americas,Weekly,Investigative journalism on organised crime in Latin America.
+InSight Crime Podcast,InSight Crime,Web,https://insightcrime.org/podcasts/,security|organised crime,ES,Americas,Weekly,Investigative journalism on organised crime in Latin America.
 Affaires sensibles,France Inter,Web,https://www.radiofrance.fr/franceinter/podcasts/affaires-sensibles,politics|culture,FR,Global,Weekly,France Inter's French true-crime and political history documentary series.
 L'Heure du Monde,Le Monde,Web,https://www.lemonde.fr/podcasts/l-heure-du-monde/,news,FR,Global,Daily,Le Monde's daily French-language news explainer.
-Code source,Le Parisien,Web,https://www.leparisien.fr/podcasts/code-source/,news,FR,Global,Weekly,Le Parisien's French investigative journalism podcast.
-Géopolitique,France Inter / Pierre Haski,Web,https://www.radiofrance.fr/franceinter/podcasts/geopolitique,politics,FR,Global,Weekly,RFI's weekly French analysis of international relations.
-Cultures Monde,France Culture,Web,https://www.radiofrance.fr/franceculture/podcasts/cultures-monde,news|politics,FR,Global,Daily,France Culture's French exploration of global cultures and politics.
-Les Enjeux internationaux,France Culture,Web,https://www.radiofrance.fr/franceculture/podcasts/les-enjeux-internationaux,politics|culture,FR,Global,Daily,France Culture's daily French briefing on international affairs.
-Sismique,Julien Devaureix,Web,https://sismique.fr/,politics,FR,Global,Monthly,French-language conversations on societal and environmental transformations.
-Thinkerview,Thinkerview,Web,https://thinkerview.com/,politics,FR,Global,Irregular,"Long-form French interviews with thinkers, experts, and decision-makers."
-Le Nouvel Esprit Public,Philippe Meyer,Web,https://nouveauespritpublic.fr/,politics,FR,Global,Weekly,French political and intellectual debate with public figures.
-Asia Matters,Andrew Peaple / CSDS,Apple Podcasts,https://podcasts.apple.com/gb/podcast/asia-matters-podcast/id1487381702,news|politics,EN,Asia,Weekly,"ISEAS analysis of Southeast Asian politics, economics, and security."
-The Diplomat's Asia Geopolitics,The Diplomat,Web,https://thediplomat.com/podcasts/,security|politics,EN,Asia,Weekly,The Diplomat's coverage of Asian geopolitics and strategic affairs.
-Indo-Pacific Insights,Lowy Institute,Web,https://www.lowyinstitute.org/podcasts,security|politics,EN,Asia,Monthly,Security and strategic dynamics across the Indo-Pacific region.
-Global Dispatches,Mark Leon Goldberg,Web,https://www.globaldispatches.org/,news|politics,EN,Global,Weekly,Short weekly briefings on international news and foreign policy.
-Sinica Podcast,Kaiser Kuo,Web,https://www.sinicapodcast.com/,politics,EN,Asia,Weekly,Long-form conversations about China and its place in the world.
-ChinaTalk,Jordan Schneider,Web,https://www.chinatalk.media/,tech|politics,EN,Asia,Weekly,"Technology, policy, and politics at the China-US intersection."
-The China-Global South Podcast,Eric Olander & Cobus van Staden,Web,https://www.chinaglobalsouth.com/podcasts/,politics,EN,Africa,Monthly,China's relationships and influence across the Global South.
-Pekingology,CSIS,Web,https://www.csis.org/podcasts/pekingology,politics,EN,Asia,Weekly,"CSIS analysis of Chinese politics, policy, and leadership."
-The Lazarus Heist,BBC,Apple Podcasts,https://podcasts.apple.com/us/podcast/the-lazarus-heist/id1612262549,tech|security,EN,Asia,Irregular,BBC investigation into North Korean state-sponsored cybercrime.
-NK News Podcast,NK News,Web,https://www.nknews.org/category/north-korea-news-podcast/,security|news,EN,Asia,Weekly,"North Korea news, analysis, and expert interviews."
-New Mandala Podcast,ANU,Web,https://www.newmandala.org/category/podcasts/,politics,EN,Asia,Weekly,"Southeast Asian politics, society, and policy from ANU researchers."
-Insight Myanmar,Insight Myanmar,Web,https://insightmyanmar.org/,security|politics,EN,Asia,Weekly,Reporting and analysis on Myanmar's political crisis.
-Grand Tamasha,Carnegie Endowment / Hindustan Times,Web,https://carnegieendowment.org/podcasts/grand-tamasha,politics,EN,Asia,Weekly,"India's politics, economy, and society from the Carnegie India centre."
-The Pakistan Experience,Shehzad Ghias Shaikh,Web,https://www.youtube.com/@thepakistanexperience,politics,EN,Asia,Weekly,"Conversations on Pakistani politics, culture, and society."
-Pacific Waves,RNZ,Web,https://www.rnz.co.nz/national/programmes/pacificwaves,news,EN,Asia,Weekly,"Pacific Islands news, politics, and regional affairs."
-Majlis,RFE/RL / Bruce Pannier,Apple Podcasts,https://podcasts.apple.com/us/podcast/majlis/id1086142112,news|politics,EN,Asia,Weekly,Analysis of Central Asian and Eurasian politics and societies.
-Talking China In Eurasia,RFE/RL / Reid Standish,Web,https://www.rferl.org/talking-china-in-eurasia-podcast,news|politics,EN,Asia,Monthly,China's influence and engagement across Central Asia and Eurasia.
-Voices on Central Asia,Central Asia Program (GWU),Web,https://voicesoncentralasia.org/podcast/,politics,EN,Asia,Monthly,Expert perspectives on Central Asian politics and development.
-Pakistonomy,Uzair Younus,Apple Podcasts,https://podcasts.apple.com/us/podcast/pakistonomy/id1531480503,politics,EN,Asia,Weekly,"Pakistan's economy, politics, and development challenges."
+Code source,Le Parisien,Web,https://www.leparisien.fr/podcasts/code-source/,news|organised crime,FR,Global,Weekly,Le Parisien's French investigative journalism podcast.
+Géopolitique,France Inter / Pierre Haski,Web,https://www.radiofrance.fr/franceinter/podcasts/geopolitique,politics|foreign policy,FR,Global,Weekly,RFI's weekly French analysis of international relations.
+Cultures Monde,France Culture,Web,https://www.radiofrance.fr/franceculture/podcasts/cultures-monde,news|politics|culture,FR,Global,Daily,France Culture's French exploration of global cultures and politics.
+Les Enjeux internationaux,France Culture,Web,https://www.radiofrance.fr/franceculture/podcasts/les-enjeux-internationaux,politics|culture|foreign policy,FR,Global,Daily,France Culture's daily French briefing on international affairs.
+Sismique,Julien Devaureix,Web,https://sismique.fr/,politics|environment,FR,Global,Monthly,French-language conversations on societal and environmental transformations.
+Thinkerview,Thinkerview,Web,https://thinkerview.com/,politics|culture,FR,Global,Irregular,"Long-form French interviews with thinkers, experts, and decision-makers."
+Le Nouvel Esprit Public,Philippe Meyer,Web,https://nouveauespritpublic.fr/,politics|governance,FR,Global,Weekly,French political and intellectual debate with public figures.
+Asia Matters,Andrew Peaple / CSDS,Apple Podcasts,https://podcasts.apple.com/gb/podcast/asia-matters-podcast/id1487381702,news|politics|foreign policy,EN,Asia,Weekly,"ISEAS analysis of Southeast Asian politics, economics, and security."
+The Diplomat's Asia Geopolitics,The Diplomat,Web,https://thediplomat.com/podcasts/,security|politics|foreign policy,EN,Asia,Weekly,The Diplomat's coverage of Asian geopolitics and strategic affairs.
+Indo-Pacific Insights,Lowy Institute,Web,https://www.lowyinstitute.org/podcasts,security|military|foreign policy,EN,Asia,Monthly,Security and strategic dynamics across the Indo-Pacific region.
+Global Dispatches,Mark Leon Goldberg,Web,https://www.globaldispatches.org/,news|politics|foreign policy,EN,Global,Weekly,Short weekly briefings on international news and foreign policy.
+Sinica Podcast,Kaiser Kuo,Web,https://www.sinicapodcast.com/,politics|foreign policy,EN,Asia,Weekly,Long-form conversations about China and its place in the world.
+ChinaTalk,Jordan Schneider,Web,https://www.chinatalk.media/,tech|politics|foreign policy,EN,Asia,Weekly,"Technology, policy, and politics at the China-US intersection."
+The China-Global South Podcast,Eric Olander & Cobus van Staden,Web,https://www.chinaglobalsouth.com/podcasts/,politics|foreign policy|development,EN,Africa,Monthly,China's relationships and influence across the Global South.
+Pekingology,CSIS,Web,https://www.csis.org/podcasts/pekingology,politics|governance|foreign policy,EN,Asia,Weekly,"CSIS analysis of Chinese politics, policy, and leadership."
+The Lazarus Heist,BBC,Apple Podcasts,https://podcasts.apple.com/us/podcast/the-lazarus-heist/id1612262549,tech|cyber|security,EN,Asia,Irregular,BBC investigation into North Korean state-sponsored cybercrime.
+NK News Podcast,NK News,Web,https://www.nknews.org/category/north-korea-news-podcast/,security|politics|news,EN,Asia,Weekly,"North Korea news, analysis, and expert interviews."
+New Mandala Podcast,ANU,Web,https://www.newmandala.org/category/podcasts/,politics|governance,EN,Asia,Weekly,"Southeast Asian politics, society, and policy from ANU researchers."
+Insight Myanmar,Insight Myanmar,Web,https://insightmyanmar.org/,security|politics|human rights,EN,Asia,Weekly,Reporting and analysis on Myanmar's political crisis.
+Grand Tamasha,Carnegie Endowment / Hindustan Times,Web,https://carnegieendowment.org/podcasts/grand-tamasha,politics|governance,EN,Asia,Weekly,"India's politics, economy, and society from the Carnegie India centre."
+The Pakistan Experience,Shehzad Ghias Shaikh,Web,https://www.youtube.com/@thepakistanexperience,politics|culture,EN,Asia,Weekly,"Conversations on Pakistani politics, culture, and society."
+Pacific Waves,RNZ,Web,https://www.rnz.co.nz/national/programmes/pacificwaves,news|politics,EN,Asia,Weekly,"Pacific Islands news, politics, and regional affairs."
+Majlis,RFE/RL / Bruce Pannier,Apple Podcasts,https://podcasts.apple.com/us/podcast/majlis/id1086142112,news|politics|governance,EN,Asia,Weekly,Analysis of Central Asian and Eurasian politics and societies.
+Talking China In Eurasia,RFE/RL / Reid Standish,Web,https://www.rferl.org/talking-china-in-eurasia-podcast,news|politics|foreign policy,EN,Asia,Monthly,China's influence and engagement across Central Asia and Eurasia.
+Voices on Central Asia,Central Asia Program (GWU),Web,https://voicesoncentralasia.org/podcast/,politics|governance|development,EN,Asia,Monthly,Expert perspectives on Central Asian politics and development.
+Pakistonomy,Uzair Younus,Apple Podcasts,https://podcasts.apple.com/us/podcast/pakistonomy/id1531480503,politics|governance|development,EN,Asia,Weekly,"Pakistan's economy, politics, and development challenges."
 Dawn News Podcasts,Dawn,Web,https://www.dawn.com/podcasts,news|politics,EN,Asia,Daily,Pakistan's leading English-language news podcasts from Dawn.
-Afghan Eye Podcast,Ahmad-Waleed Kakar,Web,https://www.afghaneye.org/podcast,security|politics,EN,Asia,Weekly,Analysis and reporting on Afghanistan's evolving political situation.
+Afghan Eye Podcast,Ahmad-Waleed Kakar,Web,https://www.afghaneye.org/podcast,security|politics|humanitarian,EN,Asia,Weekly,Analysis and reporting on Afghanistan's evolving political situation.
+Overwatch,Institute for the Study of War,Apple Podcasts,https://podcasts.apple.com/us/podcast/overwatch/id1477647189,security|military|foreign policy,EN,Global,Irregular,ISW analysts and practitioners go beyond the headlines to examine US national security and foreign policy with a focus on conflict and military strategy.
+Radio Dabanga Daily News,Radio Dabanga,Web,https://soundcloud.com/radio-dabanga,news|humanitarian|human rights,AR,Africa,Daily,Independent daily news broadcasts covering Sudan and Darfur — a critical information lifeline for conflict-affected communities and humanitarian workers in the region.
+Headline News from The Associated Press,The Associated Press,Spotify,https://open.spotify.com/show/2AoYk2xxbBfVjagnt4mwuV,news,EN,Global,Daily,Hourly US and world news bulletins direct from the Associated Press wire service.
