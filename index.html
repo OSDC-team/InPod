@@ -20,20 +20,20 @@
     body { background:var(--bg); color:var(--white); font-family:var(--sans); font-weight:300; min-height:100vh; -webkit-font-smoothing:antialiased; }
 
     /* ─── Header ─────────────────────────────────────────────────────── */
-    header { position:sticky; top:0; z-index:100; background:rgba(12,12,14,.94); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); height:80px; }
+    header { position:sticky; top:0; z-index:100; background:#f9f9f9; border-bottom:2px solid #02020a; height:80px; }
     .header-inner { max-width:860px; margin:0 auto; padding:0 32px; height:100%; display:flex; align-items:center; gap:16px; }
     .logo { display:flex; align-items:center; gap:16px; text-decoration:none; }
     /* Logo image — sourced from static/logo.png */
     .logo img { height:52px; width:auto; object-fit:contain; flex-shrink:0; }
     /* Vertical rule dividing brand mark from product descriptor */
-    .logo-divider { width:1px; height:36px; background:var(--border-h); flex-shrink:0; }
+    .logo-divider { width:1px; height:36px; background:#cccccc; flex-shrink:0; }
     .logo-text { display:flex; flex-direction:column; justify-content:center; gap:5px; }
     /* Tool name — display type, prominent */
-    .logo-label { font-family:var(--display); font-size:1.1rem; letter-spacing:.18em; color:var(--white); line-height:1; text-transform:uppercase; }
+    .logo-label { font-family:var(--display); font-size:1.1rem; letter-spacing:.18em; color:#02020a; line-height:1; text-transform:uppercase; }
     /* Tagline — mono, muted */
-    .logo-sub { font-family:var(--mono); font-size:.52rem; letter-spacing:.12em; color:var(--grey); line-height:1; }
+    .logo-sub { font-family:var(--mono); font-size:.52rem; letter-spacing:.12em; color:#555566; line-height:1; }
     .header-right { margin-left:auto; display:flex; gap:8px; align-items:center; }
-    .header-count { font-family:var(--mono); font-size:.58rem; color:var(--grey); letter-spacing:.04em; margin-right:2px; }
+    .header-count { font-family:var(--mono); font-size:.58rem; color:#555566; letter-spacing:.04em; margin-right:2px; }
 
     /* ─── Buttons ────────────────────────────────────────────────────── */
     .btn { font-family:var(--mono); font-size:.61rem; letter-spacing:.08em; text-transform:uppercase; padding:6px 14px; border:1px solid var(--muted); background:transparent; color:var(--grey); cursor:pointer; border-radius:var(--r-sm); transition:all .15s; white-space:nowrap; }
