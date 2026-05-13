@@ -127,10 +127,13 @@
     .lang-badge.NL { background:rgba(40,160,90,.14); color:#50a870; border:1px solid rgba(40,160,90,.22); }
     .lang-badge.ES { background:rgba(200,140,40,.14); color:#c89040; border:1px solid rgba(200,140,40,.22); }
     .lang-badge.AR { background:rgba(140,80,180,.14); color:#9060c0; border:1px solid rgba(140,80,180,.22); }
+    .lang-badge.UK { background:rgba(255,215,0,.14); color:#b8960a; border:1px solid rgba(255,215,0,.22); }
+    .lang-badge.DE { background:rgba(180,180,60,.14); color:#909020; border:1px solid rgba(180,180,60,.22); }
     .platform-badge { font-family:var(--mono); font-size:.54rem; letter-spacing:.05em; text-transform:uppercase; padding:2px 6px; border-radius:3px; font-weight:500; }
     .platform-badge.spotify { background:rgba(29,185,84,.1); color:#1db954; border:1px solid rgba(29,185,84,.18); }
     .platform-badge.apple   { background:rgba(251,92,105,.1); color:#fb5c69; border:1px solid rgba(251,92,105,.18); }
     .platform-badge.deezer  { background:rgba(176,96,255,.1); color:#b060ff; border:1px solid rgba(176,96,255,.18); }
+    .platform-badge.youtube { background:rgba(255,70,70,.1); color:#ff4444; border:1px solid rgba(255,70,70,.18); }
     .platform-badge.web     { background:rgba(74,127,193,.1); color:#4a7fc1; border:1px solid rgba(74,127,193,.18); }
     .platform-badge.other   { background:transparent; color:var(--grey); border:1px solid var(--muted); }
     .btn-listen { font-family:var(--mono); font-size:.56rem; letter-spacing:.06em; text-transform:uppercase; padding:5px 11px; border:1px solid var(--muted); background:transparent; color:var(--light); border-radius:var(--r-sm); text-decoration:none; display:inline-flex; align-items:center; gap:5px; transition:all .15s; white-space:nowrap; }
@@ -235,6 +238,7 @@
         <button class="chip" data-app="spotify">Spotify</button>
         <button class="chip" data-app="apple">Apple</button>
         <button class="chip" data-app="deezer">Deezer</button>
+        <button class="chip" data-app="youtube">YouTube</button>
         <button class="chip" data-app="web">Web</button>
       </div>
     </div>
@@ -251,6 +255,7 @@
         <button class="chip" data-lang="DE">🇩🇪 DE</button>
         <button class="chip" data-lang="PT">🇵🇹 PT</button>
         <button class="chip" data-lang="RU">🇷🇺 RU</button>
+        <button class="chip" data-lang="UK">🇺🇦 UK</button>
       </div>
     </div>
     <div class="filter-row">
@@ -349,6 +354,7 @@
         <option value="DE">German (DE)</option>
         <option value="PT">Portuguese (PT)</option>
         <option value="RU">Russian (RU)</option>
+        <option value="UK">Ukrainian (UK)</option>
       </select>
     </div>
     <div class="form-row"><label>Platform</label>
@@ -357,6 +363,7 @@
         <option value="Spotify">Spotify</option>
         <option value="Apple Podcasts">Apple Podcasts</option>
         <option value="Deezer">Deezer</option>
+        <option value="YouTube">YouTube</option>
         <option value="Web">Web</option>
       </select>
     </div>
@@ -399,10 +406,10 @@ let sortMode   = 'default'; // 'default' | 'az' | 'freq'
 // TAG_DOT maps every tag (primary and sub) to a dot colour for card UI.
 // Unknown tags fall back to #606068.
 const TAG_TAXONOMY = {
-  'Conflict & Security':        ['security', 'military', 'organised crime', 'cyber'],
+  'Conflict & Security':        ['security', 'military', 'organised crime', 'cyber', 'intelligence', 'investigation', 'sanctions & finance'],
   'Politics & Policy':          ['politics', 'foreign policy', 'governance', 'law'],
-  'Humanitarian Affairs & Aid': ['humanitarian', 'development', 'human rights'],
-  'Critical & Emerging Issues': ['news', 'tech', 'disinformation', 'culture', 'environment'],
+  'Humanitarian Affairs & Aid': ['humanitarian', 'development', 'human rights', 'displacement'],
+  'Critical & Emerging Issues': ['news', 'tech', 'disinformation', 'culture', 'environment', 'verification'],
 };
 
 // Reverse lookup: subtag → primary category
@@ -413,25 +420,30 @@ Object.entries(TAG_TAXONOMY).forEach(([primary, subs]) =>
 
 const TAG_DOT = {
   // Conflict & Security — reds/rose
-  security:          '#c85060',
-  military:          '#b03050',
-  'organised crime': '#d06070',
-  cyber:             '#e07080',
+  security:              '#c85060',
+  military:              '#b03050',
+  'organised crime':     '#d06070',
+  cyber:                 '#e07080',
+  intelligence:          '#a03868',
+  investigation:         '#c04878',
+  'sanctions & finance': '#b85848',
   // Politics & Policy — blues
-  politics:          '#4a8ed0',
-  'foreign policy':  '#3a7ec0',
-  governance:        '#5a9ee0',
-  law:               '#a0a038',
+  politics:              '#4a8ed0',
+  'foreign policy':      '#3a7ec0',
+  governance:            '#5a9ee0',
+  law:                   '#a0a038',
   // Humanitarian Affairs & Aid — greens
-  humanitarian:      '#38a858',
-  development:       '#28b860',
-  'human rights':    '#48c868',
+  humanitarian:          '#38a858',
+  development:           '#28b860',
+  'human rights':        '#48c868',
+  displacement:          '#30b878',
   // Critical & Emerging Issues — ambers/purples/oranges
-  news:              '#c89828',
-  tech:              '#9060c8',
-  disinformation:    '#b87030',
-  culture:           '#d07830',
-  environment:       '#508840',
+  news:                  '#c89828',
+  tech:                  '#9060c8',
+  disinformation:        '#b87030',
+  culture:               '#d07830',
+  environment:           '#508840',
+  verification:          '#7878c8',
 };
 
 // ─── Helpers ──────────────────────────────────────────────────────────────
@@ -440,17 +452,18 @@ const TAG_DOT = {
 // Add new platform branches here as needed.
 function appKey(raw) {
   const s = (raw || '').toLowerCase();
-  if (s.includes('spotify')) return 'spotify';
-  if (s.includes('apple'))   return 'apple';
-  if (s.includes('deezer'))  return 'deezer';
-  if (s === 'web')           return 'web';
+  if (s.includes('spotify'))  return 'spotify';
+  if (s.includes('apple'))    return 'apple';
+  if (s.includes('deezer'))   return 'deezer';
+  if (s.includes('youtube'))  return 'youtube';
+  if (s === 'web')            return 'web';
   return 'other';
 }
 
 // Returns { key, label } for badge rendering given a raw platform string.
 function platformInfo(raw) {
   const key = appKey(raw);
-  const labels = { spotify: 'Spotify', apple: 'Apple Podcasts', deezer: 'Deezer', web: 'Web', other: raw || '' };
+  const labels = { spotify: 'Spotify', apple: 'Apple Podcasts', deezer: 'Deezer', youtube: 'YouTube', web: 'Web', other: raw || '' };
   return { key, label: labels[key] };
 }
 
