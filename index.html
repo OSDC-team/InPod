@@ -22,11 +22,16 @@
     /* ─── Header ─────────────────────────────────────────────────────── */
     header { position:sticky; top:0; z-index:100; background:rgba(12,12,14,.94); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); height:80px; }
     .header-inner { max-width:860px; margin:0 auto; padding:0 32px; height:100%; display:flex; align-items:center; gap:16px; }
-    .logo { display:flex; align-items:center; gap:12px; text-decoration:none; }
-    .logo img { width:56px; height:56px; object-fit:contain; filter:invert(1); flex-shrink:0; }
-    .logo-text { display:flex; flex-direction:column; justify-content:center; gap:3px; }
-    .logo-label { font-family:var(--display); font-size:1.85rem; letter-spacing:.15em; color:var(--white); line-height:1; }
-    .logo-sub { font-family:var(--mono); font-size:.56rem; letter-spacing:.2em; text-transform:uppercase; color:var(--grey); line-height:1; }
+    .logo { display:flex; align-items:center; gap:16px; text-decoration:none; }
+    /* Logo image — sourced from static/logo.png, inverted for dark background */
+    .logo img { height:52px; width:auto; object-fit:contain; filter:invert(1); flex-shrink:0; }
+    /* Vertical rule dividing brand mark from product descriptor */
+    .logo-divider { width:1px; height:36px; background:var(--border-h); flex-shrink:0; }
+    .logo-text { display:flex; flex-direction:column; justify-content:center; gap:5px; }
+    /* Tool name — display type, prominent */
+    .logo-label { font-family:var(--display); font-size:1.1rem; letter-spacing:.18em; color:var(--white); line-height:1; text-transform:uppercase; }
+    /* Tagline — mono, muted */
+    .logo-sub { font-family:var(--mono); font-size:.52rem; letter-spacing:.12em; color:var(--grey); line-height:1; }
     .header-right { margin-left:auto; display:flex; gap:8px; align-items:center; }
     .header-count { font-family:var(--mono); font-size:.58rem; color:var(--grey); letter-spacing:.04em; margin-right:2px; }
 
@@ -190,7 +195,7 @@
 <!-- ─── Header ──────────────────────────────────────────────────────────── -->
 <header>
   <div class="header-inner">
-    <a class="logo" href="#"><img src="static/logo.png" alt="INSO" /><div class="logo-text"><div class="logo-label">INSO</div><div class="logo-sub">Podcast Index</div></div></a>
+    <a class="logo" href="#"><img src="static/logo.png" alt="INSO" /><div class="logo-divider"></div><div class="logo-text"><div class="logo-label">Podcast Index</div><div class="logo-sub">Analysis &amp; Advice for Humanitarians</div></div></a>
     <span class="header-count" id="header-count"></span>
     <div class="header-right">
       <button class="btn" id="open-import">Import CSV</button>
