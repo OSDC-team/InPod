@@ -1031,30 +1031,34 @@ document.getElementById('confirm-add').addEventListener('click', () => {
   const title = document.getElementById('add-title').value.trim();
   if (!title) { document.getElementById('add-title').focus(); return; }
 
-  // Prevent duplicate titles (case-insensitive).
   if (podcasts.some(p => p.title.toLowerCase() === title.toLowerCase())) {
     alert('A podcast with this title already exists.');
     return;
   }
 
-  // Parse comma-separated tags from the tags input field.
   const rawTags = document.getElementById('add-tags').value.trim();
   const tags = rawTags ? rawTags.split(/[,|]/).map(t => t.trim()).filter(Boolean) : [];
 
-  podcasts.push({
+  const fields = {
     title,
     producer:    document.getElementById('add-producer').value.trim(),
     lang:        document.getElementById('add-lang').value,
     app:         document.getElementById('add-app').value,
     freq:        document.getElementById('add-freq').value,
     region:      document.getElementById('add-region').value.trim(),
-    tags,
+    tags:        tags.join(', '),
     description: document.getElementById('add-description').value.trim(),
     link:        document.getElementById('add-link').value.trim(),
-  });
+  };
 
-  buildCountryChips();
-  render();
+  const body = Object.entries(fields)
+    .map(([k, v]) => `${k}: ${v || '—'}`)
+    .join('\n');
+
+  const subject = encodeURIComponent(`[Podcast Submission] ${title}`);
+  const bodyEnc = encodeURIComponent(body);
+
+  window.location.href = `mailto:osdc@hq.ngosafety.org?subject=${subject}&body=${bodyEnc}`;
   closeAdd();
 });
 
