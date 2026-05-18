@@ -1,4 +1,3 @@
-# InPod
 # INSO Podcast Index
 
 A static GitHub Pages site listing INSO-recommended podcasts.
@@ -7,39 +6,89 @@ A static GitHub Pages site listing INSO-recommended podcasts.
 
 ```
 ├── index.html          ← the site
+├── data/
+│   └── podcasts.csv    ← podcast data (loaded at runtime)
 └── static/
-    └── logo-symbol-wb.png
+    └── logo.png
 ```
 
-## Adding podcasts
+## Data source
 
-### Option A — CSV import (no code needed)
+The index loads `data/podcasts.csv` at runtime via `fetch()`. This means the site **requires an HTTP server** — opening `index.html` directly via `file://` will fail due to browser CORS restrictions.
 
-1. Open the live site.
-2. Click **Import CSV** (top right).
-3. Drop in any `.csv` that has these columns (order doesn't matter, header names are flexible):
+To run locally:
+```bash
+python3 -m http.server
+```
+Then open `http://localhost:8000`.
+
+## CSV format
+
+The CSV parser is flexible with column names (it matches on substrings, case-insensitive). Supported columns:
 
 | Column | Matched by |
 |---|---|
-| `Created By` | contains "created" |
-| `Title` | contains "title" |
-| `Podcast producer` | contains "producer" |
-| `Podcast application` | contains "application" |
+| Title | contains "title" |
+| Producer | contains "producer" |
+| Platform/App | contains "app" or "application" |
+| Link | contains "link" |
+| Tags | contains "tag" |
+| Language | contains "lang" |
+| Region/Country | contains "region" or "countr" |
+| Frequency | contains "freq" |
+| Description | contains "desc" |
 
-4. A preview shows how many new rows will be added. Click **Add to index**.
+Tags may be comma- or pipe-separated within a cell.
 
-> **Note:** The import is session-only — it doesn't persist after a page reload.  
-> To permanently save new podcasts, follow Option B.
+## Adding podcasts
 
-### Option B — Edit the seed data (permanent)
+### Option A — Manual entry (session only)
 
-Open `index.html` and find the `seedData` array near the top of the `<script>` block. Add entries in the same format:
+1. Open the live site.
+2. Click **+ Add** (top right or bottom of page).
+3. Fill in the form. Only **Title** is required.
+4. Click **Add to index**.
 
-```js
-{ submitter:"INSO_HQ_YOUR_ROLE", title:"Podcast Title", producer:"Producer Name", app:"Spotify" },
-```
+> **Note:** Manually added entries are session-only and won't persist after a page reload.
 
-Commit and push — GitHub Pages will rebuild automatically.
+### Option B — CSV import (session only)
+
+1. Open the live site.
+2. Click **Import CSV**.
+3. Drop or select a `.csv` file. A preview shows how many new rows will be added (duplicates by title are skipped).
+4. Click **Add to index**.
+
+> **Note:** Imported entries are also session-only.
+
+### Option C — Edit the CSV (permanent)
+
+Edit `data/podcasts.csv` directly, following the column format above. Commit and push — GitHub Pages will rebuild automatically.
+
+## Filtering & search
+
+The toolbar supports:
+
+- **Search** — matches title, producer, tags, region, and description
+- **Platform** filter — Spotify, Apple Podcasts, Deezer, YouTube, Web
+- **Language** filter — EN, FR, ES, AR, NL, CZ, DE, PT, RU, UK
+- **Frequency** filter — Daily, Weekly, Biweekly, Monthly, Irregular
+- **Topic** filter — two-level taxonomy (primary category → subtopic)
+- **Region** filter — built dynamically from the loaded data
+- **Sort** — Default, A→Z, Frequency
+- **View** — Card view or Compact view
+
+Active filters are shown as removable pills above the results.
+
+## Tag taxonomy
+
+Tags are grouped into four primary categories:
+
+| Category | Subtags |
+|---|---|
+| Conflict & Security | security, military, organised crime, cyber, intelligence, investigation, sanctions & finance |
+| Politics & Policy | politics, foreign policy, governance, law |
+| Humanitarian Affairs & Aid | humanitarian, development, human rights, displacement |
+| Critical & Emerging Issues | news, tech, disinformation, culture, environment, verification |
 
 ## GitHub Pages setup
 
